@@ -1,0 +1,91 @@
+﻿<!doctype html>
+<html lang="en-us">
+<head>
+	<meta charset="utf-8" />
+	<title>Experis TextCollapse Widget</title>
+	<!--[if lt IE 9]>
+	<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+	<link rel="stylesheet" href="../../css/reset.css" />
+	<link rel="stylesheet" href="../documentation.css" />
+</head>
+
+<body>
+	<header>
+		<hgroup>
+			<h1>Experis TextCollapse Widget</h1>
+			<h2>Collapses long lines of text, and adds a "More" link to the bottom that expands the text when clicked</h2>
+		</hgroup>
+	</header>
+
+	<article>
+		<h2>Remarks</h2>
+		<p>Coming soon.</p>
+
+		<h3>Syntax</h3>
+		<p><code>$xw.textCollapse(el:array of dom elements[, options:object]);</code></p>
+
+		<h2>Example</h2>
+		<p>The example below uses the following options: <code>{ lines: 4, moreLabel: 'Show More', lessLabel: 'Show Less' }</code></p>
+
+		<div id="longText">
+			<p>Use the &ldquo;More&rdquo; link to view the rest of this text. Sed in consequat neque. Phasellus pulvinar consectetur blandit. Phasellus ullamcorper eleifend lacus, ullamcorper auctor augue porttitor sit amet. Cras ac metus vel quam fringilla laoreet. Maecenas gravida feugiat lacus, eget consectetur leo porta eget. Sed volutpat tortor ut elit porta cursus. Cras facilisis tincidunt metus, quis cursus erat porta et. Nulla aliquam blandit iaculis. Pellentesque dignissim nunc non metus suscipit non imperdiet neque hendrerit. Aliquam dignissim lacus non lacus tincidunt ut eleifend massa vulputate. Sed vitae odio sapien, in placerat tortor. Etiam sit amet nibh vel erat iaculis ultrices. Suspendisse ut dui eu lacus dictum imperdiet.</p>
+			<p>Vestibulum auctor lobortis aliquam. Vestibulum at ornare lorem. Etiam hendrerit ullamcorper adipiscing. Suspendisse potenti. Donec non aliquam ligula. Nulla et ligula elit. Morbi tortor massa, imperdiet in imperdiet et, mattis in nulla. Pellentesque urna dolor, vehicula in commodo sit amet, fermentum nec tortor. Nullam tempor sodales purus vestibulum imperdiet.</p>
+		</div>
+
+		<h2>Parameters</h2>
+
+		<table>
+			<thead>
+				<tr>
+					<th>Parameter</th>
+					<th>Default Value</th>
+					<th>Available Values</th>
+					<th>Description</th>
+				</tr>
+			</thead>
+
+			<tbody>
+				<tr>
+					<td>els</td>
+					<td>null</td>
+					<td>array of dom elements</td>
+					<td><p></p></td>
+				</tr>
+
+				<tr>
+					<td>options.lines</td>
+					<td>4</td>
+					<td>number</td>
+					<td><p>The number of lines of text that will remain visible.</p></td>
+				</tr>
+
+				<tr>
+					<td>options.moreLabel</td>
+					<td>'More'</td>
+					<td>string</td>
+					<td><p>The hyperlink text that will appear below the collapsed text</p></td>
+				</tr>
+
+				<tr>
+					<td>options.lessLabel</td>
+					<td>'Less'</td>
+					<td>string</td>
+					<td><p>The hyperlink text that will appear below the expanded text</p></td>
+				</tr>
+			</tbody>
+		</table>	
+	</article>
+
+	<script src="../../js/experis.utils.js"></script>
+	<script src="../../js/experis.widgets.js"></script>
+
+	<script>
+		$xw.textCollapse([document.getElementById('longText')], {
+			lines: 3,
+			moreLabel: 'Show More',
+			lessLabel: 'Show Less',
+		});
+	</script>
+</body>
+</html>

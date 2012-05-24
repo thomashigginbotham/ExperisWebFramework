@@ -1,0 +1,36 @@
+﻿body {
+	padding: 10px;
+	font-family: Arial, Helvetica, sans-serif;
+	line-height: 1.5;
+}
+
+h1, h2, h3, h4, h5, h6 { margin-bottom: 0; }
+
+table {
+	margin: 1em 0;
+	border: 1px solid #cdf;
+}
+thead tr {
+	font-weight: bold;
+	background-color: #cdf;
+}
+tbody tr:nth-child(odd) {
+	background-color: #f0f3ff;
+}
+th, td {
+	padding: .5em;
+	text-align: left;
+}
+th {
+	white-space: nowrap;
+}
+td:first-child {
+	min-width: 25%;
+}
+td *:last-child {
+	margin-bottom: 0;
+}
+
+header, nav, article, footer {
+	font-size: 1.2em;
+}
