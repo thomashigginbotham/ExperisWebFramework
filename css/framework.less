@@ -1,0 +1,76 @@
+﻿/* =================================
+Variables
+==================================== */
+@gutter: 4%;
+
+/* =================================
+Mixins
+==================================== */
+.columnBreak (@cols) {
+	@firstColumnCell: e(%('%sn - %s', @cols, @cols - 1));
+	@lastColumnCell: e(%('%sn', @cols));
+	@lastRow: e(%('-n + %s', @cols));
+
+	width: (100 - @gutter * (@cols - 1)) / @cols;
+
+	// No left margin on first cell of each row
+	&:nth-of-type(@firstColumnCell) {
+		margin-left: 0;
+	}
+
+	// No right margin on last cell of each row
+	&:nth-of-type(@lastColumnCell) {
+		margin-right: 0;
+	}
+
+	// No bottom margin on last row
+	&:nth-last-of-type(@lastRow) {
+		margin-bottom: 0;
+	}
+}
+
+/* =================================
+General Styling
+==================================== */
+body {
+	font-family: Arial, Helvetica, sans-serif;
+	color: #000;
+	background-color: #fff;
+}
+
+/* =================================
+Grid Layout
+==================================== */
+.grid {
+	margin-right: -@gutter/2;
+
+	&:after {
+		content: '';
+		display: block;
+		clear: both;
+	}
+	&.two-column .cell    { .columnBreak(2); }
+	&.three-column .cell  { .columnBreak(3); }
+	&.four-column .cell   { .columnBreak(4); }
+	&.five-column .cell   { .columnBreak(5); }
+	&.six-column .cell    { .columnBreak(6); }
+	&.seven-column .cell  { .columnBreak(7); }
+	&.eight-column .cell  { .columnBreak(8); }
+	&.nine-column .cell   { .columnBreak(9); }
+	&.ten-column .cell    { .columnBreak(10); }
+	&.eleven-column .cell { .columnBreak(11); }
+	&.twelve-column .cell { .columnBreak(12); }
+}
+.cell {
+	float: left;
+	margin-right: @gutter/2;
+	margin-left: @gutter/2;
+	margin-bottom: @gutter;
+
+	&:nth-of-type(1) {
+		margin-left: 0;
+	}
+}
+.two-column .cell {
+	width: (100 - @gutter) / 2%;
+}
