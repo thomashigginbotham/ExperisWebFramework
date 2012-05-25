@@ -42,6 +42,91 @@ experis.utils = {
 		}
 	},
 	/*
+	* fixSubpixelPercentages (object) NOT READY FOR PRODUCTION USE
+	* details: {els: dom element array, dims: object array}
+	* NOTE: Percentage widths that result in subpixel values are handled differently
+	* by each browser. Webkit and IE round down to the nearest whole number, and Mozilla adjusts
+	* values of surrounding elements up/down to more closely mimick the expected result. This
+	* function allows Webkit and IE to more closely resemble Mozilla's implementation.
+	*/
+	fixSubpixelPercentages: function (details) {
+		var parent = details.els[0].parentNode;
+		var parentDims = $xu.getDimensions(parent);
+		var widthCtr = 0;
+		var heightCtr = 0;
+		var colCount = 0;
+
+		details.pixelDims = [];
+
+		// Convert percentages to pixel values
+		for (var n = 0, dim; dim = details.dims[n++]; ) {
+			details.pixelDims[n - 1] = { outerWidth: 0 };
+			var pixelDims = details.pixelDims[n - 1];
+
+			for (var key in dim) {
+				pixelDims[key] = parentDims.width * (dim[key] / 100);
+
+				if (dim[key] > 0 || key !== 'marginRight') { // Don't include negative right margin in outerWidth
+					pixelDims.outerWidth += parseInt(pixelDims[key]);
+				}
+			}
+
+			// Find number of columns that will fit in the parent
+			widthCtr += pixelDims.outerWidth;
+
+			if (widthCtr <= parentDims.width) colCount = n;
+		}
+
+		// Adjust widths of each element to integer values
+		var ctr = 0;
+		var ie = $xu.getIeVersion();
+		var pixelVariance = (ie > -1 && ie < 9) ? 3 : 0; // Older versions of IE may be up to 3 pixels off
+		var rowWidth = 0, intRowWidth = 0;
+		var diff, extraPerEl, remainder;
+
+		for (var n = 0, pixelDim; pixelDim = details.pixelDims[n++]; ) {
+			intRowWidth += pixelDim.outerWidth;
+			ctr++;
+
+			if (ctr === colCount) {
+				// Distribute the width difference among elements in the row
+				diff = parentDims.width - intRowWidth;
+				extraPerEl = parseInt(diff / colCount);
+				remainder = parseInt(diff - extraPerEl * colCount);
+
+				for (var m = n - colCount; m < n; m++) {
+					var revWidth = parseInt(details.pixelDims[m].width) + extraPerEl;
+
+					if (remainder-- > pixelVariance) revWidth++;
+
+					for (var key in details.pixelDims[m]) {
+						if (key === 'width') {
+							details.els[m].style.width = revWidth + 'px';
+						} else if (key !== 'outerWidth' && key !== 'offset') {
+							details.els[m].style[key] = parseInt(details.pixelDims[m][key]) + 'px';
+						}
+					}
+				}
+
+				// Reset counters
+				rowWidth = intRowWidth = ctr = 0;
+			}
+		}
+
+		// Rerun this function on window resize
+		var timer;
+
+		$xu.addListener(window, 'resize', (function (details) {
+			return function () {
+				clearTimeout(timer);
+
+				timer = setTimeout(function () {
+					$xu.fixSubpixelPercentages(details)
+				}, 200);
+			};
+		})(details));
+	},
+	/*
 	* getCookie (string)
 	* name: the name/key of the cookie you want to retrieve
 	* Return value: the value of the requested cookie or null if not found
