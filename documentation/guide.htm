@@ -13,9 +13,10 @@
 	<script src="../js/less-1.3.0.min.js"></script>
 
 	<!--[if lt IE 9]>
-	<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-	<script src="//s3.amazonaws.com/nwapi/nwmatcher/nwmatcher-1.2.5-min.js"></script>
+	<link rel="stylesheet" href="../css/ie.css">
+	<script src="//s3.amazonaws.com/nwapi/nwmatcher/nwmatcher-1.2.3-min.js"></script>
 	<script src="../js/selectivizr-min.js"></script>
+	<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
 	<![endif]-->
 </head>
 
@@ -155,8 +156,10 @@
 		<h1>Notes</h1>
 
 		<ul>
-			<li>Selectivizr and NWMatcher are used to provide CSS 3 selector support to IE 6-8. However, Selectivizr requires that all CSS be included through the <code>&lt;link&gt;</code> tag in order to be recognized. If you are using the client-side JavaScript version of LESS, the CSS will be inserted into a <code>&lt;style&gt;</code> tag and will not be parsed by Selectivizr.</li>
+			<li>Selectivizr and NWMatcher are used to provide CSS 3 selector support to IE 6-8. However, Selectivizr requires that all CSS be included by the <code>&lt;link&gt;</code> tag in order to be recognized. If you are using the client-side JavaScript version of LESS, the CSS will be inserted into a <code>&lt;style&gt;</code> tag and will not be parsed by Selectivizr.</li>
 			<li>WebKit (Chrome and Safari) and Trident (IE) have a different interpretation than Mozilla (Firefox) concerning sub-pixel widths. In Firefox, columns or cells with widths that add up to 100% will take up the full available space. However, other browsers may leave a noticeable space at the end due to how they round fractional percentages. A JavaScript utility function is being developed to approximate Mozilla&rsquo;s implementation of sub-pixel rendering where percentages are concerned.</li>
+			<li>The latest version of NWMatcher (1.2.5) doesn&rsquo;t properly match nth-of-type selectors. So, we&rsquo;re using version 1.2.3.</li>
+			<li>IE 7 doesn&rsquo;t support the CSS 3 box-sizing property, causing padding and borders to affect the width of columns and grid cells. A JavaScript fix is planned to address this issue.</li>
 		</ul>
 	</section> <!--/notes -->
 
