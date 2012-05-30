@@ -7,256 +7,259 @@
 	<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
 	<![endif]-->
 	<link rel="stylesheet/less" href="../css/reset.less">
+	<link rel="stylesheet/less" href="../css/framework.less">
 	<link rel="stylesheet/less" href="documentation.less">
+	<link rel="stylesheet" href="../js/google-code-prettify/prettify.css">
 
 	<script src="../js/less-1.3.0.min.js"></script>
 </head>
 
 <body>
-	<header>
-		<hgroup>
-			<h1>Experis JS Version 0.2</h1>
-			<h2>API Documentation</h2>
-		</hgroup>
-	</header>
+	<div id="wrapper">
+		<header>
+			<hgroup>
+				<h1>Experis JS Version 0.2</h1>
+				<h2>API Documentation</h2>
+			</hgroup>
+		</header>
 
-	<nav>
-		<h2>Table of Contents</h2>
+		<nav>
+			<h2>Table of Contents</h2>
 		
-		<ul>
-			<li><a href="#utilities">Utility Class</a></li>
-			<li><a href="#polyfills">Polyfills Class</a></li>
-			<li><a href="#widgets">Widgets Class</a></li>
-		</ul>
-	</nav>
+			<ul>
+				<li><a href="#utilities">Utility Class</a></li>
+				<li><a href="#polyfills">Polyfills Class</a></li>
+				<li><a href="#widgets">Widgets Class</a></li>
+			</ul>
+		</nav>
 
-	<article>
-		<h2 id="utilities">Utility Class</h2>
-		<p>The base install of Experis JS includes a set of utility functions that are intended to improve cross-browser support and offer assistance with common website-related tasks. All Experis JS classes expect these utility functions to be available; therefore, experis.utils.js should always be included in the page before any other Experis JS class.</p>
-		<p>Method calls to the Utility class can be made in the format <code>experis.utils.<em>methodName</em>()</code> or by using the shorthand <code>$xu.<em>methodName</em>()</code>.</p>
+		<article>
+			<h2 id="utilities">Utility Class</h2>
+			<p>The base install of Experis JS includes a set of utility functions that are intended to improve cross-browser support and offer assistance with common website-related tasks. All Experis JS classes expect these utility functions to be available; therefore, experis.utils.js should always be included in the page before any other Experis JS class.</p>
+			<p>Method calls to the Utility class can be made in the format <code>experis.utils.<em>methodName</em>()</code> or by using the shorthand <code>$xu.<em>methodName</em>()</code>.</p>
 
-		<h3>Methods</h3>
+			<h3>Methods</h3>
 
-		<table>
-			<thead>
-				<tr>
-					<th>Method</th>
-					<th>Return Value</th>
-					<th>Description</th>
-				</tr>
-			</thead>
+			<table class="function-listing">
+				<thead>
+					<tr>
+						<th>Method</th>
+						<th>Return Value</th>
+						<th>Description</th>
+					</tr>
+				</thead>
 
-			<tbody>
-				<tr>
-					<td><code>addListener(el:dom element, evt:string, callback:function)</code></td>
-					<td><code>None</code></td>
-					<td>
-						<p>Provides cross-browser support for the W3C <code>addEventListener()</code> method. The provided callback function will execute when the specified event is triggered on an element.</p>
-						<p>Example: <code>$xu.addListener(window, 'load', function() {alert('Page load complete.');});</code></p>
-					</td>
-				</tr>
+				<tbody>
+					<tr>
+						<td><code>addListener (el:dom element, evt:string, callback:function)</code></td>
+						<td><code>None</code></td>
+						<td>
+							<p>Provides cross-browser support for the W3C <code>addEventListener()</code> method. The provided callback function will execute when the specified event is triggered on an element.</p>
+							<p>Example: <code>$xu.addListener(window, 'load', function() {alert('Page load complete.');});</code></p>
+						</td>
+					</tr>
 
-				<tr>
-					<td><code>getCookie(name:string)</code></td>
-					<td><code>string|null</code></td>
-					<td>
-						<p>Searches for the requested cookie and returns its value or null if not found.</p>
-						<p>Example: <code>$xu.getCookie('userId');</code></p>
-					</td>
-				</tr>
+					<tr>
+						<td><code>getCookie (name:string)</code></td>
+						<td><code>string|null</code></td>
+						<td>
+							<p>Searches for the requested cookie and returns its value or null if not found.</p>
+							<p>Example: <code>$xu.getCookie('userId');</code></p>
+						</td>
+					</tr>
 
-				<tr>
-					<td><code>getDimensions(el:dom element)</code></td>
-					<td><code>object</code></td>
-					<td>
-						<p>Returns the width and height (in pixels) of the provided element as an object in the format <code>{width:<em>number</em>, height:<em>number</em>}</code>.</p>
-						<p>Example: <code>var boxWidth = $xu.getDimensions(document.getElementById('box')).width;</code></p>
-					</td>
-				</tr>
+					<tr>
+						<td><code>getDimensions (el:dom element)</code></td>
+						<td><code>object</code></td>
+						<td>
+							<p>Returns the width and height (in pixels) of the provided element as an object in the format <code>{width:<em>number</em>, height:<em>number</em>}</code>.</p>
+							<p>Example: <code>var boxWidth = $xu.getDimensions(document.getElementById('box')).width;</code></p>
+						</td>
+					</tr>
 
-				<tr>
-					<td><code>getElementsByClassName(classname:string[, el:dom element])</code></td>
-					<td><code>node list|array of dom elements</code></td>
-					<td>
-						<p>Returns a node list containing elements that belong to the requested class that are descended from the provided DOM element. If the browser does not have native support for the <code>getElementsByClassName()</code> method, an array of elements will be returned instead of a node list.</p>
-						<p>The second argument determines where the search for elements will begin. If omitted, all elements of the requested class will be returned.</p>
-					</td>
-				</tr>
+					<tr>
+						<td><code>getElementsByClassName (classname:string[, el:dom element])</code></td>
+						<td><code>node list|array of dom elements</code></td>
+						<td>
+							<p>Returns a node list containing elements that belong to the requested class that are descended from the provided DOM element. If the browser does not have native support for the <code>getElementsByClassName()</code> method, an array of elements will be returned instead of a node list.</p>
+							<p>The second argument determines where the search for elements will begin. If omitted, all elements of the requested class will be returned.</p>
+						</td>
+					</tr>
 
-				<tr>
-					<td><code>getFontSize([el:dom element])</code></td>
-					<td><code>number</code></td>
-					<td>
-						<p>Returns the font size (in pixels) of the provided DOM element or of the document if the argument is omitted.</p>
-						<p>Example: <code>$xu.getFontSize(document.getElementsByTagName('header')[0]);</code></p>
-					</td>
-				</tr>
+					<tr>
+						<td><code>getFontSize ([el:dom element])</code></td>
+						<td><code>number</code></td>
+						<td>
+							<p>Returns the font size (in pixels) of the provided DOM element or of the document if the argument is omitted.</p>
+							<p>Example: <code>$xu.getFontSize(document.getElementsByTagName('header')[0]);</code></p>
+						</td>
+					</tr>
 
-				<tr>
-					<td><code>getIeVersion()</code></td>
-					<td><code>number</code></td>
-					<td>
-						<p>Returns the version of Internet Explorer being used or -1 for other browsers.</p>
-					</td>
-				</tr>
+					<tr>
+						<td><code>getIeVersion ()</code></td>
+						<td><code>number</code></td>
+						<td>
+							<p>Returns the version of Internet Explorer being used or -1 for other browsers.</p>
+						</td>
+					</tr>
 
-				<tr>
-					<td><code>getLineHeight(el:dom element)</code></td>
-					<td><code>number</code></td>
-					<td>
-						<p>Returns the line height (in pixels) for the provided DOM element.</p>
-					</td>
-				</tr>
+					<tr>
+						<td><code>getLineHeight (el:dom element)</code></td>
+						<td><code>number</code></td>
+						<td>
+							<p>Returns the line height (in pixels) for the provided DOM element.</p>
+						</td>
+					</tr>
 
-				<tr>
-					<td><code>getScrollPosition([el:dom element])</code></td>
-					<td><code>object</code></td>
-					<td>
-						<p>Returns an object containing the horizontal and vertical position of the scrollbar within an element (defaults to the window scrollbar). Values given assume that the top, left corner of the element is the zero-point with higher numbers appearing as the scrollbar moves down and right. The object is returned in the format <code>{x:<em>number</em>, y:<em>number</em>}</code></p>
-						<p>Example: <code>var scrollBarX = $xu.getScrollPosition().x;</code></p>
-					</td>
-				</tr>
+					<tr>
+						<td><code>getScrollPosition ([el:dom element])</code></td>
+						<td><code>object</code></td>
+						<td>
+							<p>Returns an object containing the horizontal and vertical position of the scrollbar within an element (defaults to the window scrollbar). Values given assume that the top, left corner of the element is the zero-point with higher numbers appearing as the scrollbar moves down and right. The object is returned in the format <code>{x:<em>number</em>, y:<em>number</em>}</code></p>
+							<p>Example: <code>var scrollBarX = $xu.getScrollPosition().x;</code></p>
+						</td>
+					</tr>
 
-				<tr>
-					<td><code>getPageDimensions([viewPortOnly:bool])</code></td>
-					<td><code>object</code></td>
-					<td>
-						<p>Returns an object containing the width and height of the page. If <code>viewPortOnly</code> is set to true, only the dimensions of the viewable area will be given. The return value will be in the format <code>{width:<em>number</em>, height:<em>number</em>}</code>.</p>
-					</td>
-				</tr>
+					<tr>
+						<td><code>getPageDimensions ([viewPortOnly:bool])</code></td>
+						<td><code>object</code></td>
+						<td>
+							<p>Returns an object containing the width and height of the page. If <code>viewPortOnly</code> is set to true, only the dimensions of the viewable area will be given. The return value will be in the format <code>{width:<em>number</em>, height:<em>number</em>}</code>.</p>
+						</td>
+					</tr>
 
-				<tr>
-					<td><code>hasAncestor(descendant:dom element, tag:string)</code></td>
-					<td><code>bool</code></td>
-					<td>
-						<p>Indicates whether the provided descendant has an ancestor of the node type given.</p>
-						<p>Example: <code>var textboxHasFormAncestor = $xu.hasAncestor(document.getElementById('myTextBox'), 'form');</code></p>
-					</td>
-				</tr>
+					<tr>
+						<td><code>hasAncestor (descendant:dom element, tag:string)</code></td>
+						<td><code>bool</code></td>
+						<td>
+							<p>Indicates whether the provided descendant has an ancestor of the node type given.</p>
+							<p>Example: <code>var textboxHasFormAncestor = $xu.hasAncestor(document.getElementById('myTextBox'), 'form');</code></p>
+						</td>
+					</tr>
 
-				<tr>
-					<td><code>inArray(needle:object, haystack:array)</code></td>
-					<td><code>bool</code></td>
-					<td>
-						<p>Indicates whether the provided object exists in the provided array.</p>
-					</td>
-				</tr>
+					<tr>
+						<td><code>inArray (needle:object, haystack:array)</code></td>
+						<td><code>bool</code></td>
+						<td>
+							<p>Indicates whether the provided object exists in the provided array.</p>
+						</td>
+					</tr>
 
-				<tr>
-					<td><code>includeScript(url:string[, callback:function])</code></td>
-					<td><code>None</code></td>
-					<td>
-						<p>Asynchronously loads a script from the URL and runs the optional callback function after it has loaded.</p>
-						<p>Example: <code>$xu.includeScript('jquery.min.js', function() {alert('jQuery version ' + $().jquery);});</code></p>
-					</td>
-				</tr>
+					<tr>
+						<td><code>includeScript (url:string[, callback:function])</code></td>
+						<td><code>None</code></td>
+						<td>
+							<p>Asynchronously loads a script from the URL and runs the optional callback function after it has loaded.</p>
+							<p>Example: <code>$xu.includeScript('jquery.min.js', function() {alert('jQuery version ' + $().jquery);});</code></p>
+						</td>
+					</tr>
 
-				<tr>
-					<td><code>mergeJson(a:object, b:object)</code></td>
-					<td><code>None</code></td>
-					<td>
-						<p>Returns a single object by combining the two provided objects. Object b overwrites object a when conflicts occur.</p>
-						<p>Example:<br /><code>var person = {'name':'Bill', 'age':'32'};<br />var personExtra = {'height':'5\'9'};<br />var personMerged = $xu.mergeJson(person, personExtra);<br />alert(personMerged.height);</code></p>
-					</td>
-				</tr>
+					<tr>
+						<td><code>mergeJson (a:object, b:object)</code></td>
+						<td><code>None</code></td>
+						<td>
+							<p>Returns a single object by combining the two provided objects. Object b overwrites object a when conflicts occur.</p>
+							<p>Example:<br /><code>var person = {'name':'Bill', 'age':'32'};<br />var personExtra = {'height':'5\'9'};<br />var personMerged = $xu.mergeJson(person, personExtra);<br />alert(personMerged.height);</code></p>
+						</td>
+					</tr>
 
-				<tr>
-					<td><code>onDomReady(callback:function)</code></td>
-					<td><code>None</code></td>
-					<td>
-						<p>Executes the callback function as soon as the DOM has fully formed.</p>
-					</td>
-				</tr>
+					<tr>
+						<td><code>onDomReady (callback:function)</code></td>
+						<td><code>None</code></td>
+						<td>
+							<p>Executes the callback function as soon as the DOM has fully formed.</p>
+						</td>
+					</tr>
 
-				<tr>
-					<td><code>onScriptReady(scriptEl:dom &lt;script&gt; element, callback:function)</code></td>
-					<td><code>None</code></td>
-					<td>
-						<p>Executes the callback function as soon as the asynchronous <code>&lt;script&gt;</code> element is ready.</p>
-					</td>
-				</tr>
+					<tr>
+						<td><code>onScriptReady (scriptEl:dom &lt;script&gt; element, callback:function)</code></td>
+						<td><code>None</code></td>
+						<td>
+							<p>Executes the callback function as soon as the asynchronous <code>&lt;script&gt;</code> element is ready.</p>
+						</td>
+					</tr>
 
-				<tr>
-					<td><code>setCookie(name:string, value:string[, expDays:number])</code></td>
-					<td><code>None</code></td>
-					<td>
-						<p>Creates a cookie on the visitor's machine. If <code>expDays</code> is omitted, the cookie will expire when the browser is closed.</p>
-					</td>
-				</tr>
-			</tbody>
-		</table>
+					<tr>
+						<td><code>setCookie (name:string, value:string[, expDays:number])</code></td>
+						<td><code>None</code></td>
+						<td>
+							<p>Creates a cookie on the visitor's machine. If <code>expDays</code> is omitted, the cookie will expire when the browser is closed.</p>
+						</td>
+					</tr>
+				</tbody>
+			</table>
 
-		<h2 id="polyfills">Polyfills Class</h2>
-		<p>The Polyfills class adds support for features that are not implemented or did not exist in older browsers, although they are now part of the HTML or CSS standards.</p>
-		<p>Method calls to the Polyfills class can be made in the format <code>experis.polyfills.<em>methodName</em>()</code> or by using the shorthand <code>$xp.<em>methodName</em>()</code>.</p>
+			<h2 id="polyfills">Polyfills Class</h2>
+			<p>The Polyfills class adds support for features that are not implemented or did not exist in older browsers, although they are now part of the HTML or CSS standards.</p>
+			<p>Method calls to the Polyfills class can be made in the format <code>experis.polyfills.<em>methodName</em>()</code> or by using the shorthand <code>$xp.<em>methodName</em>()</code>.</p>
 
-		<h3>Methods</h3>
+			<h3>Methods</h3>
 
-		<table>
-			<thead>
-				<tr>
-					<th>Method</th>
-					<th>Return Value</th>
-					<th>Description</th>
-				</tr>
-			</thead>
+			<table class="function-listing">
+				<thead>
+					<tr>
+						<th>Method</th>
+						<th>Return Value</th>
+						<th>Description</th>
+					</tr>
+				</thead>
 
-			<tbody>
-				<tr>
-					<td><code>placeholder()</code></td>
-					<td><code>None</code></td>
-					<td>
-						<p>This method is a polyfill for @placeholder support on <code>input</code> and <code>textarea</code> elements.</p>
-					</td>
-				</tr>
+				<tbody>
+					<tr>
+						<td><code>placeholder ()</code></td>
+						<td><code>None</code></td>
+						<td>
+							<p>This method is a polyfill for @placeholder support on <code>input</code> and <code>textarea</code> elements.</p>
+						</td>
+					</tr>
 
-				<tr>
-					<td><code>video()</code></td>
-					<td><code>None</code></td>
-					<td>
-						<p>This method is a polyfill for HTML 5 video support. Flowplayer Flash video player will be used when a video cannot be played natively.</p>
-					</td>
-				</tr>
-			</tbody>
-		</table>
+					<tr>
+						<td><code>video ()</code></td>
+						<td><code>None</code></td>
+						<td>
+							<p>This method is a polyfill for HTML 5 video support. Flowplayer Flash video player will be used when a video cannot be played natively.</p>
+						</td>
+					</tr>
+				</tbody>
+			</table>
 
-		<h2 id="widgets">Widgets Class</h2>
-		<p>Widgets add various features to a page, ranging from accessibility tools to games.</p>
-		<p>Method calls to the Widgets class can be made in the format <code>experis.widgets.<em>methodName</em>()</code> or by using the shorthand <code>$xw.<em>methodName</em>()</code>.</p>
+			<h2 id="widgets">Widgets Class</h2>
+			<p>Widgets add various features to a page, ranging from accessibility tools to games.</p>
+			<p>Method calls to the Widgets class can be made in the format <code>experis.widgets.<em>methodName</em>()</code> or by using the shorthand <code>$xw.<em>methodName</em>()</code>.</p>
 
-		<h3>Methods</h3>
+			<h3>Methods</h3>
 
-		<table>
-			<thead>
-				<tr>
-					<th>Method</th>
-					<th>Return Value</th>
-					<th>Description</th>
-				</tr>
-			</thead>
+			<table class="function-listing">
+				<thead>
+					<tr>
+						<th>Method</th>
+						<th>Return Value</th>
+						<th>Description</th>
+					</tr>
+				</thead>
 
-			<tbody>
-				<tr>
-					<td><code>fontControl(wrapper:dom element[, startEl:dom element, amt:number, callback:function])</code></td>
-					<td><code>None</code></td>
-					<td>
-						<p>Creates a font size control.</p>
+				<tbody>
+					<tr>
+						<td><code>fontControl (wrapper:dom element[, startEl:dom element, amt:number, callback:function])</code></td>
+						<td><code>None</code></td>
+						<td>
+							<p>Creates a font size control.</p>
 
-						<ul>
-							<li><code>wrapper</code>: the element where the font control will be added</li>
-							<li><code>startEl</code> <em>(optional)</em>: the resizing will be limited to this element and its children</li>
-							<li><code>amt</code> <em>(optional)</em>: amount (in pixels) to increase/decrease the font size</li>
-							<li><code>callback</code> <em>(optional)</em>: a function that will be called any time resizing occurs</li>
-						</ul>
-					</td>
-				</tr>
-				<tr>
-					<td><a href="widgets/slider.htm"><code>slider(el:dom element[, options:object])</code></a></td>
-					<td><code>None</code></td>
-					<td>
-						<p>Converts HTML provided in the following format into a working image/content slider:</p>
+							<ul>
+								<li><code>wrapper</code>: the element where the font control will be added</li>
+								<li><code>startEl</code> <em>(optional)</em>: the resizing will be limited to this element and its children</li>
+								<li><code>amt</code> <em>(optional)</em>: amount (in pixels) to increase/decrease the font size</li>
+								<li><code>callback</code> <em>(optional)</em>: a function that will be called any time resizing occurs</li>
+							</ul>
+						</td>
+					</tr>
+					<tr>
+						<td><a href="widgets/slider.htm"><code>slider (el:dom element[, options:object])</code></a></td>
+						<td><code>None</code></td>
+						<td>
+							<p>Converts HTML provided in the following format into a working image/content slider:</p>
 
-<p><pre><code>&lt;div id=&quot;slider&quot;&gt;
+<pre class="prettyprint"><code>&lt;div id=&quot;slider&quot;&gt;
 	&lt;ul&gt;
 		&lt;li&gt;&lt;a href=&quot;#slide-1&quot;&gt;Slide One&lt;/a&gt;&lt;/li&gt;
 		&lt;li&gt;&lt;a href=&quot;#slide-2&quot;&gt;Slide Two&lt;/a&gt;&lt;/li&gt;
@@ -264,29 +267,38 @@
 
 	&lt;div id=&quot;slide-1&quot;&gt;&lt;a href=&quot;url-1.htm&quot;&gt;&lt;img src=&quot;image-1.jpg&quot; alt=&quot;&quot; /&gt;&lt;/a&gt;&lt;/div&gt;
 	&lt;div id=&quot;slide-2&quot;&gt;&lt;a href=&quot;url-2.htm&quot;&gt;&lt;img src=&quot;image-2.jpg&quot; alt=&quot;&quot; /&gt;&lt;/a&gt;&lt;/div&gt;
-&lt;/div&gt;</code></pre></p>
+&lt;/div&gt;</code></pre>
 
-						<p>Example: <code>$xw.slider(document.getElementById('slider'));</code></p>
-					</td>
-				</tr>
+							<p>Example: <code>$xw.slider(document.getElementById('slider'));</code></p>
+						</td>
+					</tr>
 
-				<tr>
-					<td><a href="widgets/textCollapse.htm"><code>textCollapse(els:array of dom elements[, options:object])</code></a></td>
-					<td><code>None</code></td>
-					<td>
-						<p>Collapses long blocks of text to a set number of lines and adds a clickable "more" label that expands the text.</p>
-						<p>Pass an array of DOM elements to which to apply the collapse and an optional object of settings, which default to the following:</p>
-						<p><pre><code>{ lines: 4,
-  moreLabel: 'More',
-  lessLabel: 'Less' }</code></pre></p>
-					</td>
-				</tr>
-			</tbody>
-		</table>
-	</article>
+					<tr>
+						<td><a href="widgets/textCollapse.htm"><code>textCollapse (els:array of dom elements[, options:object])</code></a></td>
+						<td><code>None</code></td>
+						<td>
+							<p>Collapses long blocks of text to a set number of lines and adds a clickable "more" label that expands the text.</p>
+							<p>Pass an array of DOM elements to which to apply the collapse and an optional object of settings, which default to the following:</p>
+							<p><pre><code>{ lines: 4,
+	  moreLabel: 'More',
+	  lessLabel: 'Less' }</code></pre></p>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</article>
+	</div> <!--/wrapper -->
 
 	<script src="../js/experis.utils.js"></script>
 	<script src="../js/experis.polyfills.js"></script>
 	<script src="../js/experis.widgets.js"></script>
+	<script src="../js/google-code-prettify/prettify.js"></script>
+
+	<script>
+		(function () {
+			// Start PrettyPrint
+			$xu.addListener(window, 'load', function (e) { prettyPrint(); });
+		})();
+	</script>
 </body>
 </html>

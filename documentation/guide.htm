@@ -24,7 +24,7 @@
 	<header>
 		<hgroup>
 			<h1>EWF (Experis Web Framework)</h1>
-			<h2>Usage and Reference</h2>
+			<h2>Usage and Reference Guide</h2>
 		</hgroup>
 
 		<nav>
@@ -41,7 +41,7 @@
 	<section id="about">
 		<h1>What is Experis Web Framework?</h1>
 		<p>EWF (pronounced &ldquo;oof&rdquo;) is a combination of Web technologies that acts as a framework for website development. It provides CSS layout techniques, common JavaScript functions, and third-party libraries that have become essential to modern Web designers. By creating a common starting point for Web projects, we can ensure design consistency, browser compatibility, and development efficiency.</p>
-		<p>There are numerous CSS frameworks available already (960 Grid, Blueprint, Bootstrap, and Foundation, to name a few), so why create another? Well, we tried them, and each seems to suffer from at least one major problem. For example, 960 Grid doesn&rsquo;t provide any styles for flexible layouts (responsive design). Others use negative margins or weird positioning effects for elements to line up nicely. In almost all cases, additional HTML elements are required to do even the simplist of tasks &mdash; such as adding a background to a row of elements or borders around cells in a grid. With EWF, we take the best ideas from those frameworks and implement them in a way that works with almost any design. We also provide common JavaScript features, like image sliders, and polyfills, such as support for HTML 5 video elements and the placeholder attribute.</p>
+		<p>There are numerous CSS frameworks available already (960 Grid, Blueprint, Bootstrap, and Foundation, to name a few), so why create another? Well, we tried them, and each seems to suffer from at least one major problem. For example, 960 Grid doesn&rsquo;t provide any styles for flexible layouts (responsive design). Others use negative margins or weird positioning effects for elements to line up nicely. In almost all cases, additional HTML elements are required to do even the simplist of tasks &mdash; such as adding a background to a row of elements or including borders around cells in a grid. With EWF, we take the best ideas from those frameworks and implement them in a way that works with almost any design. We also provide common JavaScript features, like image sliders, and polyfills, such as support for HTML 5 video in older browsers.</p>
 		<p>EWF is a work in progress and will continue to evolve as we use it in new projects and discover new and better methods of building quality websites.</p>
 	</section> <!--/about -->
 
@@ -49,7 +49,10 @@
 		<h1>Setup</h1>
 		<p>Getting started with EWF is easy. Download the files and start building.</p>
 		<p>Okay, so there&rsquo;s a bit more to it than that; but that&rsquo;s why you&rsquo;re reading this documentation. Start your project by trying to use the columnar and grid layouts, as detailed below. When you&rsquo;re ready to start adding some client-side functionality, take a look at the <a href="#scripts">Scripts</a> section of this guide. We also have API documentation for all the JavaScript functions.</p>
-		<p class="note">Important note: We use the LESS CSS framework to ease the creation and maintainability of CSS on the site. By default, the LESS code is processed by JavaScript, but that isn&rsquo;t ideal for a production website. Make sure to implement LESS on the server side before going live. You can do this with <a href="http://www.dotlesscss.org/">dotLESS</a> (a .NET handler) or <a href="http://nodejs.org/">Node.js</a></p>
+		<p class="note">Important note: We use the LESS CSS framework to ease the creation and maintainability of CSS on your Web pages. By default, the LESS code is processed by JavaScript, but that isn&rsquo;t ideal for a production website. Make sure to implement LESS on the server side before going live. You can do this with <a href="http://www.dotlesscss.org/">dotLESS</a> (a .NET handler) or <a href="http://nodejs.org/">Node.js</a>.</p>
+
+		<h2>Photoshop Guides</h2>
+		<p>In the &ldquo;resources&rdquo; folder, you&rsquo;ll find a file called <strong>guides.psd</strong>. Feel free to use it as a starting point for your design by opening it in Photoshop or Fireworks (or any other software that supports the PSD format). Just be aware that this intended for a liquid/flex layout, so design accordingly.</p>
 	</section> <!--/setup -->
 
 	<section id="layouts">
@@ -61,48 +64,48 @@
 		<h2>Columnar Layout</h2>
 
 		<section id="columnDemo" class="row">
-			<div class="column size-6">.column.size-6</div>
-			<div class="column size-3">.column.size-3</div>
-			<div class="column size-3">.column.size-3</div>
+			<div class="size-6">size-6</div>
+			<div class="size-3">size-3</div>
+			<div class="size-3">size-3</div>
 		</section>
 
-		<p>The columnar layout makes it simple to create rows of percentage-width columns by assigning each column element a class of <code>column</code> and <code>size-<em>n</em></code>, where <em>n</em> is a number from 1 to 12. Here&rsquo;s the HTML used in the example above.</p>
+		<p>The columnar layout makes it simple to create rows of percentage-width columns by assigning each a container element a class of <code>row</code> and its direct children a class of <code>size-<em>n</em></code>, where <em>n</em> is a number from 1 to 12. Here&rsquo;s the HTML used in the example above.</p>
 	
 <pre class="prettyprint"><code>&lt;section class=&quot;row&quot;&gt;
-	&lt;div class=&quot;column size-6&quot;&gt;.column.size-6&lt;/div&gt;
-	&lt;div class=&quot;column size-3&quot;&gt;.column.size-3&lt;/div&gt;
-	&lt;div class=&quot;column size-3&quot;&gt;.column.size-3&lt;/div&gt;
+	&lt;div class=&quot;size-6&quot;&gt;size-6&lt;/div&gt;
+	&lt;div class=&quot;size-3&quot;&gt;size-3&lt;/div&gt;
+	&lt;div class=&quot;size-3&quot;&gt;size-3&lt;/div&gt;
 &lt;/section&gt;</code></pre>
 
-		<p>The total size of the columns in a row must add up to twelve. For example, the columns above have sizes of 6, 3, and 3. Any combination will work &mdash; 4-6-2, 5-3-4, etc. &mdash; as long as it amounts to 12. Rows of columns can even be nested under existing columns &mdash; again adding up to a size of twelve per row.</p>
+		<p>The total size of the columns in a row must add up to twelve. For example, the columns above have sizes of 6, 3, and 3. Any combination will work &mdash; 4-6-2, 5-7, etc. &mdash; as long as it amounts to 12. Rows of columns can even be nested under existing columns &mdash; again adding up to a size of twelve per row.</p>
 		<p class="note">Why twelve? It&rsquo;s a number that&rsquo;s divisible by many numbers (2, 3, 4, and 6). This makes it flexible so that it can align well with many other elements in your website layout.</p>
 
 		<h2>Grid Layout</h2>
 
-		<section id="gridDemo" class="grid four-column">
-			<div class="cell">.cell</div>
-			<div class="cell">.cell</div>
-			<div class="cell">.cell</div>
-			<div class="cell">.cell</div>
-			<div class="cell">.cell</div>
-			<div class="cell">.cell</div>
-			<div class="cell">.cell</div>
-			<div class="cell">.cell</div>
+		<section id="gridDemo" class="four-column">
+			<div>1</div>
+			<div>2</div>
+			<div>3</div>
+			<div>4</div>
+			<div>5</div>
+			<div>6</div>
+			<div>7</div>
+			<div>8</div>
 		</section>
 
 		<p>Normally, to create a grid layout, like the one above, you either need to use a table or create your own CSS to float the elements with the correct width and margins. This grid layout relies on floats, but it&rsquo;s very flexible in that it allows you to define the number of columns through a CSS class. Unlike the column layout, all cells within a grid must be the same width. If you need a mixture of widths, you can combine the column and grid layouts, as discussed later.</p>
-		<p>A grid has a class of <code>grid</code> and <code><em>n</em>-column</code> where <em>n</em> is a word ranging from <em>one</em> to <em>twelve</em>. Each element inside the grid is given a class of <code>cell</code>. Here is how we created the layout above.</p>
+		<p>A grid has a class of <code><em>n</em>-column</code> where <em>n</em> is a word ranging from <em>one</em> to <em>twelve</em>. Each direct child element inside the grid is assumed to be a cell. Here is how we created the layout above.</p>
 
 		<p>
-<pre class="prettyprint"><code>&lt;section class=&quot;grid four-column&quot;&gt;
-	&lt;div class=&quot;cell&quot;&gt;.cell&lt;/div&gt;
-	&lt;div class=&quot;cell&quot;&gt;.cell&lt;/div&gt;
-	&lt;div class=&quot;cell&quot;&gt;.cell&lt;/div&gt;
-	&lt;div class=&quot;cell&quot;&gt;.cell&lt;/div&gt;
-	&lt;div class=&quot;cell&quot;&gt;.cell&lt;/div&gt;
-	&lt;div class=&quot;cell&quot;&gt;.cell&lt;/div&gt;
-	&lt;div class=&quot;cell&quot;&gt;.cell&lt;/div&gt;
-	&lt;div class=&quot;cell&quot;&gt;.cell&lt;/div&gt;
+<pre class="prettyprint"><code>&lt;section class=&quot;four-column&quot;&gt;
+	&lt;div&gt;1&lt;/div&gt;
+	&lt;div&gt;2&lt;/div&gt;
+	&lt;div&gt;3&lt;/div&gt;
+	&lt;div&gt;4&lt;/div&gt;
+	&lt;div&gt;5&lt;/div&gt;
+	&lt;div&gt;6&lt;/div&gt;
+	&lt;div&gt;7&lt;/div&gt;
+	&lt;div&gt;8&lt;/div&gt;
 &lt;/section&gt;</code></pre>
 		</p>
 
@@ -112,28 +115,30 @@
 		<h2>Grid Inside Column</h2>
 
 		<section id="gridInColDemo" class="row">
-			<div class="column size-9 grid two-column">
-				<div class="cell">.column.size-9 > .cell</div>
-				<div class="cell">.column.size-9 > .cell</div>
-				<div class="cell">.column.size-9 > .cell</div>
-				<div class="cell">.column.size-9 > .cell</div>
+			<div class="size-8 two-column">
+				<div>1</div>
+				<div>2</div>
+				<div>3</div>
+				<div>4</div>
 			</div>
 
-			<div class="column size-3">.column.size-3</div>
+			<div class="size-4">size-4</div>
 		</section>
 
-		<p>By combining the columnar and grid layouts, we can create more complex layouts, like the one above. This layout could be used where the Web page has a sidebar on the left or right and a main content section consisting of thumbnail images. It&rsquo;s also possible to have columns within columns or grids within grids. This is the HTML for the above demo.</p>
+		<p>By combining the columnar and grid layouts, we can create more complex layouts, like the one above. This layout could be used where the Web page has a sidebar on the right and a main content section consisting of thumbnail images. It&rsquo;s also possible to have columns within columns or grids within grids. This is the HTML for the above demo.</p>
 
 		<p>
 <pre class="prettyprint"><code>&lt;section class=&quot;row&quot;&gt;
-	&lt;div class=&quot;column size-9 grid two-column&quot;&gt;
-		&lt;div class=&quot;cell&quot;&gt;.column.size-9 &gt; .cell&lt;/div&gt;
-		&lt;div class=&quot;cell&quot;&gt;.column.size-9 &gt; .cell&lt;/div&gt;
-		&lt;div class=&quot;cell&quot;&gt;.column.size-9 &gt; .cell&lt;/div&gt;
-		&lt;div class=&quot;cell&quot;&gt;.column.size-9 &gt; .cell&lt;/div&gt;
+	&lt;!-- Column 1 --&gt;
+	&lt;div class=&quot;size-8 two-column&quot;&gt;
+		&lt;div&gt;1&lt;/div&gt;
+		&lt;div&gt;2&lt;/div&gt;
+		&lt;div&gt;3&lt;/div&gt;
+		&lt;div&gt;4&lt;/div&gt;
 	&lt;/div&gt;
 
-	&lt;div class=&quot;column size-3&quot;&gt;.column.size-3&lt;/div&gt;
+	&lt;!-- Column 2 --&gt;
+	&lt;div class=&quot;size-4&quot;&gt;size-4&lt;/div&gt;
 &lt;/section&gt;</code></pre>
 		</p>
 
@@ -142,6 +147,7 @@
 
 	<section id="scripts">
 		<h1>Scripts</h1>
+		<p>API reference is available at <a href="api-documentation.htm">documentation/api-documentation.htm</a>.</p>
 		<p>More information coming soon.</p>
 	</section> <!--/scripts -->
 
@@ -180,6 +186,8 @@
 						.removeClass('two-column')
 						.addClass('four-column');
 				}
+
+				window.location = '#gridDemo';
 			});
 		});
 	})();
