@@ -30,7 +30,45 @@ td:first-child {
 td *:last-child {
 	margin-bottom: 0;
 }
-
 header, nav, article, footer {
 	font-size: 1.2em;
+}
+#wrapper {
+	margin: 0 auto;
+	max-width: 960px;
+	font-size: 1.2em;
+}
+#columnDemo,
+#gridDemo,
+#gridInColDemo {
+	margin: 3% auto;
+	padding: 2%;
+	border: 1px dashed #999;
+}
+.column,
+.cell {
+	height: 100px;
+	line-height: 100px;
+	border: 5px solid #aaa;
+	border-radius: 10px;
+	text-align: center;
+	background: #ccc;
+}
+#columnDemo .column {
+	height: 250px;
+	line-height: 250px;
+}
+#gridInColDemo .column {
+	height: auto;
+	border-width: 0;
+}
+#gridInColDemo .cell {
+	border-width: 0;
+	color: #fff;
+	background: #999;
+}
+.note {
+	padding: 2%;
+	border-radius: 10px;
+	background-color: #eee;
 }
