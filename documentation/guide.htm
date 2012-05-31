@@ -148,8 +148,13 @@
 
 	<section id="scripts">
 		<h1>Scripts</h1>
-		<p>API reference is available at <a href="api-documentation.htm">documentation/api-documentation.htm</a>.</p>
-		<p>More information coming soon.</p>
+		<p>To make use of the scripts available in EWF, be sure to include the following just before the <code>&lt;/body&gt;</code> tag on your pages.</p>
+
+<pre class="prettyprint"><code>&lt;script src=&quot;/js/experis.utils.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;/js/experis.framework.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;/js/global.js&quot;&gt;&lt;/script&gt;</code></pre>
+
+		<p>Your site-wide scripts should be placed in <strong>global.js</strong>. We&rsquo;ve already filled out a few things for you. For a full reference on what functions are available, we have included an API reference guide at <a href="api-documentation.htm">documentation/api-documentation.htm</a>.</p>
 	</section> <!--/scripts -->
 
 	<section id="notes">
@@ -157,15 +162,14 @@
 
 		<ul>
 			<li>Selectivizr and NWMatcher are used to provide CSS 3 selector support to IE 6-8. However, Selectivizr requires that all CSS be included by the <code>&lt;link&gt;</code> tag in order to be recognized. If you are using the client-side JavaScript version of LESS, the CSS will be inserted into a <code>&lt;style&gt;</code> tag and will not be parsed by Selectivizr.</li>
-			<li>WebKit (Chrome and Safari) and Trident (IE) have a different interpretation than Mozilla (Firefox) concerning sub-pixel widths. In Firefox, columns or cells with widths that add up to 100% will take up the full available space. However, other browsers may leave a noticeable space at the end due to how they round fractional percentages. A JavaScript utility function is being developed to approximate Mozilla&rsquo;s implementation of sub-pixel rendering where percentages are concerned.</li>
+			<li>WebKit (Chrome and Safari) and Trident (IE) have a different interpretation than Mozilla (Firefox) concerning sub-pixel widths. In Firefox, columns or cells with widths that add up to 100% will take up the full available space. However, other browsers may leave a noticeable space at the end due to how they round fractional percentages. A JavaScript utility function has been developed to approximate Mozilla&rsquo;s implementation of sub-pixel rendering where percentages are concerned; however, it only works with the columnar layout at this time, not grid layouts.</li>
 			<li>The latest version of NWMatcher (1.2.5) doesn&rsquo;t properly match nth-of-type selectors. So, we&rsquo;re using version 1.2.3.</li>
-			<li>IE 7 doesn&rsquo;t support the CSS 3 box-sizing property, causing padding and borders to affect the width of columns and grid cells. A JavaScript fix is planned to address this issue.</li>
 		</ul>
 	</section> <!--/notes -->
 
 	<script src="../js/experis.utils.js"></script>
-	<script src="../js/experis.polyfills.js"></script>
-	<script src="../js/experis.widgets.js"></script>
+	<script src="../js/experis.framework.js"></script>
+	<script src="../js/global.js"></script>
 	<script src="../js/google-code-prettify/prettify.js"></script>
 
 	<script>
