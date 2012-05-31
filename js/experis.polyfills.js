@@ -9,7 +9,7 @@ if (!experis) { alert('You must include experis.utils.js before using the Experi
 
 experis.polyfills = {
 	/*
-	* fixSubpixelWidths (dom element, object)
+	* fixSubpixelWidths (dom element, object[, number])
 	* Percentage widths that result in subpixel values are handled differently by each
 	* browser. Webkit and IE round values down to the nearest whole number, and Mozilla adjusts
 	* values of surrounding elements up/down to more closely mimick the expected result. This
@@ -17,7 +17,9 @@ experis.polyfills = {
 	* Child elements are assumed to have box-sizing set to border-box.
 	* childWidths is in the format: [{width:25, marginLeft:1, marginRight:1}, {...}] where each number represents a percentage
 	*/
-	fixSubpixelWidths: function (wrapper, childWidths) {
+	fixSubpixelWidths: function (wrapper, childWidths, callCount) {
+		if (!callCount) callCount = 0;
+
 		var wrapperWidth = $xu.getDimensions(wrapper).width;
 		var totalWidth = 0;      // The total number of pixels the children "should" take up
 		var totalWidthInt = 0;   // The total width actually taken up
@@ -71,26 +73,29 @@ experis.polyfills = {
 			remaining--;
 		}
 
-		// Rerun this function on window resize
-		var timer;
+		if (callCount === 0) {
+			var timer;
+			callCount++;
 
-		$xu.addListener(window, 'resize', (function (wrapper, childWidths) {
-			return function () {
-				clearTimeout(timer);
+			// Rerun this function on window resize
+			$xu.addListener(window, 'resize', (function (wrapper, childWidths, callCount) {
+				return function () {
+					clearTimeout(timer);
 
-				// Clear out width and margin styles
-				for (var n = 0, el; el = wrapper.childNodes[n++]; ) {
-					if (el.nodeType !== 3) {
-						el.style.width = el.style.marginLeft = el.style.marginRight = '';
+					// Clear out width and margin styles
+					for (var n = 0, el; el = wrapper.childNodes[n++]; ) {
+						if (el.nodeType !== 3) {
+							el.style.width = el.style.marginLeft = el.style.marginRight = '';
+						}
 					}
-				}
 
-				// Run function after a set time (to ease CPU load)
-				timer = setTimeout(function () {
-					$xp.fixSubpixelWidths(wrapper, childWidths);
-				}, 500);
-			};
-		})(wrapper, childWidths));
+					// Run function after a set time (to ease CPU load)
+					timer = setTimeout(function () {
+						$xp.fixSubpixelWidths(wrapper, childWidths, callCount);
+					}, 200);
+				};
+			})(wrapper, childWidths, callCount));
+		}
 	},
 	/*
 	* placeholder ()
