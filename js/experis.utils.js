@@ -10,9 +10,10 @@ var experis = {};
 /* ------------------------------------
    Properties
 --------------------------------------- */
-experis.path = '/js/experis/'; // Path to "experis" directory
+experis.path = '/js/'; // Path to "experis" directory
 experis.domReady = false;
 experis.scripts = [];
+experis.timer = []; // Array of timers for setTimeout/setInterval functions (functions should use $x.timer.push() to avoid overwriting other timers)
 
 /* Content delivery networks */
 experis.cdn = {
@@ -179,6 +180,20 @@ experis.utils = {
 		el.parentNode.removeChild(newEl);
 
 		return lineHeight;
+	},
+	/*
+	* getChildNodesByType (number|named constant, dom element)
+	* nodeType: the type of nodes to return (e.g. ELEMENT_NODE or 1)
+	* parent: the DOM element to search within
+	*/
+	getChildNodesByType: function (nodeType, parent) {
+		var els = [];
+
+		for (var n = 0, child; child = parent.childNodes[n++]; ) {
+			if (child.nodeType === nodeType) els.push(child);
+		}
+
+		return els;
 	},
 	/*
 	* getScrollPosition ([dom element])
