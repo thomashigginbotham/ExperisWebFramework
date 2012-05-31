@@ -9,6 +9,90 @@ if (!experis) { alert('You must include experis.utils.js before using the Experi
 
 experis.polyfills = {
 	/*
+	* fixSubpixelWidths (dom element, object)
+	* Percentage widths that result in subpixel values are handled differently by each
+	* browser. Webkit and IE round values down to the nearest whole number, and Mozilla adjusts
+	* values of surrounding elements up/down to more closely mimick the expected result. This
+	* function allows Webkit and IE to more closely resemble Mozilla's implementation.
+	* Child elements are assumed to have box-sizing set to border-box.
+	* childWidths is in the format: [{width:25, marginLeft:1, marginRight:1}, {...}] where each number represents a percentage
+	*/
+	fixSubpixelWidths: function (wrapper, childWidths) {
+		var wrapperWidth = $xu.getDimensions(wrapper).width;
+		var totalWidth = 0;      // The total number of pixels the children "should" take up
+		var totalWidthInt = 0;   // The total width actually taken up
+		var el;
+
+		for (var n = 0, ctr = 0, child; child = childWidths[n++]; ctr++) {
+			// Convert percentage values to pixels and add to totalWidth
+			child.widthPx = wrapperWidth * (child.width / 100);
+			child.marginLeftPx = wrapperWidth * (child.marginLeft / 100);
+			child.marginRightPx = wrapperWidth * (child.marginRight / 100);
+			child.widthPxInt = parseInt(child.widthPx);
+			child.marginLeftPxInt = parseInt(child.marginLeftPx);
+			child.marginRightPxInt = parseInt(child.marginRightPx);
+
+			totalWidth += child.widthPx + child.marginLeftPx + child.marginRightPx;
+			totalWidthInt += child.widthPxInt + child.marginLeftPxInt + child.marginRightPxInt;
+
+			// Update width/margins of child to integer pixel values
+			while (wrapper.childNodes[ctr].nodeType === 3) {
+				ctr++; // Ignore text nodes
+			}
+
+			el = wrapper.childNodes[ctr];
+			el.style.width = child.widthPxInt + 'px';
+			el.style.marginLeft = child.marginLeftPxInt + 'px';
+			el.style.marginRight = child.marginRightPxInt + 'px';
+		}
+
+		// Distribute remaining pixels among children's widths
+		var remaining = parseInt(totalWidth - totalWidthInt);
+
+		while (remaining > 0) {
+			var ctr = 0, el;
+
+			while (wrapper.childNodes[ctr].nodeType === 3) {
+				ctr++; // Ignore text nodes
+			}
+
+			if (ctr > wrapper.childNodes.length - 1) {
+				// Move back to the first child
+				ctr = 0;
+
+				while (wrapper.childNodes[ctr].nodeType === 3) {
+					ctr++;
+				}
+			}
+
+			el = wrapper.childNodes[ctr];
+			el.style.width = parseInt(el.style.width) + 1 + 'px';
+
+			remaining--;
+		}
+
+		// Rerun this function on window resize
+		var timer;
+
+		$xu.addListener(window, 'resize', (function (wrapper, childWidths) {
+			return function () {
+				clearTimeout(timer);
+
+				// Clear out width and margin styles
+				for (var n = 0, el; el = wrapper.childNodes[n++]; ) {
+					if (el.nodeType !== 3) {
+						el.style.width = el.style.marginLeft = el.style.marginRight = '';
+					}
+				}
+
+				// Run function after a set time (to ease CPU load)
+				timer = setTimeout(function () {
+					$xp.fixSubpixelWidths(wrapper, childWidths);
+				}, 500);
+			};
+		})(wrapper, childWidths));
+	},
+	/*
 	* placeholder ()
 	* Polyfill for @placeholder support
 	*/
