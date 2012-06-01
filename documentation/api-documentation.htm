@@ -204,7 +204,23 @@
 
 				<tbody>
 					<tr>
-						<td><code>placeholder ()</code></td>
+						<td><code>fixSubpixelWidths(wrapper:dom element, childWidths:array, callCount:number)</code></td>
+						<td><code>None</code></td>
+						<td>
+							<p>Normalizes the handling of subpixel values cross-browser.</p>
+							<p>Different browsers handle subpixel values in different ways. Webkit (Chrome and Safari) and Trident (IE) round decimal values to the nearest whole number. This means that elements with percentages that add up to 100% when placed side by side, may not fill the entire available space. For example, if a container element has a width of 225 px and two elements inside have a width of 50% each, their widths will evaluate to 112.5 px each. Of course, there&rsquo;s no such thing as a half pixel on a monitor, so they round down to 112 px. However, this leaves an additional pixel (0.5 * 2) left over at the end.</p>
+							<p>Mozilla handles this problem by adjusting the widths of the elements so that the full 100% is still used. To do this, the first element would be given a width of 112 px and the second would have a width of 113 px. The fixSubpixelWidths() function mimicks Mozilla&rsquo;s implementation in other browsers.</p>
+							
+							<ul>
+								<li><code>wrapper</code>: the element that contains the percentage-width children</li>
+								<li><code>childWidths</code>: an array of objects in the format <code>[{width:25, marginLeft:1, marginRight:1}, {...}]</code> where each number represents a percentage</li>
+								<li><code>callCount</code> <em>(optional)</em>: a parameter used internally when the function is called during window resizing</li>
+							</ul>
+						</td>
+					</tr>
+
+					<tr>
+						<td><code>placeholder()</code></td>
 						<td><code>None</code></td>
 						<td>
 							<p>This method is a polyfill for @placeholder support on <code>input</code> and <code>textarea</code> elements.</p>
@@ -212,7 +228,7 @@
 					</tr>
 
 					<tr>
-						<td><code>video ()</code></td>
+						<td><code>video()</code></td>
 						<td><code>None</code></td>
 						<td>
 							<p>This method is a polyfill for HTML 5 video support. Flowplayer Flash video player will be used when a video cannot be played natively.</p>
