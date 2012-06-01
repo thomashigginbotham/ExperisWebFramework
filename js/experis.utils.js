@@ -14,13 +14,14 @@ experis.path = '/js/'; // Path to "experis" directory
 experis.domReady = false;
 experis.scripts = [];
 experis.timer = []; // Array of timers for setTimeout/setInterval functions (functions should use $x.timer.push() to avoid overwriting other timers)
+experis.urlProtocol = (document.location.protocol === 'file:') ? 'http:' : document.location.protocol; // Absolute URLs should use http protocol
 
 /* Content delivery networks */
 experis.cdn = {
-	jquery: '//ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js',
-	jqueryui: '//ajax.googleapis.com/ajax/libs/jqueryui/1/jquery-ui.min.js',
-	prototype: '//ajax.googleapis.com/ajax/libs/prototype/1/prototype.js',
-	nwmatcher: '//s3.amazonaws.com/nwapi/nwmatcher/nwmatcher-1.2.5-min.js'
+	jquery: experis.urlProtocol + '//ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js',
+	jqueryui: experis.urlProtocol + '//ajax.googleapis.com/ajax/libs/jqueryui/1/jquery-ui.min.js',
+	prototype: experis.urlProtocol + '//ajax.googleapis.com/ajax/libs/prototype/1/prototype.js',
+	nwmatcher: experis.urlProtocol + '//s3.amazonaws.com/nwapi/nwmatcher/nwmatcher-1.2.5-min.js'
 };
 
 /* ------------------------------------
