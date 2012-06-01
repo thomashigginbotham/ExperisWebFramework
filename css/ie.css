@@ -18,6 +18,10 @@ Fixes for IE 7
 	*zoom: 1;
 }
 
+/* IE 7 parent elements need a defined width for children that have percentage widths. Of course,
+ * this means no responsive layout for IE 7. Instead, we optimize for 1024x768. */
+#wrapper { *max-width: 960px; *width: 960px }
+
 /* -- box-sizing:border-box support -- */
 .row > *,
 .one-column > *,

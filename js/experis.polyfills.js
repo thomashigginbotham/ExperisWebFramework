@@ -18,6 +18,8 @@ experis.polyfills = {
 	* childWidths is in the format: [{width:25, marginLeft:1, marginRight:1}, {...}] where each number represents a percentage
 	*/
 	fixSubpixelWidths: function (wrapper, childWidths, callCount) {
+		if ($xu.getPageDimensions().width <= 480) return;
+
 		if (!callCount) callCount = 0;
 
 		var wrapperWidth = $xu.getDimensions(wrapper).width;
