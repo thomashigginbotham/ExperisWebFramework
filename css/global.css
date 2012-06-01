@@ -1,0 +1,35 @@
+﻿/* -- Global Styles -- */
+body {
+	color: #222;
+	background-color: #fff;
+}
+h1,
+h2 {
+	margin: 0;
+}
+#wrapper {
+	margin: 0 auto;
+	padding: 2%;
+	max-width: 960px;
+	font-size: 1.4em;
+}
+header {
+	padding: 2%;
+	background-color: #ccc;
+}
+article {
+	margin: 2% 0;
+}
+#sidebar {
+	padding: 2%;
+	color: #fff;
+	background-color: #999;
+}
+#content {
+	padding: 2%;
+	background-color: #eee;
+}
+footer {
+	text-align: center;
+	background-color: #ccc;
+}

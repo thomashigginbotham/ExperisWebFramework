@@ -97,7 +97,6 @@
 		<p>Normally, to create a grid layout, like the one above, you either need to use a table or create your own CSS to float the elements with the correct width and margins. This grid layout relies on floats, but it&rsquo;s very flexible in that it allows you to define the number of columns through a CSS class. Unlike the column layout, all cells within a grid must be the same width. If you need a mixture of widths, you can combine the column and grid layouts, as discussed later.</p>
 		<p>A grid has a class of <code><em>n</em>-column</code> where <em>n</em> is a word ranging from <em>one</em> to <em>twelve</em>. Each direct child element inside the grid is assumed to be a cell. Here is how we created the layout above.</p>
 
-		<p>
 <pre class="prettyprint"><code>&lt;section class=&quot;four-column&quot;&gt;
 	&lt;div&gt;1&lt;/div&gt;
 	&lt;div&gt;2&lt;/div&gt;
@@ -108,7 +107,6 @@
 	&lt;div&gt;7&lt;/div&gt;
 	&lt;div&gt;8&lt;/div&gt;
 &lt;/section&gt;</code></pre>
-		</p>
 
 		<p>To change the above from a four-column grid to a two-column grid, all we have to do is change the class name. <span id="changeGridCols">Try it out</span>, and watch the demo grid above as it toggles between a class of <code>four-columns</code> and <code>two-columns</code>.</p>
 		<p class="note">One more thing to point out: notice that we&rsquo;ve added padding and borders to the cells and columns in the demos. With most CSS frameworks, this creates big problems, because you can&rsquo;t mix pixel and percentage widths to arrive at 100%. To achieve this, we use the border-box CSS model for columns and grid cells, which is supported by all major browsers, even IE 8.</p>
@@ -128,7 +126,6 @@
 
 		<p>By combining the columnar and grid layouts, we can create more complex layouts, like the one above. This layout could be used where the Web page has a sidebar on the right and a main content section consisting of thumbnail images. It&rsquo;s also possible to have columns within columns or grids within grids. This is the HTML for the above demo.</p>
 
-		<p>
 <pre class="prettyprint"><code>&lt;section class=&quot;row&quot;&gt;
 	&lt;!-- Column 1 --&gt;
 	&lt;div class=&quot;size-8 two-column&quot;&gt;
@@ -141,7 +138,6 @@
 	&lt;!-- Column 2 --&gt;
 	&lt;div class=&quot;size-4&quot;&gt;size-4&lt;/div&gt;
 &lt;/section&gt;</code></pre>
-		</p>
 
 		<p class="note">Notice how we are able to use the same div as the column and as the grid container. This keeps your HTML lightweight by not requiring extra elements just for the purpose of attaching a class name &mdash; one of the main reasons we created Experis Web Framework.</p>
 	</section> <!--/layouts -->
