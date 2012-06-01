@@ -1,3 +1,3 @@
-Experis Web Framework, EWF (pronounced "oof"), is a combination of common Web technologies that makes it easy to design, develop, and maintian cross-browser, responsive websites.
+Experis Web Framework, EWF (pronounced "oof"), is a combination of common Web technologies that makes it easy to design, develop, and maintain cross-browser, responsive websites.
 
-To get started, download the files, and open the HTML file at documentation/guide.htm in a modern Web browser (i.e. not older versions of IE). In order for IE 8 and older to render pages correctly, you will need to run the files from a Web server. The reason being that some technologies, such as Selectivizr, do not work via the file: protocol.
+To get started, download the files, and open the HTML file at documentation/guide.htm in a modern Web browser (i.e. not older versions of IE). In order for IE 8 and older to render pages correctly, you will need to run the files from a Web server. The reason being that some technologies, such as Selectivizr, do not work via the "file:" protocol.
