@@ -3,77 +3,89 @@
 <head>
 	<meta charset="utf-8" />
 	<title>Experis Slider Widget</title>
-	<!--[if lt IE 9]>
-	<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-	<![endif]-->
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 	<link rel="stylesheet" href="../../css/reset.min.css">
 	<link rel="stylesheet" href="../../css/framework.min.css">
 	<link rel="stylesheet" href="../documentation.min.css" />
 	<link rel="stylesheet" href="../../js/google-code-prettify/prettify.css">
 
-	<script src="../../js/less-1.3.0.min.js"></script>
-
 	<style>
-		#sample-slider {
+		.experis-slider {
 			position: relative;
-			width: 750px;
-			height: 350px;
+			width: 640px;
+			height: 320px;
 			overflow: hidden;
 		}
-		#sample-slider ul{
+		.experis-slider > ul {
 			position: absolute;
-			top: 310px;
-			z-index: 2;
+			top: 0;
+			left: 0;
+			z-index: 1;
 			margin: 0;
 			padding: 0;
-			width: 100%;
+			width: 640px;
 			list-style: none;
-			background: #000;
-			opacity: .75;
+			background: rgba(0, 0, 0, .7);
 		}
-		#sample-slider li {
-			float: left;
-			width: 33.3%;
+		.experis-slider > ul li {
+			height: auto;
+			line-height: 1.5;
+			border-width: 0;
+			border-radius: 0;
 			text-align: center;
+			background: none;
 		}
-		#sample-slider li.selected {
-			background: #00f;
-		}
-		#sample-slider li a {
-			float: left;
-			width: 100%;
-			line-height: 40px;
-			text-decoration: none;
-			color: #fff;
-		}
-		#sample-slider .experis-slider-arrows {
-			top: 120px;
-			left: 10px;
-			width: auto;
-			font-size: 70px;
-			font-weight: bold;
-			background-color: transparent;
-			opacity: 1;
-		}
-		#sample-slider .experis-slider-arrows a {
+		.experis-slider > ul a {
 			display: block;
-			width: 70px;
-			height: 70px;
-			line-height: 70px;
-			border: 7px solid #fff;
-			border-radius: 45px;
-			text-align: center;
-			text-decoration: none;
+			padding: .5em;
 			color: #fff;
-			opacity: .5;
-			box-shadow: 0 0 30px #000;
-			text-shadow: 0 0 30px #000;
+			text-decoration: none;
 		}
-		.experis-slider-next{
+		.experis-slider-arrows {
+			display: none;
 			position: absolute;
-			left: 647px;
+			top: 150px;
+			left: 10px;
+			width: 620px;
+			z-index: 1;
+		}
+		.experis-slider:hover .experis-slider-arrows {
+			display: block;
+		}
+		.experis-slider-arrows a {
+			position: absolute;
+			text-decoration: none;
+			text-shadow: 2px 2px 5px #000;
+			font-size: 30px;
+			font-weight: bold;
+			color: #fff;
+		}
+		.experis-slider-next {
+			right: 0;
+		}
+		#fruit img,
+		#chrome video {
+			display: block;
+		}
+		#customContent {
+			padding-top: 3em;
+			background-color: #ccc;
 		}
 	</style>
+
+	<!--[if lt IE 9]>
+	<link rel="stylesheet" href="../../css/ie.css">
+	<script src="http://s3.amazonaws.com/nwapi/nwmatcher/nwmatcher-1.2.3-min.js"></script>
+	<script src="../../js/selectivizr-min.js"></script>
+	<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+
+	<style>
+	.experis-slider > ul {
+		background-color: #000;
+	}
+	</style>
+	<![endif]-->
 </head>
 
 <body>
@@ -86,27 +98,32 @@
 		</header>
 
 		<article>
-			<div id="sample-slider">
-				<!-- Slider next/prev arrows will appear here -->
+			<div id="sample-slider" class="experis-slider">
+				<ul class="row">
+					<li class="size-4"><a href="#fruit">Lorem Ipsum Dolor Sit Amet</a></li>
+					<li class="size-4"><a href="#chrome">Consectetuer Adipiscing Elit</a></li>
+					<li class="size-4"><a href="#customContent">Nonummy Dolor Elit</a></li>
+				</ul>
 
-				<div class="slider">
-					<ul>
-						<li><a href="#fruit">Eat More Fruit</a></li>
-						<li><a href="#walking">Walking is Good Excercise</a></li>
-						<li><a href="#xray">See Your Doctor</a></li>
-					</ul>
+				<div id="fruit"><a href="http://www.google.com/search?q=fruit"><img src="../assets/fruit.jpg" alt="" width="640" height="320"></a></div>
+		
+				<div id="chrome">
+					<video width="640" height="320" controls>
+						<source src="../assets/chrome.mp4" type="video/mp4">
+						<a href="../assets/chrome.mp4">Chrome Video</a>
+					</video>
+				</div>
 
-					<div id="fruit"><a href="http://google.com/"><img src="../assets/fruit.jpg" alt="Fruits" width="750" height="350"></a></div>
-					<div id="walking"><a href="http://bing.com/"><img src="../assets/walking.jpg" alt="Person walking"></a></div>
-					<div id="xray"><a href="http://yahoo.com/"><img src="../assets/x-ray.jpg" alt="Doctors looking at an x-ray"></a></div>
+				<div id="customContent">
+					<h2>Sample Heading</h2>
+					<p>Example of HTML content embedded into a slide.</p>
 				</div>
 			</div>
 
 			<h2>Remarks</h2>
-			<p>Like all functions in the Experis JS library, the slider widget is constantly evolving and may contain bugs and unexpected behavior when used in specific circumstances. The widget was initially designed strictly as an <em>image</em> slider, but has been modified to support any type of content and will even support multiple images per slide.</p>
-			<p>Options provided to the method allow you to determine the delay between slides, the type of transition (slide or fade), and whether the slider should scroll back to the beginning when it reaches the last slide or whether it should simply continue as if the first slide were next in the list.</p>
+			<p>Like all functions in the Experis JS library, the slider widget is constantly evolving and may contain bugs and unexpected behavior when used in specific circumstances. The widget was initially designed strictly as an <em>image</em> slider, but has been modified to support any type of content.</p>
+			<p>Options provided to the method allow you to determine the delay between slides, the type of transition, and other settings.</p>
 			<p>The slider uses minimal CSS to accomplish its purpose, relying on the designer to provide the style.</p>
-			<p><strong>Note</strong>: the slider next/prev arrows will be drawn outside of the slider's wrapper element. This allows the arrows to extend outside of the slider if necessary but also means that a secondary wrapper may be needed to contain the arrows. In the future, this will likely be revised so that the slider creates its own internal wrapper element.</p>
 
 			<h3>Syntax</h3>
 			<pre class="prettyprint"><code>$xw.slider(el:dom element[, options:object]);</code></pre>
@@ -126,9 +143,6 @@
 	&lt;div id=&quot;slide-2&quot;&gt;&lt;a href=&quot;url-2.htm&quot;&gt;&lt;img src=&quot;image-2.jpg&quot; alt=&quot;&quot; /&gt;&lt;/a&gt;&lt;/div&gt;
 &lt;/div&gt;</code></pre>
 
-			<h2>Example</h2>
-			<p>View the source code of this page for an example of the slider.</p>
-
 			<h2>Parameters</h2>
 
 			<table>
@@ -146,7 +160,7 @@
 						<td>el</td>
 						<td>null</td>
 						<td>dom element</td>
-						<td><p>This parameter is the &ldquo;wrapper&rdquo; element of the slider and is required. No error will be thrown if the element does not exist. This allows the script to be used on pages that may not have a slider without alerting the user of a problem.</p></td>
+						<td><p>This parameter is the &ldquo;wrapper&rdquo; element of the slider and is required.</p></td>
 					</tr>
 
 					<tr>
@@ -158,23 +172,16 @@
 
 					<tr>
 						<td>options.transTime</td>
-						<td>500 (&frac12; second)</td>
+						<td>300 (0.3 seconds)</td>
 						<td>number</td>
 						<td><p>The amount of time it takes for a slide to transition to the next.</p></td>
 					</tr>
 
 					<tr>
-						<td>options.transEffect</td>
+						<td>options.transType</td>
 						<td>'slide'</td>
-						<td>'slide' or 'fade'</td>
-						<td><p>The type of effect that will be used to transition the slides.</p></td>
-					</tr>
-
-					<tr>
-						<td>options.finishEffect</td>
-						<td>'cycle'</td>
-						<td>'cycle' or 'none'</td>
-						<td><p>The 'cycle' setting will cause the slider to scroll back to the beginning when it reaches the end. The 'none' setting will cause the slider to continue moving forward with the first slide next in line at the end. This parameter has no effect when options.transEffect is set to 'fade'.</p></td>
+						<td>'slide', 'wipe', or 'fade'</td>
+						<td><p>The type of effect that will be used to transition between slides.</p></td>
 					</tr>
 
 					<tr>
@@ -185,24 +192,10 @@
 					</tr>
 
 					<tr>
-						<td>options.width</td>
-						<td>null</td>
-						<td>number</td>
-						<td><p>The width of the slider (in pixels). If omitted, the width of the first image will be used.</p></td>
-					</tr>
-
-					<tr>
-						<td>options.height</td>
-						<td>null</td>
-						<td>number</td>
-						<td><p>The height of the slider (in pixels). If omitted, the height of the first image will be used.</p></td>
-					</tr>
-
-					<tr>
-						<td>options.imagesPerSlide</td>
-						<td>1</td>
-						<td>number</td>
-						<td><p>The number of slides to scroll after each transition. Make sure to set the options.width parameter if you intend to set this parameter to anything higher than 1.</p></td>
+						<td>options.stopAfterHover</td>
+						<td>true</td>
+						<td>boolean</td>
+						<td><p>When set to true, the slide show will not automatically resume after the user has hovered over it</p></td>
 					</tr>
 				</tbody>
 			</table>	
@@ -212,7 +205,14 @@
 	</div> <!--/wrapper -->
 
 	<script src="../../js/experis.utils.js"></script>
+
+	<script>
+		$x.path = '../../js/'; // Use relative path in case this guide is not hosted on a server
+	</script>
+
 	<script src="../../js/experis.widgets.js"></script>
+	<script src="../../js/experis.framework.js"></script>
+	<script src="../../js/global.js"></script>
 	<script src="../../js/google-code-prettify/prettify.js"></script>
 
 	<script>
@@ -220,15 +220,11 @@
 		$xu.addListener(window, 'load', function (e) { prettyPrint(); });
 
 		// Start slider
-		$xw.slider($xu.getElementsByClassName('slider'), {
+		$xw.slider(document.getElementById('sample-slider'), {
 			delay: 3000,
-			transTime: 300,
-			transEffect: 'slide',
-			finishEffect: 'none',
-			showArrows: true,
-			width: 750,
-			height: 350,
-			imagesPerSlide: 1
+			transTime: 250,
+			transType: 'slide',
+			showArrows: true
 		});
 	</script>
 </body>
