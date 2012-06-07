@@ -21,7 +21,7 @@ experis.cdn = {
 	jquery: experis.urlProtocol + '//ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js',
 	jqueryui: experis.urlProtocol + '//ajax.googleapis.com/ajax/libs/jqueryui/1/jquery-ui.min.js',
 	prototype: experis.urlProtocol + '//ajax.googleapis.com/ajax/libs/prototype/1/prototype.js',
-	nwmatcher: experis.urlProtocol + '//s3.amazonaws.com/nwapi/nwmatcher/nwmatcher-1.2.5-min.js'
+	nwmatcher: experis.urlProtocol + '//s3.amazonaws.com/nwapi/nwmatcher/nwmatcher-1.2.3-min.js'
 };
 
 /* ------------------------------------
