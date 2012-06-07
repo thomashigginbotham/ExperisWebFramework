@@ -158,14 +158,10 @@ experis.polyfills = {
 	* when videos fail to load or if <video> is unsupported.
 	*/
 	video: function (vidWidth, vidHeight) {
-		if (!vidWidth) vidWidth = 320;
-		if (!vidHeight) vidHeight = 240;
-
-		$xu.addListener(window, 'load', function () {
+		$xu.onDomReady(function () {
 			$xu.includeScript($x.path + 'flowplayer/flowplayer-3.2.6.min.js', function () {
 				// Check if video loaded, and if not, use FlowPlayer
 				var videos = document.getElementsByTagName('video');
-
 				for (var n = 0, len = videos.length; n < len; n++) {
 					if (!videos[n].currentSrc || videos[n].networkState === HTMLMediaElement.NETWORK_NO_SOURCE) {
 						var children = videos[n].childNodes;
@@ -173,23 +169,43 @@ experis.polyfills = {
 						for (m = 0, child_len = children.length; m < child_len; m++) {
 							if (children[m].nodeName.toLowerCase() === 'a') {
 								// Move anchor above video and hide video
-								var clone = children[m].cloneNode(true);
+								var movieUrl = children[m].getAttribute('href');
+								var wrapper = document.createElement('div');
 
-								clone.id = clone.id + '-clone';
+								wrapper.id = children[m].id + '-clone';
 
-								videos[n].parentNode.insertBefore(clone, videos[n]);
+								videos[n].parentNode.insertBefore(wrapper, videos[n]);
 								videos[n].style.display = 'none';
+								children[m].style.display = 'none';
 
 								// Set video dimensions and call flowplayer()
-								clone.style.display = 'block';
-								clone.style.width = vidWidth + 'px';
-								clone.style.height = vidHeight + 'px';
+								var widthAttr = videos[n].getAttribute('width');
+								var heightAttr = videos[n].getAttribute('height');
 
-								flowplayer(clone.id, $x.path + 'flowplayer/flowplayer-3.2.7.swf', { clip: { autoPlay: false} });
+								if (!vidWidth && widthAttr !== null) {
+									vidWidth = widthAttr;
+								} else if (!vidWidth) {
+									vidWidth = 320;
+								}
+
+								if (!vidHeight && heightAttr !== null) {
+									vidHeight = heightAttr;
+								} else if (!vidHeight) {
+									vidHeight = 240;
+								}
+
+								with (wrapper.style) {
+									display = 'block';
+									width = vidWidth + 'px';
+									height = vidHeight + 'px';
+									overflow = 'hidden';
+								}
+
+								flowplayer(wrapper.id, { src: $x.path + 'flowplayer/flowplayer-3.2.7.swf', wmode: 'opaque' }, { clip: { url: movieUrl, autoPlay: false} });
 
 								// Sometimes IE doesn't load the player on the first try
-								if (clone.innerHTML.toLowerCase().indexOf('<object') == -1) {
-									flowplayer(clone.id, $x.path + 'flowplayer/flowplayer-3.2.7.swf', { clip: { autoPlay: false} });
+								if (wrapper.innerHTML.toLowerCase().indexOf('<object') == -1) {
+									flowplayer(wrapper.id, { src: $x.path + 'flowplayer/flowplayer-3.2.7.swf', wmode: 'opaque' }, { clip: { url: movieUrl, autoPlay: false} });
 								}
 							}
 						}
