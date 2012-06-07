@@ -58,229 +58,268 @@ experis.widgets = {
 	* slider(dom element[, object])
 	* Converts an HTML structure into a functioning content slider
 	*/
-	slider: function (el, options) {
-		var timer, sliderWidth, sliderHeight, imageWidth, imageHeight;
+	slider: function (wrapper, options) {
+		$xu.includeScript($x.path + 'experis.fx.js', function () { // Require FX library
+			$xu.includeScript($x.cdn.nwmatcher, function () {      // Require NWMatcher
+				if (wrapper.className.indexOf('experis-slider') === -1) {
+					wrapper.className += ' experis-slider';
+				}
 
-		// Default options
-		defaults = {
-			delay: 5000,
-			transTime: 500,
-			transEffect: 'slide', // 'slide' or 'fade' ('fade' setting is problematic in IE)
-			finishEffect: 'cycle', // 'cycle' (cycles back through slides at end) or 'none' (proceeds to first slide at end as if it were next in line)
-			showArrows: true,
-			width: null,
-			height: null,
-			imagesPerSlide: 1 // Only one image is assumed per slide by default
-		}
+				var slides = NW.Dom.select('.experis-slider > div', wrapper.parentNode);
+				var nav = NW.Dom.select('.experis-slider > ul', wrapper.parentNode);
+				var slideDims = $xu.getDimensions(slides[0]);
+				var slideCount = slides.length;
+				var curSlide = 1;
+				var mouseStatus = 'out';
+				var ieVersion = $xu.getIeVersion();
+				var timer, transTimer;
 
-		options = $xu.mergeJson(defaults, options);
+				var defaults = {
+					delay: 5000,
+					transType: 'slide',
+					transTime: 300,
+					showArrows: true,
+					stopAfterHover: true
+				};
 
-		$xu.onDomReady(function () {
-			// Use jQuery for animation
-			$xu.includeScript($x.cdn.jquery, function () {
-				(function ($) {
-					var slider = $(el);
-					var slides = slider.find('>div');
-					var navLinks = slider.find('>ul li a');
-					var firstImg = slider.find('> div').eq(0).find('img');
+				options = $xu.mergeJson(defaults, options);
 
-					if (slider.length === 0) return;
+				// Build new HTML structure
+				var slidePanel = document.createElement('div');
+				var slideWrap = document.createElement('div');
 
-					var animate = function (posX, directionalNav) {
-						if (options.transEffect === 'slide') {
-							// Use sliding transition
-							if (directionalNav && options.finishEffect === 'none') {
-								if (posX === 0 || typeof (posX) !== 'string') {
-									// Create a copy of the first/last slide(s) and place it at the end/beginning of the slider
-									var imgCopies = [];
-									var changeOperator = (posX === 0) ? '-=' : '+=';
+				slidePanel.className = 'experis-slide-panel';
+				slidePanel.style.position = 'relative';
+				slidePanel.style.overflow = 'hidden';
 
-									for (var n = 0; n <= options.imagesPerSlide; n++) {
-										var imgCopy = (posX === 0) ? slides.eq(n).clone() : slides.eq(slides.length - n).clone();
+				slideWrap.className = 'experis-slide-wrap';
+				slideWrap.style.position = 'relative';
+				slideWrap.style.left = 0;
+				slideWrap.style.width = slideDims.width * slideCount + 'px';
 
-										imgCopy
-											.css('position', 'absolute')
-											.css('top', 0)
+				slidePanel.appendChild(slideWrap);
+				wrapper.appendChild(slidePanel);
 
-										if (posX === 0) {
-											imgCopy.css('left', imageWidth * slides.length + n * imageWidth);
-											wrapper.append(imgCopy);
-										} else {
-											imgCopy.css('left', -imageWidth * n);
-											wrapper.prepend(imgCopy);
-										}
+				for (var n = 0, slide; slide = slides[n++]; ) {
+					// CSS for each slide
+					with (slide.style) {
+						float = 'left';      // WebKit
+						cssFloat = 'left';   // Mozilla
+						styleFloat = 'left'; // Trident
+						position = 'relative';
+						width = slideDims.width + 'px';
+						height = slideDims.height + 'px';
+						overflow = 'auto';
+					}
 
-										imgCopies.push(imgCopy);
-									}
+					// Move slide to inner wrapper
+					slideWrap.appendChild(slide);
+				}
 
-									// Slide the main images out of the view area to reveal the copied image(s)
-									wrapper.animate({ 'left': changeOperator + (imageWidth * (options.imagesPerSlide)) }, options.transTime, function () {
-										// Move the slider back to the first slide and delete the copied slide
-										wrapper.css('left', posX);
+				// Event handlers
+				$xu.addListener(wrapper, 'mouseover', function () {
+					mouseStatus = 'over';
+					stopSlider();
+				});
 
-										for (var n = 0; n <= options.imagesPerSlide; n++) {
-											imgCopies[n].remove();
-										}
-									});
+				$xu.addListener(wrapper, 'mouseout', function () {
+					mouseStatus = 'out';
 
-									return;
+					if (!options.stopAfterHover) {
+						startSlider();
+					}
+				});
+
+				// Navigation event handlers
+				if (nav.length === 1) {
+					var anchors = NW.Dom.select('.experis-slider > ul a', wrapper.parentNode);
+
+					for (var n = 0, anchor; anchor = anchors[n++]; ) {
+						$xu.addListener(anchor, 'click', (function (n) {
+							return function (e) {
+								e = (window.event) ? window.event : e;
+
+								gotoSlide(n);
+
+								try {
+									e.preventDefault();
+								} catch (exc) {
+									e.returnValue = false;
 								}
 							}
+						})(n));
+					}
+				}
 
-							wrapper.animate({ 'left': posX }, options.transTime);
-						} else {
-							// Use fading transition
-							// To do this, we're going to make a copy of the slides, and hide it under the main slider.
-							// Then we'll adjust the opacity of the top slider to reveal the slides below.
-							if (!$.browser.msie) {
-								var subwrapper = wrapper.clone();
+				// Add navigation arrows
+				if (options.showArrows) {
+					var arrowWrap = document.createElement('div');
+					var prevArrow = document.createElement('a');
+					var nextArrow = document.createElement('a');
 
-								subwrapper.css({ position: 'absolute', zIndex: '0' });
+					arrowWrap.className = 'experis-slider-arrows';
 
-								wrapper.parent().append(subwrapper);
+					prevArrow.className = 'experis-slider-prev';
+					prevArrow.setAttribute('href', 'javascript:void(0)');
+					prevArrow.innerHTML = '&lt;';
 
-								subwrapper.animate({ 'left': posX }, 0, function () {
-									wrapper.stop().animate({ 'opacity': 0 }, options.transTime, function () {
-										wrapper.animate({ 'left': posX }, 0);
-										wrapper.css('opacity', 1);
-										subwrapper.remove();
-									});
-								});
-							} else {
-								// IE has problems with the opacity. Move to the next slide without a transition.
-								wrapper.css('left', posX);
+					nextArrow.className = 'experis-slider-next';
+					nextArrow.setAttribute('href', 'javascript:void(0)');
+					nextArrow.innerHTML = '&gt;';
+
+					arrowWrap.appendChild(prevArrow);
+					arrowWrap.appendChild(nextArrow);
+
+					wrapper.insertBefore(arrowWrap, slidePanel);
+
+					$xu.addListener(prevArrow, 'click', function () {
+						var prevSlide = (curSlide > 1) ? curSlide - 1 : slides.length;
+						gotoSlide(prevSlide);
+					});
+
+					$xu.addListener(nextArrow, 'click', function () {
+						var nextSlide = (curSlide < slides.length) ? curSlide + 1 : 1;
+						gotoSlide(nextSlide);
+					});
+				}
+
+				// Methods
+				var runTransition = function (slideNum, callback) {
+					var fps = 30;
+					var nextSlide = slides[slideNum - 1];
+					var direction = (slideNum > curSlide || curSlide === slides.length && slideNum === 1) ? 1 : -1;
+
+					switch (options.transType) {
+						/* Slide next photo over top of current photo */ 
+						case 'slide':
+							// Clone next slide and absolutely position outside the wrapper
+							var slideCopy = nextSlide.cloneNode(true);
+
+							slideCopy.style.position = 'absolute';
+							slideCopy.style.top = '0';
+							slideCopy.style.left = (direction === 1) ? slideDims.width + 'px' : -slideDims.width + 'px';
+
+							slidePanel.appendChild(slideCopy);
+
+							// Move slide over top of current slide in increments
+							var start = parseInt(slideCopy.style.left); // Starting position of cloned slide
+							var end = 0; // Ending position of cloned slide
+							var len = (options.transTime / 1000) * fps; // Number of frames of animation
+							var linearVals = $xfx.linearTrans(start, end, len);
+							var curFrame = 0;
+
+							transTimer = setInterval(function () {
+								slideCopy.style.left = linearVals[curFrame++] + 'px';
+
+								if (curFrame === linearVals.length) {
+									clearInterval(transTimer);
+
+									// Move slideWrap's position to next slide and remove cloned slide
+									slideWrap.style.left = -(slideNum - 1) * slideDims.width + 'px';
+									slidePanel.removeChild(slideCopy);
+
+									if (callback) callback();
+								}
+							}, 1000 / fps);
+
+							break;
+						/* Fade next photo view by adjusting opacity */ 
+						case 'fade':
+							// Clone next slide, set opacity to zero, and absolutely position it above currently slide
+							var slideCopy = nextSlide.cloneNode(true);
+
+							slideCopy.style.position = 'absolute';
+							slideCopy.style.top = '0';
+							slideCopy.style.left = '0';
+							slideCopy.style.opacity = 0;
+
+							if (ieVersion > -1 && ieVersion < 9) {
+								slideCopy.style.filter = 'progid:DXImageTransform.Microsoft.Alpha(opacity=0)';
 							}
-						}
-					};
 
-					var advanceSlider = function () {
-						var leftPos = wrapper.position().left;
-						var posX = (leftPos <= (-sliderWidth * (slides.length - 1) + 2) / options.imagesPerSlide) ? 0 : '-=' + sliderWidth;
+							slidePanel.appendChild(slideCopy);
 
-						// Add selected class to navigation
-						var navParents = slider.find('>ul li');
-						var nextSlideNum = (posX == 0) ? 0 : Math.abs(leftPos - sliderWidth - 1) / sliderWidth;
+							// Fade cloned slide to 100% opacity, move next slide into view, and remove cloned slide
+							var len = (options.transTime / 1000) * fps; // Number of frames of animation
+							var linearVals = $xfx.linearTrans(0, 1, len);
+							var curFrame = 0;
 
-						navParents.removeClass('selected');
-						navParents.eq(nextSlideNum).addClass('selected');
+							transTimer = setInterval(function () {
+								slideCopy.style.opacity = linearVals[curFrame++];
 
-						// Advance the slider
-						animate(posX, true);
-					};
+								if (ieVersion > -1 && ieVersion < 9) {
+									slideCopy.filters[0].opacity = linearVals[curFrame - 1] * 100;
+								}
 
-					var gotoSlide = function (href) {
+								if (curFrame === linearVals.length) {
+									clearInterval(transTimer);
+
+									// Move slideWrap's position to next slide and remove cloned slide
+									slideWrap.style.left = -(slideNum - 1) * slideDims.width + 'px';
+									slidePanel.removeChild(slideCopy);
+
+									if (callback) callback();
+								}
+							}, 1000 / fps);
+
+							break;
+						/* Wipe current photo out of the viewing area by sliding the next photo into view */ 
+						case 'wipe':
+							// Move slide wrapper to new position
+							var len = (options.transTime / 1000) * fps; // Number of frames of animation
+							var linearVals = $xfx.linearTrans(-(curSlide - 1) * slideDims.width, -(slideNum - 1) * slideDims.width, len);
+							var curFrame = 0;
+
+							transTimer = setInterval(function () {
+								slideWrap.style.left = linearVals[curFrame++] + 'px';
+
+								if (curFrame === linearVals.length) {
+									clearInterval(transTimer);
+									if (callback) callback();
+								}
+							}, 1000 / fps);
+
+							break;
+					}
+				};
+
+				var gotoSlide = function (slideNum) {
+					if (curSlide !== slideNum) {
 						stopSlider();
 
-						// Trim possible absolute path from href
-						var hrefParts = href.split('#');
-						href = '#' + hrefParts[hrefParts.length - 1];
+						// Reset any video elements
+						var videos = slides[slideNum - 1].getElementsByTagName('video');
 
-						var slide = $(href);
-						var posX = -sliderWidth * (slide.position().left / sliderWidth);
-						var parent = slider.find('a[href="' + href + '"]').parent();
-
-						parent.siblings().removeClass('selected');
-						parent.addClass('selected');
-
-						animate(posX);
-
-						startSlider();
-					};
-
-					var startSlider = function () {
-						if (!timer) timer = setInterval(advanceSlider, options.delay);
-					};
-
-					var stopSlider = function () {
-						clearInterval(timer);
-						timer = false;
-					};
-
-					// Add wrapper around slides
-					var wrapper = $('<div class="experis-slider-wrap"></div>');
-
-					wrapper
-						.append(slides)
-						.css('position', 'relative')
-						.css('width', '50000px')
-						.css('z-index', 1);
-
-					slides.css('float', 'left');
-
-					slider
-						.css('position', 'relative')
-						.append(wrapper);
-
-					var init = function () {
-						// Use first image to determine slider dimensions
-						imageWidth = firstImg.width();
-						imageHeight = firstImg.height();
-						sliderWidth = (options.width) ? options.width : imageWidth * options.imagesPerSlide;
-						sliderHeight = (options.height) ? options.height : imageHeight * options.imagesPerSlide;
-
-						slider
-							.width(sliderWidth)
-							.height(sliderHeight)
-							.css('overflow', 'hidden');
-
-						// Hook up event handlers
-						slider.hover(function () {
-							stopSlider();
-						}, function () {
-							startSlider();
-						});
-
-						navLinks.click(function () {
-							gotoSlide(this.getAttribute('href'));
-							return false;
-						});
-
-						// Add navigation arrows
-						if (options.showArrows) {
-							var arrowNav = $('<ul class="experis-slider-arrows" style="position:absolute; z-index:2"><li class="experis-slider-prev"><a href="#">&lt;</a></li><li class="experis-slider-next"><a href="#">&gt;</a></li></ul>');
-
-							arrowNav.insertBefore(wrapper.parent());
-
-							arrowNav.find('.experis-slider-prev').click(function () {
-								stopSlider();
-
-								var leftPos = wrapper.position().left;
-								var lastSlidePos = -sliderWidth * (slides.length - 1) / options.imagesPerSlide;
-								var posX = (leftPos >= 0) ? lastSlidePos : '+=' + sliderWidth;
-
-								// Add selected class to navigation
-								var navParents = slider.find('>ul li');
-								var prevSlideNum = (posX === lastSlidePos) ? slides.length - 1 : Math.abs(leftPos + sliderWidth - 1) / sliderWidth;
-
-								navParents.removeClass('selected');
-								navParents.eq(prevSlideNum).addClass('selected');
-
-								// Continue
-								animate(posX, true);
-
-								return false;
-							});
-
-							arrowNav.find('.experis-slider-next').click(function () {
-								stopSlider();
-								advanceSlider();
-								startSlider();
-
-								return false;
-							});
+						for (var n = 0, video; video = videos[n++]; ) {
+							try {
+								video.currentTime = 0;
+								video.pause();
+							} catch (exc) {
+								// Video not supported or not loaded
+							}
 						}
 
-						// Time to slide, Quinn.
-						navLinks.eq(0).parent().addClass('selected');
-						startSlider();
-					};
-
-					if ($.browser.msie) {
-						init();
-					} else {
-						$xu.addListener(window, 'load', init);
+						// Play transition
+						runTransition(slideNum, function () {
+							curSlide = slideNum;
+							if (mouseStatus === 'out') startSlider();
+						});
 					}
-				})(jQuery);
+				};
+
+				var startSlider = function () {
+					timer = setInterval(function () {
+						var nextSlide = (curSlide < slideCount) ? curSlide + 1 : 1;
+						gotoSlide(nextSlide);
+					}, options.delay);
+				};
+
+				var stopSlider = function () {
+					clearInterval(timer);
+				};
+
+				// Time to slide, Quinn.
+				startSlider();
 			});
 		});
 	},
