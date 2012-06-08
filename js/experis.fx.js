@@ -8,20 +8,26 @@
 if (!experis) { alert('You must include experis.utils.js before using Experis FX.'); }
 
 experis.fx = {
-	/*
-	* linearTrans(number, number, number)
-	* start: the number with which to start
-	* end:   the number at the end of the transition
-	* len:   the number of steps in the transition
-	*/
-	linearTrans: function (start, end, len) {
+	trans: {
+		linear: [0, 0, 1, 1],
+		easeIn: [0, 0, 0, 1],
+		easeOut: [1, 0, 1, 1]
+	},
+	// Note: this function needs work. The math is currently wrong, but it does allow for basic easing.
+	getBezierTransform: function (start, end, steps, bezier) {
 		var transValues = [];
-		var step = (end - start) / len;
 
-		for (var n = 0; n < len; n++) {
-			transValues.push(start + step * n);
+		for (var n = 1; n < steps; n++) {
+			var t = n / steps;
+			var a = 1 - 3 * bezier[2] + 3 * bezier[0];
+			var b = 3 * bezier[2] - 6 * bezier[0];
+			var c = 3 * bezier[0];
+			var x = (((a * t) + b) * t + c) * t;
+
+			transValues.push(start + x * (end - start));
 		}
 
+		transValues.unshift(start);
 		transValues.push(end);
 
 		return transValues;

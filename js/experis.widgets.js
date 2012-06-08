@@ -78,6 +78,7 @@ experis.widgets = {
 					delay: 5000,
 					transType: 'slide',
 					transTime: 300,
+					transEasing: 'linear',
 					showArrows: true,
 					stopAfterHover: true
 				};
@@ -185,6 +186,8 @@ experis.widgets = {
 
 				// Methods
 				var runTransition = function (slideNum, callback) {
+					if (transTimer > 0) return; // transition is already running
+
 					var fps = 30;
 					var nextSlide = slides[slideNum - 1];
 					var direction = (slideNum > curSlide || curSlide === slides.length && slideNum === 1) ? 1 : -1;
@@ -204,8 +207,8 @@ experis.widgets = {
 							// Move slide over top of current slide in increments
 							var start = parseInt(slideCopy.style.left); // Starting position of cloned slide
 							var end = 0; // Ending position of cloned slide
-							var len = (options.transTime / 1000) * fps; // Number of frames of animation
-							var linearVals = $xfx.linearTrans(start, end, len);
+							var steps = (options.transTime / 1000) * fps; // Number of frames of animation
+							var linearVals = $xfx.getBezierTransform(start, end, steps, $xfx.trans[options.transEasing]);
 							var curFrame = 0;
 
 							transTimer = setInterval(function () {
@@ -213,6 +216,7 @@ experis.widgets = {
 
 								if (curFrame === linearVals.length) {
 									clearInterval(transTimer);
+									transTimer = 0;
 
 									// Move slideWrap's position to next slide and remove cloned slide
 									slideWrap.style.left = -(slideNum - 1) * slideDims.width + 'px';
@@ -240,8 +244,8 @@ experis.widgets = {
 							slidePanel.appendChild(slideCopy);
 
 							// Fade cloned slide to 100% opacity, move next slide into view, and remove cloned slide
-							var len = (options.transTime / 1000) * fps; // Number of frames of animation
-							var linearVals = $xfx.linearTrans(0, 1, len);
+							var steps = (options.transTime / 1000) * fps; // Number of frames of animation
+							var linearVals = $xfx.getBezierTransform(0, 1, steps, $xfx.trans[options.transEasing]);
 							var curFrame = 0;
 
 							transTimer = setInterval(function () {
@@ -253,6 +257,7 @@ experis.widgets = {
 
 								if (curFrame === linearVals.length) {
 									clearInterval(transTimer);
+									transTimer = 0;
 
 									// Move slideWrap's position to next slide and remove cloned slide
 									slideWrap.style.left = -(slideNum - 1) * slideDims.width + 'px';
@@ -266,8 +271,8 @@ experis.widgets = {
 						/* Wipe current photo out of the viewing area by sliding the next photo into view */ 
 						case 'wipe':
 							// Move slide wrapper to new position
-							var len = (options.transTime / 1000) * fps; // Number of frames of animation
-							var linearVals = $xfx.linearTrans(-(curSlide - 1) * slideDims.width, -(slideNum - 1) * slideDims.width, len);
+							var steps = (options.transTime / 1000) * fps; // Number of frames of animation
+							var linearVals = $xfx.getBezierTransform(-(curSlide - 1) * slideDims.width, -(slideNum - 1) * slideDims.width, steps, $xfx.trans[options.transEasing]);
 							var curFrame = 0;
 
 							transTimer = setInterval(function () {
@@ -275,6 +280,8 @@ experis.widgets = {
 
 								if (curFrame === linearVals.length) {
 									clearInterval(transTimer);
+									transTimer = 0;
+
 									if (callback) callback();
 								}
 							}, 1000 / fps);

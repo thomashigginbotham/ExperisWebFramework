@@ -185,6 +185,13 @@
 					</tr>
 
 					<tr>
+						<td>options.transEasing</td>
+						<td>'linear'</td>
+						<td>'linear', 'easeIn', or 'easeOut'</td>
+						<td><p>Determines the transition&rsquo;s easing effect</p></td>
+					</tr>
+
+					<tr>
 						<td>options.showArrows</td>
 						<td>true</td>
 						<td>boolean</td>
@@ -222,8 +229,9 @@
 		// Start slider
 		$xw.slider(document.getElementById('sample-slider'), {
 			delay: 3000,
-			transTime: 250,
+			transTime: 600,
 			transType: 'slide',
+			transEasing: 'easeOut',
 			showArrows: true
 		});
 	</script>
