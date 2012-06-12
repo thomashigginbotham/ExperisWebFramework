@@ -197,28 +197,6 @@ experis.utils = {
 		return els;
 	},
 	/*
-	* getScrollPosition ([dom element])
-	* el: the DOM element of which you want to retrieve the scrollbar position
-	* Return value: an object representing the location of the scrollbar for a given element assuming the
-	*     zero point is at the top left corner and values increase as the scrollbar moves (e.g. {x:0, y:25})
-	*/
-	getScrollPosition: function (el) {
-		var offset = { x: 0, y: 0 };
-
-		if (window.pageXOffset != null) {
-			el = el || window;
-			offset.x = el.pageXOffset;
-			offset.y = el.pageYOffset;
-		} else {
-			el = el || (document.compatMode && document.compatMode != 'BackCompat') ? document.documentElement : document.body;
-
-			offset.x = el.scrollLeft;
-			offset.y = el.scrollTop;
-		}
-
-		return offset;
-	},
-	/*
 	* getPageDimensions ([bool])
 	* viewPortOnly: a boolean value to determine whether to return dimensions for the full page or only the viewable area
 	* Return value: an object containing the dimensions of the page (e.g. {width:1024, height:3450})
@@ -251,6 +229,51 @@ experis.utils = {
 	*/
 	getQueryString: function (key) {
 		// Under construction
+	},
+	/*
+	* getScrollPosition ([dom element])
+	* el: the DOM element of which you want to retrieve the scrollbar position
+	* Return value: an object representing the location of the scrollbar for a given element assuming the
+	*     zero point is at the top left corner and values increase as the scrollbar moves (e.g. {x:0, y:25})
+	*/
+	getScrollPosition: function (el) {
+		var offset = { x: 0, y: 0 };
+
+		if (window.pageXOffset != null) {
+			el = el || window;
+			offset.x = el.pageXOffset;
+			offset.y = el.pageYOffset;
+		} else {
+			el = el || (document.compatMode && document.compatMode != 'BackCompat') ? document.documentElement : document.body;
+
+			offset.x = el.scrollLeft;
+			offset.y = el.scrollTop;
+		}
+
+		return offset;
+	},
+	/*
+	* NOTE: THIS FUNCTION IS UNTESTED
+	* getStyleSheetCssValue (dom stylesheet element, string, string)
+	* stylesheet: the style sheet to check (e.g. document.styleSheets[0])
+	* selector: the CSS selector to find
+	* attr: the CSS attribute to find
+	*/
+	getStyleSheetCssValue: function (stylesheet, selector, attr) {
+		selector = selector.toLowerCase();
+
+		for (var n = 0, len = stylesheet.cssRules.length; n < len; n++) {
+			var curSelectors = stylesheet.cssRules[n].selectorText.toLowerCase().split(',');
+
+			for (var m = 0, selectorLen = curSelectors.length; m < selectorLen; m++) {
+				if (curSelectors[m].trim() === selector) {
+					var value = stylesheet.cssRules[n].style.getPropertyValue(attr);
+					return value;
+				}
+			}
+		}
+
+		return null;
 	},
 	/*
 	* hasAncestor (dom element, string)
