@@ -187,8 +187,8 @@
 					<tr>
 						<td>options.transEasing</td>
 						<td>'linear'</td>
-						<td>'linear', 'easeIn', 'easeOut', 'swing', or 'bounceIn'</td>
-						<td><p>Determines the transition&rsquo;s easing effect</p></td>
+						<td>'linear', 'easeIn', 'easeOut', 'easeInOut', 'bounceIn', 'bounceOut'</td>
+						<td><p>Determines the transition&rsquo;s easing effect. The &ldquo;bounce&rdquo; settings do not apply to &ldquo;fade&rdquo; transition, and the &ldquo;bounceIn&rdquo; setting does not apply to the &ldquo;slide&rdquo; transition.</td>
 					</tr>
 
 					<tr>
@@ -231,7 +231,7 @@
 			delay: 3000,
 			transTime: 600,
 			transType: 'slide',
-			transEasing: 'easeOut',
+			transEasing: 'easeInOut',
 			showArrows: true
 		});
 	</script>
