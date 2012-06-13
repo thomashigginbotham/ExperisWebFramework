@@ -1,4 +1,6 @@
-﻿/* -- Global Styles -- */
+﻿/* =================================
+Site-wide Styles
+==================================== */
 body {
 	color: #222;
 	background-color: #fff;
@@ -19,6 +21,19 @@ header {
 }
 article {
 	margin: 2% 0;
+	/* Continue the sidebar background all the way to the bottom */
+	background-image: -webkit-linear-gradient(#999, #999);
+	background-image: -moz-linear-gradient(#999, #999);
+	background-image: -o-linear-gradient(#999, #999);
+	background-image: -ms-linear-gradient(#999, #999);
+	background-image: linear-gradient(#999, #999);
+	background-repeat: no-repeat;
+	background-size: 23.5% 100%;
+}
+@media (max-width: 480px) {
+	article {
+		background-image: none;
+	}
 }
 #sidebar {
 	padding: 2%;
@@ -32,4 +47,17 @@ article {
 footer {
 	text-align: center;
 	background-color: #ccc;
+}
+
+/* =================================
+Classes
+==================================== */
+.grid {
+	margin: 1em 0;
+	padding: 0;
+	list-style: none;
+}
+.grid li {
+	padding: .5em;
+	background: #ccc;
 }

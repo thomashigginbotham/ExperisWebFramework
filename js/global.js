@@ -9,8 +9,6 @@
 		// Add code for any Experis widgets you need to use
 	});
 
-	$xf.fixColumnPercentageWidths(); // Fix browser rendering of subpixel values in column widths
-
 	/* --
 	   Add your own scripts here
 	   -- */

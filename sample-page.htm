@@ -5,9 +5,8 @@
 	<title>Sample Page</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-	<link rel="stylesheet" href="css/reset.min.css">
 	<link rel="stylesheet" href="css/framework.min.css">
-	<link rel="Stylesheet" href="css/global.css"> <!-- Update this file with your own CSS -->
+	<link rel="Stylesheet" href="css/global.css"> <!-- Update this file with your own CSS. Consider using LESS instead! -->
 
 	<!--[if lt IE 9]>
 	<link rel="stylesheet" href="css/ie.css">
@@ -27,14 +26,25 @@
 	</header>
 
 	<article class="row">
-		<div id="sidebar" class="size-4">
+		<div id="sidebar" class="size-3">
 			<h1>Sidebar area</h1>
 			<p>Add some links or something.</p>
 		</div>
 
-		<div id="content" class="size-8">
+		<div id="content" class="size-9">
 			<h1>Main Content Area</h1>
 			<p>TO DO: Create something amazing!</p>
+
+			<ul class="grid four-column">
+				<li>Grid Cell 1</li>
+				<li>Grid Cell 2</li>
+				<li>Grid Cell 3</li>
+				<li>Grid Cell 4</li>
+				<li>Grid Cell 5</li>
+				<li>Grid Cell 6</li>
+				<li>Grid Cell 7</li>
+				<li>Grid Cell 8</li>
+			</ul>
 		</div>
 	</article>
 
@@ -49,7 +59,6 @@
 	$x.path = 'js/'; // You can remove this line when running on a Web server
 </script>
 
-<script src="js/experis.framework.js"></script>
 <script src="js/global.js"></script> <!-- Add your own scripts to this file -->
 </body>
 </html>

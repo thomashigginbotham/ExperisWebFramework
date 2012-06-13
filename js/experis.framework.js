@@ -8,6 +8,12 @@
 if (!experis) { alert('You must include experis.utils.js before using the Experis Framework.'); }
 
 experis.framework = {
+	/*
+	* fixColumnPercentageWidths ()
+	* This function adjusts the widths of elements within a column to distribute their widths
+	* proportionately in browsers that round sub-pixel values down. This can be resource
+	* intensive, so it is not used by default.
+	*/
 	fixColumnPercentageWidths: function () {
 		$xu.includeScript($x.path + 'experis.polyfills.js', function () {
 			$xu.onDomReady(function () {
