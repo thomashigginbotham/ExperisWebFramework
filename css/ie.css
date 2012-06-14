@@ -38,3 +38,19 @@ Fixes for IE 7
 .twelve-column > * {
 	*behavior: url(../js/boxsizing.htc);
 }
+
+/* -- Floating the last child in a grid row to the right causes problems in IE 7 -- */
+.one-column > *:nth-of-type(1n),
+.two-column > *:nth-of-type(2n),
+.three-column > *:nth-of-type(3n),
+.four-column > *:nth-of-type(4n),
+.five-column > *:nth-of-type(5n),
+.six-column > *:nth-of-type(6n),
+.seven-column > *:nth-of-type(7n),
+.eight-column > *:nth-of-type(8n),
+.nine-column > *:nth-of-type(9n),
+.ten-column > *:nth-of-type(10n),
+.eleven-column > *:nth-of-type(11n),
+.twelve-column > *:nth-of-type(12n) {
+	*float: none;
+}

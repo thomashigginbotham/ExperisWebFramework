@@ -1,4 +1,15 @@
 ﻿/* =================================
+Variables
+==================================== */
+@experis-blue:#6390c7;
+@lighter-blue: #f0f3ff;
+@light-blue: #cdf;
+@lighter-gray: #eee;
+@light-gray: #ccc;
+@gray: #aaa;
+@dark-gray: #999;
+
+/* =================================
 Fonts
 ==================================== */
 @font-face {
@@ -44,19 +55,19 @@ body {
 h1, h2, h3, h4, h5, h6 { margin-bottom: .25em; font-family: Judson }
 
 h1 {
-	border-bottom: 1px solid #6390c7;
-	color: #6390c7;
+	border-bottom: 1px solid @experis-blue;
+	color: @experis-blue;
 }
 table {
 	margin: 1em 0;
-	border: 1px solid #cdf;
+	border: 1px solid @light-blue;
 }
 thead tr {
 	font-weight: bold;
-	background-color: #cdf;
+	background-color: @light-blue;
 }
 tbody tr:nth-child(odd) {
-	background-color: #f0f3ff;
+	background-color: @lighter-blue;
 }
 th, td {
 	padding: .5em;
@@ -80,6 +91,35 @@ Page Structure
 	max-width: 960px;
 	font-size: 1.4em;
 }
+nav ul {
+	margin: 0 0 1em;
+	padding: .0;
+	text-align: center;
+	list-style: none;
+	background: @experis-blue;
+	
+	a {
+		display: block;
+		padding: .5em 0;
+		text-decoration: none;
+		color: #fff;
+	
+		&:hover {
+			color: #000;
+			background: @light-blue;
+		}
+	}
+}
+
+@media (max-width: 480px) {
+	nav ul {
+		background: none;
+		
+		a {
+			background: @experis-blue;
+		}
+	}
+}
 
 /* =================================
 Demos
@@ -90,14 +130,14 @@ Demos
 	margin: 1em auto;
 	padding: 2%;
 	width: 94%; /* Required for IE 7 */
-	border: 1px dashed #999;
+	border: 1px dashed @dark-gray;
 }
 .row > *,
 section[class$='-column'] > *,
 div[class$='-column'] > * {
 	height: 100px;
 	line-height: 100px;
-	border: 5px solid #aaa;
+	border: 5px solid @gray;
 	border-radius: 10px;
 	text-align: center;
 	background: #ccc;
@@ -113,10 +153,10 @@ div[class$='-column'] > * {
 #gridInColDemo div > * {
 	border-width: 0;
 	color: #fff;
-	background: #999;
+	background: @dark-gray;
 }
 .note {
 	padding: 2%;
 	border-radius: 10px;
-	background-color: #eee;
+	background-color: @lighter-gray;
 }

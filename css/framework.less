@@ -19,7 +19,7 @@ Mixins
 	}
 
 	> * {
-		@firstColumnCell: e(%('%sn - %s', @cols, @cols - 1));
+		@firstColumnCell: e(%('%sn-%s', @cols, @cols - 1));
 		@lastColumnCell: e(%('%sn', @cols));
 		@lastRow: e(%('-n + %s', @cols));
 
@@ -32,6 +32,7 @@ Mixins
 
 		// No left margin on first cell of each row
 		&:nth-of-type(@firstColumnCell) {
+			clear: left;
 			margin-left: 0;
 		}
 
@@ -204,8 +205,8 @@ Small-screen Device Styles
 	.ten-column > *,
 	.eleven-column > *,
 	.twelve-column > * {
-		float: none;
-		margin: 1em 0;
+		float: none !important;
+		margin: 1em 0 !important;
 		width: 100%;
 	}
 }

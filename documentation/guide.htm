@@ -5,8 +5,9 @@
 	<title>Experis Web Framework Documentation</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-	<link rel="stylesheet" href="../css/framework.min.css">
-	<link rel="stylesheet" href="documentation.min.css">
+	<link rel="stylesheet" type="text/less" href="../css/framework.less">
+	<link rel="stylesheet" type="text/less" href="documentation.less">
+	<script src="../js/less-1.3.0.min.js"></script>
 	<link rel="stylesheet" href="../js/google-code-prettify/prettify.css">
 
 	<script src="../js/less-1.3.0.min.js"></script>
@@ -22,13 +23,24 @@
 <body>
 <div id="wrapper">
 	<header>
-		<hgroup>
-			<h1>EWF (Experis Web Framework)</h1>
-			<h2>Usage and Reference Guide</h2>
-		</hgroup>
+		<svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="100%" height="150px" viewBox="0 0 500 220">
+			<line x1="30" y1="30" x2="90" y2="90" stroke="#c36d24" stroke-width="35" stroke-linecap="round" />
+			<line x1="30" y1="150" x2="90" y2="90" stroke="#c36d24" stroke-width="35" stroke-linecap="round" />
+			<line x1="120" y1="60" x2="150" y2="30" stroke="#6d8f81" stroke-width="35" stroke-linecap="round" />
+			<line x1="120" y1="120" x2="150" y2="150" stroke="#6290c4" stroke-width="35" stroke-linecap="round" />
+
+			<line x1="200" y1="30" x2="260" y2="150" stroke="#999" stroke-width="35" stroke-linecap="round" />
+			<line x1="290" y1="90" x2="320" y2="150" stroke="#ccc" stroke-width="35" stroke-linecap="round" />
+			<line x1="320" y1="30" x2="380" y2="150" stroke="#999" stroke-width="35" stroke-linecap="round" />
+
+			<line x1="375" y1="30" x2="460" y2="30" stroke="#999" stroke-width="35" stroke-linecap="round" />
+			<line x1="405" y1="85" x2="440" y2="85" stroke="#ccc" stroke-width="35" stroke-linecap="round" />
+			
+			<text x="15" y="210" fill="#999" font-family="Arial, Helvetica, sans-serif" font-size="41">Experis Web Framework</text>
+		</svg>
 
 		<nav>
-			<ul>
+			<ul class="five-column">
 				<li><a href="#about">What is EWF?</a></li>
 				<li><a href="#setup">Setup</a></li>
 				<li><a href="#layouts">Layouts</a></li>
@@ -157,7 +169,6 @@
 
 		<ul>
 			<li>Selectivizr and NWMatcher are used to provide CSS 3 selector support to IE 6-8. However, Selectivizr requires that all CSS be included by the <code>&lt;link&gt;</code> tag in order to be recognized. If you are using the client-side JavaScript version of LESS, the CSS will be inserted into a <code>&lt;style&gt;</code> tag and will not be parsed by Selectivizr.</li>
-			<li>WebKit (Chrome and Safari) and Trident (IE) have a different interpretation than Mozilla (Firefox) concerning sub-pixel widths. In Firefox, columns or cells with widths that add up to 100% will take up the full available space. However, other browsers may leave a noticeable space at the end due to how they round fractional percentages. A JavaScript utility function has been developed to approximate Mozilla&rsquo;s implementation of sub-pixel rendering where percentages are concerned; however, it only works with the columnar layout at this time, not grid layouts.</li>
 			<li>The latest version of NWMatcher (1.2.5) doesn&rsquo;t properly match nth-of-type selectors. So, we&rsquo;re using version 1.2.3.</li>
 		</ul>
 	</section> <!--/notes -->
@@ -168,7 +179,6 @@
 		$x.path = '../js/'; // Use relative path in case this guide is not hosted on a server
 	</script>
 
-	<script src="../js/experis.framework.js"></script>
 	<script src="../js/global.js"></script>
 	<script src="../js/google-code-prettify/prettify.js"></script>
 
