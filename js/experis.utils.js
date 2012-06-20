@@ -109,7 +109,7 @@ experis.utils = {
 			els = el.getElementsByClassName(classname);
 		} else {
 			var allEls = el.getElementsByTagName('*');
-			var regex = new RegExp('(^|\s)' + classname + '(\s|$)');
+			var regex = new RegExp('(^|\\s)' + classname + '(\\s|$)');
 			els = [];
 
 			for (var n = 0, len = allEls.length; n < len; n++) {
