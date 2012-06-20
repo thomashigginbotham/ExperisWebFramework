@@ -333,9 +333,7 @@ experis.utils = {
 			// Insert new script
 			var firstScript = document.getElementsByTagName('script')[0];
 			var newScript = document.createElement('script');
-
 			if (callback) $xu.onScriptReady(newScript, callback);
-
 			newScript.src = url;
 			firstScript.parentNode.insertBefore(newScript, firstScript);
 		}
@@ -412,19 +410,23 @@ experis.utils = {
 		if (scriptEl.getAttribute('data-loaded') === 'true' || scriptEl.readyState === 'loaded' || scriptEl.readyState === 'complete') {
 			callback();
 		} else {
-			// W3C
-			$xu.addListener(scriptEl, 'load', function () {
-				scriptEl.setAttribute('data-loaded', 'true');
-				callback();
-			});
+			var ieVersion = $xu.getIeVersion();
 
-			// IE
-			$xu.addListener(scriptEl, 'readystatechange', function () {
-				if (scriptEl.readyState === 'loaded' || scriptEl.readyState === 'complete') {
+			if (ieVersion === -1 || ieVersion > 8) {
+				// W3C
+				$xu.addListener(scriptEl, 'load', function () {
 					scriptEl.setAttribute('data-loaded', 'true');
 					callback();
-				}
-			});
+				});
+			} else {
+				// IE 8 or below
+				$xu.addListener(scriptEl, 'readystatechange', function () {
+					if (scriptEl.readyState === 'loaded' || scriptEl.readyState === 'complete') {
+						scriptEl.setAttribute('data-loaded', 'true');
+						callback();
+					}
+				});
+			}
 		}
 
 	},
