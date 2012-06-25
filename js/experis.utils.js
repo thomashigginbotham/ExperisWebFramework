@@ -448,6 +448,17 @@ experis.utils = {
 
 		document.cookie = cookie;
 
+	},
+	/*
+	* trace (string)
+	* msg: the message to send to console (or an alert box if console isn't available)
+	*/
+	trace: function (msg) {
+		try {
+			console.log(msg);
+		} catch (exc) {
+			alert(msg);
+		}
 	}
 };
 
