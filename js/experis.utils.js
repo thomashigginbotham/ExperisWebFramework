@@ -13,7 +13,6 @@ var experis = {};
 experis.path = '/js/'; // Path to "experis" directory
 experis.domReady = false;
 experis.scripts = [];
-experis.timer = []; // Array of timers for setTimeout/setInterval functions (functions should use $x.timer.push() to avoid overwriting other timers)
 experis.urlProtocol = (document.location.protocol === 'file:') ? 'http:' : document.location.protocol; // Absolute URLs should use http protocol
 
 /* Content delivery networks */
@@ -42,6 +41,20 @@ experis.utils = {
 		} else { // Last resort
 			el['on' + evt] = callback;
 		}
+	},
+	/*
+	* getChildNodesByType (number|named constant, dom element)
+	* nodeType: the type of nodes to return (e.g. ELEMENT_NODE or 1)
+	* parent: the DOM element to search within
+	*/
+	getChildNodesByType: function (nodeType, parent) {
+		var els = [];
+
+		for (var n = 0, child; child = parent.childNodes[n++];) {
+			if (child.nodeType === nodeType) els.push(child);
+		}
+
+		return els;
 	},
 	/*
 	* getCookie (string)
@@ -183,20 +196,6 @@ experis.utils = {
 		return lineHeight;
 	},
 	/*
-	* getChildNodesByType (number|named constant, dom element)
-	* nodeType: the type of nodes to return (e.g. ELEMENT_NODE or 1)
-	* parent: the DOM element to search within
-	*/
-	getChildNodesByType: function (nodeType, parent) {
-		var els = [];
-
-		for (var n = 0, child; child = parent.childNodes[n++]; ) {
-			if (child.nodeType === nodeType) els.push(child);
-		}
-
-		return els;
-	},
-	/*
 	* getPageDimensions ([bool])
 	* viewPortOnly: a boolean value to determine whether to return dimensions for the full page or only the viewable area
 	* Return value: an object containing the dimensions of the page (e.g. {width:1024, height:3450})
@@ -225,10 +224,19 @@ experis.utils = {
 	/*
 	* getQueryString (string)
 	* key: the identifier for the query string value you want to obtain
-	* Return value: the query string value or null if not found
+	* Return value: the query string value or an empty string if not found
 	*/
 	getQueryString: function (key) {
-		// Under construction
+		key = key.replace(/[\[]/, '\\\[').replace(/[\]]/, '\\\]');
+
+		var regex = new RegExp('[\\?&]' + key + '=([^&#]*)');
+		var results = regex.exec(window.location.search);
+
+		if (results === null) {
+			return '';
+		} else {
+			return decodeURIComponent(results[1].replace(/\+/g, ' '));
+		}
 	},
 	/*
 	* getScrollPosition ([dom element])

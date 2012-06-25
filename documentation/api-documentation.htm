@@ -58,6 +58,14 @@
 					</tr>
 
 					<tr>
+						<td><code>getChildNodesByType (nodeType:number, parent:dom element)</code></td>
+						<td><code>array of dom elements</code></td>
+						<td>
+							<p>Returns an arry of DOM elements belonging to the provided node type within a provided parent node. Older versions of IE only support node types 1 (Element node) and 3 (Text node).</p>
+						</td>
+					</tr>
+
+					<tr>
 						<td><code>getCookie (name:string)</code></td>
 						<td><code>string|null</code></td>
 						<td>
@@ -110,6 +118,22 @@
 					</tr>
 
 					<tr>
+						<td><code>getPageDimensions ([viewPortOnly:bool])</code></td>
+						<td><code>object</code></td>
+						<td>
+							<p>Returns an object containing the width and height of the page. If <code>viewPortOnly</code> is set to true, only the dimensions of the viewable area will be given. The return value will be in the format <code>{width:<em>number</em>, height:<em>number</em>}</code>.</p>
+						</td>
+					</tr>
+
+					<tr>
+						<td><code>getQueryString (key:string)</code></td>
+						<td><code>string</code></td>
+						<td>
+							<p>Returns the URL query string value of the requested key or an empty string if unavailable</p>
+						</td>
+					</tr>
+
+					<tr>
 						<td><code>getScrollPosition ([el:dom element])</code></td>
 						<td><code>object</code></td>
 						<td>
@@ -119,10 +143,10 @@
 					</tr>
 
 					<tr>
-						<td><code>getPageDimensions ([viewPortOnly:bool])</code></td>
-						<td><code>object</code></td>
+						<td><code>getStyleSheetCssValue (stylesheet:dom stylesheet element , selector:string, attr:string)</code></td>
+						<td><code>string</code></td>
 						<td>
-							<p>Returns an object containing the width and height of the page. If <code>viewPortOnly</code> is set to true, only the dimensions of the viewable area will be given. The return value will be in the format <code>{width:<em>number</em>, height:<em>number</em>}</code>.</p>
+							<p>Parses the provided style sheet for the first match of a selector and its attribute (white space is important), and returns the value.</p>
 						</td>
 					</tr>
 
