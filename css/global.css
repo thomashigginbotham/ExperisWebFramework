@@ -32,6 +32,7 @@ article {
 }
 @media (max-width: 480px) {
 	article {
+		margin: 0;
 		background-image: none;
 	}
 }
@@ -48,6 +49,9 @@ footer {
 	padding: .5em;
 	text-align: center;
 	background-color: #ccc;
+}
+footer p {
+	margin: 0;
 }
 
 /* =================================
