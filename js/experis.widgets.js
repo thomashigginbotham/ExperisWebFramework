@@ -268,7 +268,69 @@ experis.widgets = {
 							}, 1000 / fps);
 
 							break;
-						/* Wipe current photo out of the viewing area by sliding the next photo into view */ 
+						/* Fade to a color, then fade in the new slide */
+						case 'flash':
+							var bg = '#fff';
+
+							// Create empty "cover" slide and position over the current slide
+							var cover = document.createElement('div');
+
+							with (cover.style) {
+								position = 'absolute';
+								top = '0';
+								left = '0';
+								width = slideDims.width + 'px';
+								height = slideDims.height + 'px';
+								opacity = 0;
+								backgroundColor = bg;
+							}
+
+							if (ieVersion > -1 && ieVersion < 9) {
+								cover.style.filter = 'progid:DXImageTransform.Microsoft.Alpha(opacity=0)';
+							}
+
+							slidePanel.appendChild(cover);
+
+							// Fade in "cover" slide
+							var steps = (options.transTime / 2 / 1000) * fps; // Number of frames of animation
+							var bezier = $xfx.getBezierTransform(0, 1, steps, $xfx.trans[options.transEasing]);
+							var curFrame = 0;
+
+							transTimer = setInterval(function () {
+								cover.style.opacity = bezier[curFrame++];
+
+								if (ieVersion > -1 && ieVersion < 9) {
+									cover.filters[0].opacity = bezier[curFrame - 1] * 100;
+								}
+
+								if (curFrame === bezier.length) {
+									clearInterval(transTimer);
+									transTimer = 0;
+									curFrame--;
+
+									// Move slideWrap's position to next slide and fade out "cover" slide
+									slideWrap.style.left = -(slideNum - 1) * slideDims.width + 'px';
+
+									transTimer = setInterval(function () {
+										cover.style.opacity = bezier[curFrame--];
+
+										if (ieVersion > -1 && ieVersion < 9) {
+											cover.filters[0].opacity = bezier[curFrame + 1] * 100;
+										}
+
+										if (curFrame === -1) {
+											clearInterval(transTimer);
+											transTimer = 0;
+
+											slidePanel.removeChild(cover);
+											if (callback) callback();
+										}
+									}, 1000 / fps);
+								}
+							}, 1000 / fps);
+
+							break;
+							/* Wipe current photo out of the viewing area by sliding the next photo into view */
 						case 'wipe':
 							// Move slide wrapper to new position
 							var steps = (options.transTime / 1000) * fps; // Number of frames of animation
