@@ -52,11 +52,26 @@
 		</nav>
 	</header>
 
-	<section id="about">
-		<h1>What is Experis Web Framework?</h1>
-		<p>EWF (pronounced &ldquo;oof&rdquo;) is a combination of Web technologies that acts as a framework for website development. It provides CSS layout techniques, common JavaScript functions, and third-party libraries that have become essential to modern Web designers. By creating a common starting point for Web projects, we can ensure design consistency, browser compatibility, and development efficiency.</p>
-		<p>There are numerous CSS frameworks available already (960 Grid, Blueprint, Bootstrap, and Foundation, to name a few), so why create another? Well, we tried them, and each seems to suffer from at least one major problem. For example, 960 Grid doesn&rsquo;t provide any styles for flexible layouts (responsive design). Others use negative margins or weird positioning effects for elements to line up nicely. In almost all cases, additional HTML elements are required to do even the simplist of tasks &mdash; such as adding a background to a row of elements or including borders around cells in a grid. With EWF, we take the best ideas from those frameworks and implement them in a way that works with almost any design. We also provide common JavaScript features, like image sliders, and polyfills, such as support for HTML 5 video in older browsers.</p>
-		<p>EWF is a work in progress and will continue to evolve as we use it in new projects and discover new and better methods of building quality websites.</p>
+	<section id="about" class="row">
+		<div class="size-8">
+			<h1>What is Experis Web Framework?</h1>
+			<p>EWF (pronounced &ldquo;oof&rdquo;) is a combination of Web technologies that acts as a framework for website development. It provides CSS layout techniques, common JavaScript functions, and third-party libraries that have become essential to modern Web designers. By creating a common starting point for Web projects, we can ensure design consistency, browser compatibility, and development efficiency.</p>
+			<p>There are numerous CSS frameworks available already (960 Grid, Blueprint, Bootstrap, and Foundation, to name a few), so why create another? Well, we tried them, and each seems to suffer from at least one major problem. For example, 960 Grid doesn&rsquo;t provide any styles for flexible layouts (responsive design). Others use negative margins or weird positioning effects for elements to line up nicely. In almost all cases, additional HTML elements are required to do even the simplist of tasks &mdash; such as adding a background to a row of elements or including borders around cells in a grid. With EWF, we take the best ideas from those frameworks and implement them in a way that works with almost any design. We also provide common JavaScript features, like image sliders, and polyfills, such as support for HTML 5 video in older browsers.</p>
+			<p>EWF is a work in progress and will continue to evolve as we use it in new projects and discover new and better methods of building quality websites.</p>
+		</div>
+
+		<div class="size-4">
+			<h2>Supported Browsers*</h2>
+			<ul>
+				<li>Chrome</li>
+				<li>Firefox</li>
+				<li>Safari</li>
+				<li>Opera</li>
+				<li>Internet Explorer 7-10</li>
+			</ul>
+
+			<p><small>* Only the latest versions are supported unless otherwise indicated</small></p>
+		</div>
 	</section> <!--/about -->
 
 	<section id="setup">
@@ -121,7 +136,7 @@
 	&lt;div&gt;8&lt;/div&gt;
 &lt;/section&gt;</code></pre>
 
-		<p>To change the above from a four-column grid to a two-column grid, all we have to do is change the class name. <span id="changeGridCols">Try it out</span>, and watch the demo grid above as it toggles between a class of <code>four-columns</code> and <code>two-columns</code>.</p>
+		<p>To change the above from a four-column grid to a two-column grid, all we have to do is change the class name. <span id="changeGridCols">Try it out</span>, and watch the demo grid above as it toggles between a class of <code>four-column</code> and <code>two-column</code>.</p>
 		<p class="note">One more thing to point out: notice that we&rsquo;ve added padding and borders to the cells and columns in the demos. With most CSS frameworks, this creates big problems, because you can&rsquo;t mix pixel and percentage widths to arrive at 100%. To achieve this, we use the border-box CSS model for columns and grid cells, which is supported by all major browsers, even IE 8.</p>
 
 		<h2>Grid Inside Column</h2>
@@ -153,6 +168,11 @@
 &lt;/section&gt;</code></pre>
 
 		<p class="note">Notice how we are able to use the same div as the column and as the grid container. This keeps your HTML lightweight by not requiring extra elements just for the purpose of attaching a class name &mdash; one of the main reasons we created Experis Web Framework.</p>
+
+		<h2>Form Styling</h2>
+		<p>Many CSS frameworks include their own set of styles for form elements (buttons, drop-downs, etc.). This is great for lazy designers, but it means that every website you create will look similar. Not only that, it will look similar to <em>every</em> website created with that framework.</p>
+		<p>Each website should be unique to the client, and for that reason, we are not including specific form styles in EWF. Instead, we will recommend <a href="http://jqueryui.com/themeroller/">jQuery UI&rsquo;s ThemeRoller</a>. jQuery UI provides many interface and form elements to improve user experience, and ThemeRoller allows the designer to customize fonts, colors, and other aspects of the elements.</p>
+		<p>For more simplistic forms, where jQuery UI would be overkill, the designer should have no problems styling individual elements to fit the rest of the design.</p>
 	</section> <!--/layouts -->
 
 	<section id="scripts">
@@ -160,10 +180,26 @@
 		<p>To make use of the scripts available in EWF, be sure to include the following just before the <code>&lt;/body&gt;</code> tag on your pages.</p>
 
 <pre class="prettyprint"><code>&lt;script src=&quot;/js/experis.utils.js&quot;&gt;&lt;/script&gt;
-&lt;script src=&quot;/js/experis.framework.js&quot;&gt;&lt;/script&gt;
 &lt;script src=&quot;/js/global.js&quot;&gt;&lt;/script&gt;</code></pre>
 
 		<p>Your site-wide scripts should be placed in <strong>global.js</strong>. We&rsquo;ve already filled out a few things for you. For a full reference on what functions are available, we have included an API reference guide at <a href="api-documentation.htm">documentation/api-documentation.htm</a>.</p>
+
+		<h2>Content Delivery Networks</h2>
+		<p>EWF provides access to popular content delivery networks (CDNs) and allows you to load scripts, such as jQuery, asynchronously. This means you only need to load them when then are needed and lets you keep them separate from other code on the page. Here&rsquo;s an example that uses both jQuery and Prototype.</p>
+
+<pre class="prettyprint"><code>&lt;script&gt;
+	// Set &lt;p&gt; to blue using jQuery
+	$xu.includeScript($x.cdn.jquery, function () {
+		$('p').css('color', 'blue');
+	});
+
+	// Set &lt;h1&gt; to red using Prototype
+	$xu.includeScript($x.cdn.prototype, function () {
+		$$('h1').invoke('setStyle', { color: 'red' });
+	});
+&lt;/script&gt;</code></pre>
+
+		<p class="note">EWF will not reload an external script if it has been included already with <code>$xu.includeScript</code>. However, you need to be aware that included scripts have access to the global scope, and they may interfere with scripts that run later. For example, if you use jQuery without calling its <code>noConflict</code> method, it will hijack the $ character, causing potential problems with other scripts that may use it.</p>
 	</section> <!--/scripts -->
 
 	<section id="notes">

@@ -6,6 +6,7 @@ Variables
 @light-blue: #cdf;
 @lighter-gray: #eee;
 @light-gray: #ccc;
+@pale-orange: #ffc99e;
 @gray: #aaa;
 @dark-gray: #999;
 
@@ -124,6 +125,15 @@ nav ul {
 }
 
 /* =================================
+Sidebar
+==================================== */
+#about .size-4 {
+	padding: 2%;
+	border-radius: 10px;
+	background-color: @pale-orange;
+}
+
+/* =================================
 Demos
 ==================================== */
 #columnDemo,
@@ -134,9 +144,9 @@ Demos
 	width: 94%; /* Required for IE 7 */
 	border: 1px dashed @dark-gray;
 }
-.row > *,
+:not(#about).row > *,
 section[class$='-column'] > *,
-div[class$='-column'] > * {
+:not(#about) div[class$='-column'] > * {
 	height: 100px;
 	line-height: 100px;
 	border: 5px solid @gray;
@@ -144,15 +154,15 @@ div[class$='-column'] > * {
 	text-align: center;
 	background: #ccc;
 }
-#columnDemo > * {
+#columnDemo.row > * {
 	height: 250px;
 	line-height: 250px;
 }
-#gridInColDemo > * {
+#gridInColDemo.row > * {
 	height: auto;
 	border-width: 0;
 }
-#gridInColDemo div > * {
+#gridInColDemo.row div > * {
 	border-width: 0;
 	color: #fff;
 	background: @dark-gray;
