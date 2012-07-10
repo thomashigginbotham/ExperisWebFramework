@@ -192,6 +192,8 @@ experis.widgets = {
 					var nextSlide = slides[slideNum - 1];
 					var direction = (slideNum > curSlide || curSlide === slides.length && slideNum === 1) ? 1 : -1;
 
+					transTimer = 1;
+
 					switch (options.transType) {
 						/* Slide next photo over top of current photo */ 
 						case 'slide':
@@ -204,27 +206,15 @@ experis.widgets = {
 
 							slidePanel.appendChild(slideCopy);
 
-							// Move slide over top of current slide in increments
-							var start = parseInt(slideCopy.style.left); // Starting position of cloned slide
-							var end = 0; // Ending position of cloned slide
-							var steps = (options.transTime / 1000) * fps; // Number of frames of animation
-							var linearVals = $xfx.getBezierTransform(start, end, steps, $xfx.trans[options.transEasing]);
-							var curFrame = 0;
+							// Move slide over top of current slide
+							$xfx.animate(slideCopy, { left: '0px' }, options.transTime, options.transEasing, function () {
+								// Move slideWrap's position to next slide and remove cloned slide
+								slideWrap.style.left = -(slideNum - 1) * slideDims.width + 'px';
+								slidePanel.removeChild(slideCopy);
+								transTimer = 0;
 
-							transTimer = setInterval(function () {
-								slideCopy.style.left = linearVals[curFrame++] + 'px';
-
-								if (curFrame === linearVals.length) {
-									clearInterval(transTimer);
-									transTimer = 0;
-
-									// Move slideWrap's position to next slide and remove cloned slide
-									slideWrap.style.left = -(slideNum - 1) * slideDims.width + 'px';
-									slidePanel.removeChild(slideCopy);
-
-									if (callback) callback();
-								}
-							}, 1000 / fps);
+								if (callback) callback();
+							});
 
 							break;
 						/* Fade next photo view by adjusting opacity */ 
@@ -232,40 +222,24 @@ experis.widgets = {
 							// Clone next slide, set opacity to zero, and absolutely position it above currently slide
 							var slideCopy = nextSlide.cloneNode(true);
 
-							slideCopy.style.position = 'absolute';
-							slideCopy.style.top = '0';
-							slideCopy.style.left = '0';
-							slideCopy.style.opacity = 0;
-
-							if (ieVersion > -1 && ieVersion < 9) {
-								slideCopy.style.filter = 'progid:DXImageTransform.Microsoft.Alpha(opacity=0)';
-							}
+							$xu.setStyle(slideCopy, {
+								position: 'absolute',
+								top: '0',
+								left: '0',
+								opacity: 0
+							});
 
 							slidePanel.appendChild(slideCopy);
 
-							// Fade cloned slide to 100% opacity, move next slide into view, and remove cloned slide
-							var steps = (options.transTime / 1000) * fps; // Number of frames of animation
-							var linearVals = $xfx.getBezierTransform(0, 1, steps, $xfx.trans[options.transEasing]);
-							var curFrame = 0;
+							// Fade cloned slide to 100% opacity
+							$xfx.animate(slideCopy, { opacity: 1 }, options.transTime, options.transEasing, function () {
+								// Move slideWrap's position to next slide and remove cloned slide
+								slideWrap.style.left = -(slideNum - 1) * slideDims.width + 'px';
+								slidePanel.removeChild(slideCopy);
+								transTimer = 0;
 
-							transTimer = setInterval(function () {
-								slideCopy.style.opacity = linearVals[curFrame++];
-
-								if (ieVersion > -1 && ieVersion < 9) {
-									slideCopy.filters[0].opacity = linearVals[curFrame - 1] * 100;
-								}
-
-								if (curFrame === linearVals.length) {
-									clearInterval(transTimer);
-									transTimer = 0;
-
-									// Move slideWrap's position to next slide and remove cloned slide
-									slideWrap.style.left = -(slideNum - 1) * slideDims.width + 'px';
-									slidePanel.removeChild(slideCopy);
-
-									if (callback) callback();
-								}
-							}, 1000 / fps);
+								if (callback) callback();
+							});
 
 							break;
 						/* Fade to a color, then fade in the new slide */
@@ -292,61 +266,27 @@ experis.widgets = {
 							slidePanel.appendChild(cover);
 
 							// Fade in "cover" slide
-							var steps = (options.transTime / 2 / 1000) * fps; // Number of frames of animation
-							var bezier = $xfx.getBezierTransform(0, 1, steps, $xfx.trans[options.transEasing]);
-							var curFrame = 0;
+							$xfx.animate(cover, { opacity: 1 }, options.transTime / 2, options.transEasing, function () {
+								// Position next slide under the cover slide
+								slideWrap.style.left = -(slideNum - 1) * slideDims.width + 'px';
 
-							transTimer = setInterval(function () {
-								cover.style.opacity = bezier[curFrame++];
-
-								if (ieVersion > -1 && ieVersion < 9) {
-									cover.filters[0].opacity = bezier[curFrame - 1] * 100;
-								}
-
-								if (curFrame === bezier.length) {
-									clearInterval(transTimer);
+								// Fade out the cover slide and then remove it
+								$xfx.animate(cover, { opacity: 0 }, options.transTime / 2, options.transEasing, function () {
+									slidePanel.removeChild(cover);
 									transTimer = 0;
-									curFrame--;
 
-									// Move slideWrap's position to next slide and fade out "cover" slide
-									slideWrap.style.left = -(slideNum - 1) * slideDims.width + 'px';
-
-									transTimer = setInterval(function () {
-										cover.style.opacity = bezier[curFrame--];
-
-										if (ieVersion > -1 && ieVersion < 9) {
-											cover.filters[0].opacity = bezier[curFrame + 1] * 100;
-										}
-
-										if (curFrame === -1) {
-											clearInterval(transTimer);
-											transTimer = 0;
-
-											slidePanel.removeChild(cover);
-											if (callback) callback();
-										}
-									}, 1000 / fps);
-								}
-							}, 1000 / fps);
+									if (callback) callback();
+								});
+							});
 
 							break;
 							/* Wipe current photo out of the viewing area by sliding the next photo into view */
 						case 'wipe':
 							// Move slide wrapper to new position
-							var steps = (options.transTime / 1000) * fps; // Number of frames of animation
-							var linearVals = $xfx.getBezierTransform(-(curSlide - 1) * slideDims.width, -(slideNum - 1) * slideDims.width, steps, $xfx.trans[options.transEasing]);
-							var curFrame = 0;
-
-							transTimer = setInterval(function () {
-								slideWrap.style.left = linearVals[curFrame++] + 'px';
-
-								if (curFrame === linearVals.length) {
-									clearInterval(transTimer);
-									transTimer = 0;
-
-									if (callback) callback();
-								}
-							}, 1000 / fps);
+							$xfx.animate(slideWrap, { left: -(slideNum - 1) * slideDims.width + 'px' }, options.transTime, options.transEasing, function () {
+								transTimer = 0;
+								if (callback) callback();
+							});
 
 							break;
 					}

@@ -458,6 +458,29 @@ experis.utils = {
 
 	},
 	/*
+	* setStyle (dom element array, object)
+	* els: an element or array of elements
+	* object: an object of CSS rules in the format { attribute: value }
+	*/
+	setStyle: function (els, values) {
+		var ieVersion = $xu.getIeVersion();
+
+		if (els.length === undefined) els = [els];
+
+		for (var n = 0, el; el = els[n++];) {
+			for (var key in values) {
+				el.style[key] = values[key];
+
+				if (ieVersion > -1 && ieVersion < 9) {
+					// IE opacity
+					if (key === 'opacity') {
+						el.style.filter = 'progid:DXImageTransform.Microsoft.Alpha(opacity=' + parseInt(values[key] * 100) + ')';
+					}
+				}
+			}
+		}
+	},
+	/*
 	* trace (string)
 	* msg: the message to send to console (or an alert box if console isn't available)
 	*/
