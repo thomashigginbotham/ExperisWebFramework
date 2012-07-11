@@ -4,7 +4,7 @@
 	<meta charset="utf-8" />
 	<title>Experis JS API Documentation</title>
 	<link rel="stylesheet" type="text/css" href="../css/framework.min.css">
-	<link rel="stylesheet" type="text/css" href="documentation.min.css">
+	<link rel="stylesheet" type="text/less" href="documentation.less">
 	<link rel="stylesheet" href="../js/google-code-prettify/prettify.css">
 
 	<script src="../js/less-1.3.0.min.js"></script>
@@ -27,10 +27,11 @@
 		</header>
 
 		<nav>
-			<ul class="three-column">
+			<ul class="four-column">
 				<li><a href="#utilities">Utility Class</a></li>
 				<li><a href="#polyfills">Polyfills Class</a></li>
 				<li><a href="#widgets">Widgets Class</a></li>
+				<li><a href="#fx">FX Class</a></li>
 			</ul>
 		</nav>
 
@@ -331,6 +332,71 @@
 <pre class="prettyprint"><code>{ lines: 4,
   moreLabel: 'More',
   lessLabel: 'Less' }</code></pre>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+
+			<h2 id="fx">FX Class</h2>
+			<p>The Experis FX class provides functions for animation and graphical effects.</p>
+			<p>Method calls to the FX class can be made in the format <code>experis.fx.<em>methodName</em>()</code> or by using the shorthand <code>$xfx.<em>methodName</em>()</code>.</p>
+
+			<h3>Properties</h3>
+
+			<table class="function-listing">
+				<thead>
+					<tr>
+						<th>Property</th>
+						<th>Description</th>
+					</tr>
+				</thead>
+
+				<tbody>
+					<tr>
+						<td><code>trans</code></td>
+						<td>
+							<p>The trans property is an object with the following properties that are commonly used for easing effects:</p>
+
+							<ul>
+								<li>linear</li>
+								<li>easeIn</li>
+								<li>easeOut</li>
+								<li>easeInOut</li>
+								<li>bounceIn</li>
+								<li>bounceOut</li>
+							</ul>
+
+							<p>These values are cubic beziers represented in an array format. The <code>animate()</code> method of the FX library accepts a string representation of these values, but they are publically available and settable by any code that requires them.</p>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+
+			<h3>Methods</h3>
+
+			<table class="function-listing">
+				<thead>
+					<tr>
+						<th>Method</th>
+						<th>Return Value</th>
+						<th>Description</th>
+					</tr>
+				</thead>
+
+				<tbody>
+					<tr>
+						<td><code>animate (els:array of dom elements, values:object, duration:number[, easing:string, callback:function])</code></td>
+						<td><code>None</code></td>
+						<td>
+							<p>Accepts an array of DOM elements and a JSON object consisting of CSS values, and applies the CSS values as a transition over the course of the provided duration time. Only numeric transitions are supported (i.e. you may adjust an element&rsquo;s position or size, but not its background color).</p>
+
+							<ul>
+								<li><code>els</code>: a DOM element array or a single element</li>
+								<li><code>values</code>: an object of CSS rules to apply (e.g. {left:'200px', 'width:0px'}) (Note that units of measurement are required, even if they may be omitted in valid CSS.)</li>
+								<li><code>duration</code>: the duration of the transition in milliseconds</li>
+								<li><code>easing</code> <em>(optional)</em>: Determines the transition&rsquo;s easing effect (defaults to 'easeInOut')</li>
+								<li><code>callback</code> <em>(optional)</em>: a function that will be called when the transition completes</li>
+							</ul>
 						</td>
 					</tr>
 				</tbody>
