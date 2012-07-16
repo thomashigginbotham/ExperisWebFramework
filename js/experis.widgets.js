@@ -135,6 +135,9 @@ experis.widgets = {
 				if (nav.length === 1) {
 					var anchors = NW.Dom.select('.experis-slider > ul a', wrapper.parentNode);
 
+					// Add "selected" class to first slide
+					anchors[0].parentNode.className += ' selected';
+
 					for (var n = 0, anchor; anchor = anchors[n++]; ) {
 						$xu.addListener(anchor, 'click', (function (n) {
 							return function (e) {
@@ -311,6 +314,16 @@ experis.widgets = {
 						// Play transition
 						runTransition(slideNum, function () {
 							curSlide = slideNum;
+
+							// Add "selected" class to current navigation item
+							var items = NW.Dom.select('.experis-slider > ul li', wrapper.parentNode);
+
+							for (var n = 0, item; item = items[n++];) {
+								item.className = item.className.replace(' selected', '');
+							}
+
+							items[curSlide - 1].className += ' selected';
+
 							if (mouseStatus === 'out') startSlider();
 						});
 					}
