@@ -424,6 +424,171 @@ experis.widgets = {
 				});
 			}
 		}
+	},
+	/*
+	* eventTimeline(dom element[, object])
+	* Converts a listing of news/event entries into an interactive timeline
+	*/
+	eventTimeline: function (wrapper, options) {
+		$xu.includeScript($x.path + 'experis.fx.js', function () {
+			var defaults = {
+				months: 4,
+				monthWidth: 200,
+				borderColor: '#000',
+				legendColors: {
+					random: ['#f00', '#0f0', '#00f', '#ff0', '#0ff', '#f0f', '#f90', '#f09', '#0f9', '#09f', '#90f', '#9f0']
+				}
+			};
+
+			options = $xu.mergeJson(defaults, options);
+
+			$xu.includeScript($x.cdn.nwmatcher, function () {
+				// Get data from HTML
+				var eventItems = NW.Dom.select('div[data-category]', wrapper);
+				var eventDetails = [];
+
+				for (var n = 0, item; item = eventItems[n++];) {
+					var h2 = NW.Dom.select('h2', item)[0];
+					var a = NW.Dom.select('a', item)[0];
+					var eventDate = new Date(Date.parse(h2.innerHTML));
+					var url = a.getAttribute('href');
+					var category = item.getAttribute('data-category');
+
+					eventDetails.push({
+						date: eventDate,
+						category: category,
+						url: url,
+						html: item.innerHTML
+					});
+				}
+
+				// Create new timeline structure
+				var monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+
+				if (eventDetails.length > 0) {
+					var curMonth = eventDetails[0].date.getMonth();
+
+					wrapper.style.height = '2em';
+					wrapper.style.borderBottom = '1px solid ' + options.borderColor;
+
+					for (var n = 0; n < options.months; n++) {
+						var div = document.createElement('div');
+						var eventMonth = (curMonth - n >= 0) ? curMonth - n : curMonth - n + monthNames.length;
+						var heading = document.createElement('span');
+						var headingText = monthNames[eventMonth];
+
+						div.className = 'experis-timeline-month';
+
+						with (div.style) {
+							position = 'relative';
+							cssFloat = 'left';
+							styleFloat = 'left';
+							paddingLeft = '10px';
+							width = options.monthWidth - 10 + 'px';
+							height = '2em';
+							borderLeft = '1px solid ' + options.borderColor;
+						}
+
+						heading.className = 'experis-timeline-heading';
+						heading.appendChild(document.createTextNode(headingText));
+
+						div.appendChild(heading);
+
+						for (var m = 0, detail; detail = eventDetails[m++];) {
+							if (detail.date.getMonth() === eventMonth) {
+								// Place hyperlink and tooltip
+								var a = document.createElement('a');
+								var tooltip = document.createElement('div');
+
+								a.setAttribute('href', detail.url);
+								a.setAttribute('data-category', detail.category);
+
+								// Get category color
+								var markerColor;
+
+								if (options.legendColors[detail.category]) {
+									markerColor = options.legendColors[detail.category];
+								} else {
+									var rand = Math.floor(Math.random() * options.legendColors.random.length);
+
+									markerColor = options.legendColors.random[rand];
+									options.legendColors.random.splice(rand, 1);
+									options.legendColors[detail.category] = markerColor;
+								}
+
+								with (a.style) {
+									position = 'absolute';
+									bottom = '-5px';
+									left = options.monthWidth - parseInt(detail.date.getDate() / 31 * options.monthWidth) + 'px';
+									display = 'block';
+									width = '10px';
+									height = '10px';
+									borderRadius = '50%';
+									backgroundColor = markerColor;
+								}
+
+								tooltip.className = 'experis-timeline-tooltip';
+
+								with (tooltip.style) {
+									position = 'absolute';
+									bottom = '15px';
+									left = parseInt(options.monthWidth / -2.5) + 'px';
+									width = parseInt(options.monthWidth / 1.25) + 'px';
+									display = 'none';
+								}
+
+								// Add tooltip event handlers
+								$xu.addListener(a, 'mouseover', (function (tooltip) {
+									return function () {
+										tooltip.style.display = 'block';
+									};
+								})(tooltip));
+
+								$xu.addListener(a, 'mouseout', (function (tooltip) {
+									return function () {
+										tooltip.style.display = 'none';
+									};
+								})(tooltip));
+
+								tooltip.innerHTML = detail.html;
+								a.appendChild(tooltip);
+								div.appendChild(a);
+							}
+						}
+
+						wrapper.insertBefore(div, eventItems[0]);
+					}
+
+					// Add legend
+					var legend = document.createElement('ul');
+
+					legend.className = 'experis-timeline-legend';
+
+					with (legend.style) {
+						clear = 'left';
+						margin = '1em 0';
+						padding = '0';
+						listStyle = 'none';
+					}
+
+					for (var key in options.legendColors) {
+						if (key !== 'random') {
+							var item = document.createElement('li');
+
+							item.innerHTML = '<span data-category="' + key + '" style="display:inline-block; width:10px; height:10px; border-radius:50%; background-color:' + options.legendColors[key] + '"></span> ' + key;
+							legend.appendChild(item);
+						}
+					}
+
+					wrapper.parentNode.insertBefore(legend, wrapper.nextSibling);
+				}
+
+				// Remove old HTML
+				for (var n = 0, item; item = eventItems[n++];) {
+					wrapper.removeChild(item);
+				}
+			});
+		});
 	}
 };
 

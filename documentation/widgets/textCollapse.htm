@@ -12,6 +12,14 @@
 	<link rel="stylesheet" href="../../css/framework.min.css">
 	<link rel="stylesheet" href="../documentation.min.css" />
 	<link rel="stylesheet" href="../../js/google-code-prettify/prettify.css">
+
+	<style>
+		#example {
+			padding: 20px 0;
+			border-top: 1px dashed #ccc;
+			border-bottom: 1px dashed #ccc;
+		}
+	</style>
 </head>
 
 <body>
@@ -24,21 +32,20 @@
 		</header>
 
 		<article>
-			<h2>Remarks</h2>
-			<p>Coming soon.</p>
+			<h2>Example</h2>
+
+			<p>The example below uses the following options: <pre class="prettyprint"><code>{ lines: 3, moreLabel: 'Show More', lessLabel: 'Show Less' }</code></pre></p>
+
+			<div id="example">
+				<div id="longText">
+					<p>Use the &ldquo;More&rdquo; link to view the rest of this text. Sed in consequat neque. Phasellus pulvinar consectetur blandit. Phasellus ullamcorper eleifend lacus, ullamcorper auctor augue porttitor sit amet. Cras ac metus vel quam fringilla laoreet. Maecenas gravida feugiat lacus, eget consectetur leo porta eget. Sed volutpat tortor ut elit porta cursus. Cras facilisis tincidunt metus, quis cursus erat porta et. Nulla aliquam blandit iaculis. Pellentesque dignissim nunc non metus suscipit non imperdiet neque hendrerit. Aliquam dignissim lacus non lacus tincidunt ut eleifend massa vulputate. Sed vitae odio sapien, in placerat tortor. Etiam sit amet nibh vel erat iaculis ultrices. Suspendisse ut dui eu lacus dictum imperdiet.</p>
+					<p>Vestibulum auctor lobortis aliquam. Vestibulum at ornare lorem. Etiam hendrerit ullamcorper adipiscing. Suspendisse potenti. Donec non aliquam ligula. Nulla et ligula elit. Morbi tortor massa, imperdiet in imperdiet et, mattis in nulla. Pellentesque urna dolor, vehicula in commodo sit amet, fermentum nec tortor. Nullam tempor sodales purus vestibulum imperdiet.</p>
+					<p>Sed in consequat neque. Phasellus pulvinar consectetur blandit. Phasellus ullamcorper eleifend lacus, ullamcorper auctor augue porttitor sit amet. Cras ac metus vel quam fringilla laoreet. Maecenas gravida feugiat lacus, eget consectetur leo porta eget. Sed volutpat tortor ut elit porta cursus.</p>
+				</div>
+			</div>
 
 			<h3>Syntax</h3>
 			<pre class="prettyprint"><code>$xw.textCollapse(el:array of dom elements[, options:object]);</code></pre>
-
-			<h2>Example</h2>
-
-			<p>The example below uses the following options: <code>{ lines: 3, moreLabel: 'Show More', lessLabel: 'Show Less' }</code></p>
-
-			<div id="longText">
-				<p>Use the &ldquo;More&rdquo; link to view the rest of this text. Sed in consequat neque. Phasellus pulvinar consectetur blandit. Phasellus ullamcorper eleifend lacus, ullamcorper auctor augue porttitor sit amet. Cras ac metus vel quam fringilla laoreet. Maecenas gravida feugiat lacus, eget consectetur leo porta eget. Sed volutpat tortor ut elit porta cursus. Cras facilisis tincidunt metus, quis cursus erat porta et. Nulla aliquam blandit iaculis. Pellentesque dignissim nunc non metus suscipit non imperdiet neque hendrerit. Aliquam dignissim lacus non lacus tincidunt ut eleifend massa vulputate. Sed vitae odio sapien, in placerat tortor. Etiam sit amet nibh vel erat iaculis ultrices. Suspendisse ut dui eu lacus dictum imperdiet.</p>
-				<p>Vestibulum auctor lobortis aliquam. Vestibulum at ornare lorem. Etiam hendrerit ullamcorper adipiscing. Suspendisse potenti. Donec non aliquam ligula. Nulla et ligula elit. Morbi tortor massa, imperdiet in imperdiet et, mattis in nulla. Pellentesque urna dolor, vehicula in commodo sit amet, fermentum nec tortor. Nullam tempor sodales purus vestibulum imperdiet.</p>
-				<p>Sed in consequat neque. Phasellus pulvinar consectetur blandit. Phasellus ullamcorper eleifend lacus, ullamcorper auctor augue porttitor sit amet. Cras ac metus vel quam fringilla laoreet. Maecenas gravida feugiat lacus, eget consectetur leo porta eget. Sed volutpat tortor ut elit porta cursus.</p>
-			</div>
 
 			<h2>Parameters</h2>
 
