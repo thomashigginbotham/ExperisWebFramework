@@ -370,23 +370,25 @@ experis.utils = {
 		}
 
 		// Internet Explorer
-		/*@cc_on
-		@if (@_win32 || @_win64)
-		if (document.getElementById('ieScriptLoad') == null) {
-			document.write('<script id="ieScriptLoad" defer src="//:"><\/script>');
-		}
-
-		document.getElementById('ieScriptLoad').onreadystatechange = function () {
-			var readyState = document.getElementById('ieScriptLoad').readyState;
-
-			if (readyState === 'complete' || readyState === 'loaded') {
-				$x.domReady = true;
-				callback();
+		if ($xu.getIeVersion() < 9) {
+			/*@cc_on
+			@if (@_win32 || @_win64)
+			if (document.getElementById('ieScriptLoad') == null) {
+				document.write('<script id="ieScriptLoad" defer src="//:"><\/script>');
 			}
-		};
-
-		return;
-		@end@*/
+	
+			document.getElementById('ieScriptLoad').onreadystatechange = function () {
+				var readyState = document.getElementById('ieScriptLoad').readyState;
+	
+				if (readyState === 'complete' || readyState === 'loaded') {
+					$x.domReady = true;
+					callback();
+				}
+			};
+	
+			return;
+			@end@*/
+		}
 
 		// Mozilla, Chrome, Opera
 		if (document.addEventListener) {
