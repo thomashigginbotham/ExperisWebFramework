@@ -5,8 +5,8 @@
 	<title>Experis Web Framework Documentation</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-	<link rel="stylesheet" type="text/css" href="../css/framework.min.css">
-	<link rel="stylesheet" type="text/css" href="documentation.min.css">
+	<link rel="stylesheet" type="text/css" href="../css/framework.css">
+	<link rel="stylesheet" type="text/css" href="documentation.css">
 	<link rel="stylesheet" href="../js/google-code-prettify/prettify.css">
 
 	<script src="../js/svgweb/svg.js" data-path="../js/svgweb"></script>
@@ -206,6 +206,7 @@
 		<h1>Notes</h1>
 
 		<ul>
+			<li>IE 7 does not support the CSS border-box model, so padding and borders are likely to break layouts unless you manually adjust the widths for IE 7.</li>
 			<li>Selectivizr and NWMatcher are used to provide CSS 3 selector support to IE 6-8. However, Selectivizr requires that all CSS be included by the <code>&lt;link&gt;</code> tag in order to be recognized. If you are using the client-side JavaScript version of LESS, the CSS will be inserted into a <code>&lt;style&gt;</code> tag and will not be parsed by Selectivizr.</li>
 			<li>The latest version of NWMatcher (1.2.5) doesn&rsquo;t properly match nth-of-type selectors. So, we&rsquo;re using version 1.2.3.</li>
 		</ul>

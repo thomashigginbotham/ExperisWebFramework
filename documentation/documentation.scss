@@ -1,14 +1,14 @@
 ﻿/* =================================
 Variables
 ==================================== */
-@experis-blue:#6390c7;
-@lighter-blue: #f0f3ff;
-@light-blue: #cdf;
-@lighter-gray: #eee;
-@light-gray: #ccc;
-@pale-orange: #ffc99e;
-@gray: #aaa;
-@dark-gray: #999;
+$experis-blue: #6390c7;
+$lighter-blue: #f0f3ff;
+$light-blue: #cdf;
+$lighter-gray: #eee;
+$light-gray: #ccc;
+$pale-orange: #ffc99e;
+$gray: #aaa;
+$dark-gray: #999;
 
 /* =================================
 Fonts
@@ -56,19 +56,19 @@ body {
 h1, h2, h3, h4, h5, h6 { margin-bottom: .25em; font-family: Judson }
 
 h1 {
-	border-bottom: 1px solid @experis-blue;
-	color: @experis-blue;
+	border-bottom: 1px solid $experis-blue;
+	color: $experis-blue;
 }
 table {
 	margin: 1em 0;
-	border: 1px solid @light-blue;
+	border: 1px solid $light-blue;
 }
 thead tr {
 	font-weight: bold;
-	background-color: @light-blue;
+	background-color: $light-blue;
 }
 tbody tr:nth-child(odd) {
-	background-color: @lighter-blue;
+	background-color: $lighter-blue;
 }
 th, td {
 	padding: .5em;
@@ -98,7 +98,7 @@ nav ul {
 	height: 2.6em; /* Needed for IE 7 */
 	text-align: center;
 	list-style: none;
-	background: @experis-blue;
+	background: $experis-blue;
 	
 	a {
 		display: block;
@@ -108,7 +108,7 @@ nav ul {
 	
 		&:hover {
 			color: #000;
-			background: @light-blue;
+			background: $light-blue;
 		}
 	}
 }
@@ -119,7 +119,7 @@ nav ul {
 		background: none;
 		
 		a {
-			background: @experis-blue;
+			background: $experis-blue;
 		}
 	}
 }
@@ -130,7 +130,7 @@ Sidebar
 #about .size-4 {
 	padding: 2%;
 	border-radius: 10px;
-	background-color: @pale-orange;
+	background-color: $pale-orange;
 }
 
 /* =================================
@@ -142,14 +142,14 @@ Demos
 	margin: 1em auto;
 	padding: 2%;
 	width: 94%; /* Required for IE 7 */
-	border: 1px dashed @dark-gray;
+	border: 1px dashed $dark-gray;
 }
 :not(#about).row > *,
 section[class$='-column'] > *,
 :not(#about) div[class$='-column'] > * {
 	height: 100px;
 	line-height: 100px;
-	border: 5px solid @gray;
+	border: 5px solid $gray;
 	border-radius: 10px;
 	text-align: center;
 	background: #ccc;
@@ -165,10 +165,10 @@ section[class$='-column'] > *,
 #gridInColDemo.row div > * {
 	border-width: 0;
 	color: #fff;
-	background: @dark-gray;
+	background: $dark-gray;
 }
 .note {
 	padding: 2%;
 	border-radius: 10px;
-	background-color: @lighter-gray;
+	background-color: $lighter-gray;
 }
