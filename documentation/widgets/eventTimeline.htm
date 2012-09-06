@@ -18,6 +18,11 @@
 			padding: 20px;
 			border: 1px dashed #ccc;
 		}
+		#example:after {
+			content: '';
+			display: block;
+			clear: left;
+		}
 		a[data-category] {
 			z-index: 2;
 			text-decoration: none;
@@ -46,6 +51,11 @@
 			color: #fff;
 			font-size: .9em;
 		}
+		.experis-timeline-legend {
+			clear: left;
+			float: left;
+			margin: 1em 0 0;
+		}
 	</style>
 </head>
 
@@ -64,7 +74,7 @@
 
 			<h2>Example</h2>
 
-			<p>The example below uses the following options: <pre class="prettyprint"><code>{ months:3, monthWidth:300, legendColors:{ News:'#900', Event:'#090', Press:'#009' } }</code></pre></p>
+			<p>The example below uses the following options: <pre class="prettyprint"><code>{ months:3, monthWidth:300, sort:'descending', legendColors:{ News:'#900', Event:'#090', Press:'#009' } }</code></pre></p>
 
 
 			<div id="example">
@@ -142,7 +152,7 @@
 						<td>options.months</td>
 						<td>4</td>
 						<td>number</td>
-						<td><p>The number of months to include on the timeline (timeline will automatically start at the most recent item’s month).</p></td>
+						<td><p>The number of months to include on the timeline</p></td>
 					</tr>
 
 					<tr>
@@ -150,6 +160,13 @@
 						<td>200</td>
 						<td>number</td>
 						<td><p>The width (in px) of each month on the timeline</p></td>
+					</tr>
+
+					<tr>
+						<td>options.sort</td>
+						<td>ascending</td>
+						<td>string</td>
+						<td><p>Whether the timeline dates should start at the current month and ascend or start at the latest event date and descend. Possible values are <code>&quot;ascending&quot;</code> and <code>&quot;descending&quot;</code></p></td>
 					</tr>
 
 					<tr>
@@ -202,6 +219,7 @@
 		$xw.eventTimeline(document.getElementById('sample-timeline'), {
 			months: 3,
 			monthWidth: 300,
+			sort: 'descending',
 			legendColors: { News: '#900', Event: '#090', Press: '#009' }
 		});
 	</script>
