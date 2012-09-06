@@ -451,7 +451,7 @@ experis.widgets = {
 				for (var n = 0, item; item = eventItems[n++];) {
 					var h2 = NW.Dom.select('h2', item)[0];
 					var a = NW.Dom.select('a', item)[0];
-					var eventDate = new Date(Date.parse(h2.innerHTML));
+					var eventDate = new Date(Date.parse(h2.innerHTML.split('<')[0]));
 					var url = a.getAttribute('href');
 					var category = item.getAttribute('data-category');
 
@@ -502,6 +502,8 @@ experis.widgets = {
 
 						div.appendChild(heading);
 
+						var usedDates = [];
+
 						for (var m = 0, detail; detail = eventDetails[m++];) {
 							if (detail.date.getMonth() === eventMonth) {
 								// Place hyperlink and tooltip
@@ -525,7 +527,7 @@ experis.widgets = {
 								}
 
 								// Position hyperlink on timeline
-								var leftPos;
+								var leftPos, bottomPos;
 
 								if (options.sort == 'ascending') {
 									leftPos = parseInt(detail.date.getDate() / 31 * options.monthWidth) + 'px';
@@ -533,9 +535,11 @@ experis.widgets = {
 									leftPos = options.monthWidth - parseInt(detail.date.getDate() / 31 * options.monthWidth) + 'px';
 								}
 
+								bottomPos = (usedDates[detail.date] != null) ? (-10 * usedDates[detail.date] - usedDates[detail.date] - 5) : -5;
+
 								with (a.style) {
 									position = 'absolute';
-									bottom = '-5px';
+									bottom = bottomPos + 'px';
 									left = leftPos;
 									display = 'block';
 									width = '10px';
@@ -570,6 +574,12 @@ experis.widgets = {
 								tooltip.innerHTML = detail.html;
 								a.appendChild(tooltip);
 								div.appendChild(a);
+
+								if (usedDates[detail.date] != null) {
+									usedDates[detail.date]++;
+								} else {
+									usedDates[detail.date] = 1;
+								}
 							}
 						}
 
