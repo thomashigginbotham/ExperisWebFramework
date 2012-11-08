@@ -1,0 +1,336 @@
+/*     ______                      _
+      / ____/_  ______  ___  _____(_)_____
+     / __/  | |/_/ __ \/ _ \/ ___/ // ___/
+    / /___ _>  </ /_/ /  __/ /  / /(__  )
+   /_____//_/|_/ .___/\___/_/  /_//____/
+              /_/  CSS Framework using Sass */
+
+/* =================================
+Table of Contents
+====================================
+:Variables
+:Mixins
+:Reset Rules
+:General Styling
+:Column Layout
+:Grid Layout
+:Classes
+:Media Queries
+:IE 7 Fixes
+==================================== */
+
+/* =================================
+:Variables
+==================================== */
+$gutter: 3%;
+
+/* =================================
+:Mixins
+==================================== */
+@mixin border-box {
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+@mixin grid-layout ($cols) {
+	$first-column-cell: #{$cols}n-#{$cols - 1};
+	$last-column-cell: #{$cols}n;
+	$last-row: -n + #{$cols};
+
+	&:after {
+		content: '';
+		display: block;
+		clear: both;
+	}
+	> * {
+		float: left;
+		@include border-box;
+		margin-right: $gutter/2;
+		margin-left: $gutter/2;
+		margin-bottom: $gutter;
+		width: (100 - $gutter * ($cols - 1)) / $cols;
+		*width: (100 - $gutter * ($cols - 1)) / $cols - .1; // IE 7 offset
+
+		// No left margin on first cell of each row
+		&:nth-of-type(#{$first-column-cell}) {
+			clear: both;
+			margin-left: 0;
+		}
+
+		// No right margin on last cell of each row
+		&:nth-of-type(#{$last-column-cell}) {
+			float: right;
+			margin-right: 0;
+		}
+
+		// No bottom margin on last row
+		&:nth-last-of-type(#{$last-row}) {
+			margin-bottom: 0;
+			*margin-bottom: $gutter; // Except in IE 7
+		}
+	}
+	.size-1,
+	.size-2,
+	.size-3,
+	.size-4,
+	.size-5,
+	.size-6,
+	.size-7,
+	.size-8,
+	.size-9,
+	.size-10,
+	.size-11,
+	.size-12, {
+		> :last-child {
+			margin-bottom: 0; // No bottom margin on last element in grid cells
+		}
+	}
+	
+	img { max-width: 100%; width: auto; height: auto; }
+}
+@mixin column-width($size) {
+	width: (100 - $gutter * (12 / $size - 1)) / (12 / $size);
+	*width: (100 - $gutter * (12 / $size - 1)) / (12 / $size) - .1; // IE 7 offset
+}
+@mixin column-pull($size) {
+	float: left;
+	margin-left: -(100 - $gutter / 2 * (12 / $size - 1)) / (12 / $size);
+}
+@mixin column-push($size) {
+	float: left;
+	margin-left: (100 - $gutter * (12 / $size - 1)) / (12 / $size) + ($gutter * 1.5);
+}
+
+/* =================================
+:Reset Rules
+==================================== */
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote,
+a, abbr, acronym, address, big, cite,
+del, dfn, img, ins, kbd, q, s, samp,
+strike, sub, sup, tt, var,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+
+/* Tab Width for Code (doesn't work in WebKit) */
+pre {
+	-moz-tab-size: 4;
+	-o-tab-size: 4;
+	tab-size: 4;
+}
+
+/* New baselines */
+body {
+	font-size: 62.5%;
+}
+p, dl, ol, ul, table {
+	margin-bottom: 1em;
+}
+
+h1 { margin-bottom: .25em; font-size: 2em; }
+h2 { margin-bottom: .25em; font-size: 1.6em; }
+h3 { font-size: 1.4em; }
+h4 { font-size: 1.2em; }
+h5 { font-size: 1.1em; }
+
+ol, ul {
+	margin: 0 0 1em .8em;
+	padding-left: .8em;
+}
+
+pre, code {
+	font-family: 'Courier New', Monospace;
+}
+
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+blockquote, q {
+	quotes: none;
+
+	&:before,
+	&:after {
+		content: '';
+		content: none;
+	}
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+/* =================================
+:General Styling
+==================================== */
+body {
+	line-height: 1.5;
+	color: #000;
+	background-color: #fff;
+}
+img {
+	border: none;
+}
+
+/* =================================
+:Column Layout
+==================================== */
+.row {
+	&:before {
+		content: '';
+		display: block;
+		width: 100%;
+	}
+	&:after {
+		content: '';
+		display: block;
+		clear: both;
+		width: 100%;
+	}
+	> * {
+		float: left;
+		@include border-box;
+		margin-right: $gutter/2;
+		margin-left: $gutter/2;
+
+		&:first-child {
+			margin-left: 0;
+		}
+		&:last-child {
+			float: right;
+			margin-right: 0;
+		}
+	}
+	img {
+		width: auto; // For IE 8
+		max-width: 100%;
+		height: auto;
+	}
+	iframe {
+		max-width: 100%;
+	}
+}
+.size-1  { @include column-width(1) }
+.size-2  { @include column-width(2) }
+.size-3  { @include column-width(3) }
+.size-4  { @include column-width(4) }
+.size-5  { @include column-width(5) }
+.size-6  { @include column-width(6) }
+.size-7  { @include column-width(7) }
+.size-8  { @include column-width(8) }
+.size-9  { @include column-width(9) }
+.size-10 { @include column-width(10) }
+.size-11 { @include column-width(11) }
+.size-12 { width: 100%; }
+
+.row {
+	.push-1  { @include column-push(1) }
+	.push-2  { @include column-push(2) }
+	.push-3  { @include column-push(3) }
+	.push-4  { @include column-push(4) }
+	.push-5  { @include column-push(5) }
+	.push-6  { @include column-push(6) }
+	.push-7  { @include column-push(7) }
+	.push-8  { @include column-push(8) }
+	.push-9  { @include column-push(9) }
+	.push-10 { @include column-push(10) }
+	.push-11 { @include column-push(11) }
+	.push-12 { @include column-push(12) }
+
+	.pull-1  { @include column-pull(1) }
+	.pull-2  { @include column-pull(2) }
+	.pull-3  { @include column-pull(3) }
+	.pull-4  { @include column-pull(4) }
+	.pull-5  { @include column-pull(5) }
+	.pull-6  { @include column-pull(6) }
+	.pull-7  { @include column-pull(7) }
+	.pull-8  { @include column-pull(8) }
+	.pull-9  { @include column-pull(9) }
+	.pull-10 { @include column-pull(10) }
+	.pull-11 { @include column-pull(11) }
+	.pull-12 { @include column-pull(12) }
+}
+
+/* =================================
+:Grid Layout
+==================================== */
+.one-column    { @include grid-layout(1) }
+.two-column    { @include grid-layout(2) }
+.three-column  { @include grid-layout(3) }
+.four-column   { @include grid-layout(4) }
+.five-column   { @include grid-layout(5) }
+.six-column    { @include grid-layout(6) }
+.seven-column  { @include grid-layout(7) }
+.eight-column  { @include grid-layout(8) }
+.nine-column   { @include grid-layout(9) }
+.ten-column    { @include grid-layout(10) }
+.eleven-column { @include grid-layout(11) }
+.twelve-column { @include grid-layout(12) }
+
+/* =================================
+:Classes
+==================================== */
+.border-box {
+	@include border-box;
+}
+
+/* =================================
+:Media Queries
+==================================== */
+@media (max-width: 480px) {
+	.row,
+	.one-column,
+	.two-column,
+	.three-column,
+	.four-column,
+	.five-column,
+	.six-column,
+	.seven-column,
+	.eight-column,
+	.nine-column,
+	.ten-column,
+	.eleven-column,
+	.twelve-column {
+		> * {
+			float: none;
+			display: block;
+			margin: $gutter/2 0;
+			width: 100%;
+
+			&:last-child,
+			&:nth-last-of-type(-n + 12) {
+				float: none;
+			}
+			&[class*='push-'],
+			&[class*='pull-'] {
+				margin-left: 0;
+				margin-right: 0;
+			}
+		}
+	}
+}
+
+/* =================================
+:IE 7 Fixes
+==================================== */
+body {*min-width: 960px} // No responsive design for IE 7
+.row {*zoom: 1}
+
+input[type=submit],
+input[type=reset],
+input[type=button] {
+	*filter: chroma(color=#000000);
+}

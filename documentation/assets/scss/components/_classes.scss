@@ -1,0 +1,64 @@
+/* =================================
+Table of Contents
+====================================
+:Generic Classes
+:Sidebar Classes
+==================================== */
+
+/* =================================
+:Generic Classes
+==================================== */
+.note {
+	padding: $gutter;
+	border: 1px solid $gray;
+	border-radius: 5px;
+	background: $light-gray;
+	box-shadow: inset 1px 1px 1px #fff,
+	            1px 1px 1px $dark-gray;
+}
+
+/* =================================
+:Sidebar Classes
+==================================== */
+.sidebar-menu {
+	margin-bottom: $gutter;
+	padding: $gutter;
+	font-size: 1.2em;
+	background: $med-gray;
+
+	ul {
+		margin: 0;
+		padding: 0;
+		list-style: none;
+	}
+	a {
+		display: block;
+		padding: $gutter;
+		border-bottom: 1px solid $gray;
+		text-decoration: none;
+		color: #fff;
+
+		&:hover,
+		&:focus {
+			background: $dark-gray;
+		}
+	}
+	li:last-of-type a {
+		border-bottom-width: 0;
+	}
+	.selected a {
+		background: darken($med-gray, 15%);
+	}
+}
+.sidebar-callout {
+	padding: $gutter;
+	background: $light-gray;
+
+	h1 {
+		font-size: 1.2em;
+		font-weight: bold;
+	}
+	> :last-child {
+		margin-bottom: 0;
+	}
+}

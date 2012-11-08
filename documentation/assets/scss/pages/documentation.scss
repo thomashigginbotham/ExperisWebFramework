@@ -1,0 +1,77 @@
+// Always import global files first
+@import '../../../../scss/global/framework';
+@import '../../../../scss/global/variables';
+
+// Components
+@import 'components/common';
+@import 'components/classes';
+
+// Prism for code syntax higlighting
+@import 'plugins/prism';
+
+/* =================================
+Table of Contents
+====================================
+:General Styling
+:Media Queries
+==================================== */
+
+/* =================================
+:General Styling
+==================================== */
+#wrap {
+	margin: 0 auto;
+	padding: 0 $gutter;
+	max-width: 960px;
+	font: 1.4em/1.5 Arial, Helvetica, sans-serif;
+}
+article {
+	.row,
+	*[class*='-column'] {
+		margin-bottom: 3%;
+		text-align: center;
+
+		> * {
+			padding: 1em;
+			border-radius: 5px;
+			background-color: $gray;
+		}
+		.row > * {
+			background-color: $light-gray;
+		}
+		&.wrapper-grid > .row {
+			padding: 0;
+		}
+	}
+	.row .row {
+		margin-bottom: 0;
+	}
+	*[class*='pull-'] {
+		color: #fff;
+		background-color: $dark-gray;
+	}
+	pre[class*="language-"] {
+		margin: 0 0 $gutter;
+
+		code {
+			display: block;
+			padding: 0;
+			background: transparent;
+		}
+	}
+	code {
+		display: inline-block;
+		padding: .1em;
+		background: $light-gray;
+	}
+}
+
+/* =================================
+:Media Queries
+==================================== */
+@media (max-width: 800px) {
+	#main > * {
+		float: none;
+		width: 100%;
+	}
+}

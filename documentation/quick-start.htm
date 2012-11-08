@@ -1,0 +1,275 @@
+<!doctype html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-us" xml:lang="en-us">
+	<head>
+		<meta charset="utf-8"/>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Quick Start Guide</title>
+		<link rel="stylesheet" href="assets/css/pages/documentation.css"/>
+
+		<!--[if lt IE 9]>
+		<link rel="stylesheet" href="assets/css/components/ie.css"/>
+		<script src="../js/ie/html5shiv.js"></script>
+		<script src="../js/ie/nwmatcher-1.2.3-min.js"></script>
+		<script src="../js/ie/selectivizr-min.js"></script>
+		<![endif]-->
+
+		<script data-main="assets/js/documentation" src="../js/lib/require-jquery.js"></script>
+	</head>
+
+	<body>
+		<div id="wrap">
+			<header>
+				<!--[if gte IE 9]><!-->
+				<svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="100%" height="150px" viewBox="0 0 500 220">
+					<line x1="30" y1="30" x2="90" y2="90" stroke="#c36d24" stroke-width="35" stroke-linecap="round" />
+					<line x1="30" y1="150" x2="90" y2="90" stroke="#c36d24" stroke-width="35" stroke-linecap="round" />
+					<line x1="120" y1="60" x2="150" y2="30" stroke="#6d8f81" stroke-width="35" stroke-linecap="round" />
+					<line x1="120" y1="120" x2="150" y2="150" stroke="#6290c4" stroke-width="35" stroke-linecap="round" />
+					<line x1="200" y1="30" x2="260" y2="150" stroke="#999" stroke-width="35" stroke-linecap="round" />
+					<line x1="290" y1="90" x2="320" y2="150" stroke="#ccc" stroke-width="35" stroke-linecap="round" />
+					<line x1="320" y1="30" x2="380" y2="150" stroke="#999" stroke-width="35" stroke-linecap="round" />
+					<line x1="375" y1="30" x2="460" y2="30" stroke="#999" stroke-width="35" stroke-linecap="round" />
+					<line x1="405" y1="85" x2="440" y2="85" stroke="#ccc" stroke-width="35" stroke-linecap="round" />
+				
+					<text x="15" y="210" fill="#999" font-family="Arial, Helvetica, sans-serif" font-size="41">Experis Web Framework</text>
+				</svg>
+				<!--<![endif]-->
+				<!--[if lt IE 9]>
+				<h1>Experis Web Framework</h1>
+				<![endif]-->
+			</header>
+
+			<section id="main" class="row">
+				<div class="size-3">
+					<nav class="sidebar-menu">
+						<ul>
+							<li><a href="introduction.htm">Introduction</a></li>
+							<li class="selected"><a href="quick-start.htm">Quick Start Guide</a></li>
+							<li><a href="style-guide.htm">Style Guide</a></li>
+						</ul>
+					</nav>
+
+					<div class="sidebar-callout">
+						<h1>Supported Browsers*</h1>
+
+						<ul>
+							<li>Chrome</li>
+							<li>Firefox</li>
+							<li>Safari</li>
+							<li>Opera</li>
+							<li>IE 7–10</li>
+						</ul>
+
+						<p><small>* Only the latest versions are supported unless otherwise noted.</small></p>
+					</div>
+				</div>
+
+				<article class="size-9">
+					<h1>Quick Start Guide</h1>
+					<p>If you’re looking to get started with EWF quickly, this is the place. The details below should put you on the right track.</p>
+
+					<h2>Start with the <strong>sample.htm</strong> File</h2>
+					<p>In the root directory, you should see a file called <strong>sample.htm</strong>. This file contains all the pieces you need to start on a new page. Remove everything inside of <code>&lt;div id=&quot;wrap&quot;/&gt;</code> and start editing!</p>
+					<p>Still here? OK, if you need further help, here are the basics…</p>
+
+					<h2>Expected Technologies</h2>
+					<p>Modern websites require modern tech, so there may be a few best practices that we use that you aren’t familiar with. There is no requirement that you follow these practices, but they are highly recommended.</p>
+
+					<ul>
+						<li>HTML 5 and CSS 3</li>
+						<li>Sass (Syntactically Awesome Style Sheets)</li>
+						<li>RequireJS + jQuery</li>
+					</ul>
+
+					<h3>HTML 5 and CSS 3</h3>
+					<p>Many HTML 5 features are supported by current browser incarnations and support for many more is being added daily. There really aren’t many good reasons not to take advantage of those features. The major hurdles to HTML 5 and CSS 3 at this point are older versions of Internet Explorer. EWF supports IE 7–9 but requires some extra JavaScript to get IE 7 and 8 working. In order to test in either of those browsers, make sure you are running the site through a Web server and not a file system.</p>
+					<p>The extent to which you need HTML 5 and CSS 3 depends on the needs of your website. Just make sure to use the <code>&lt;!doctype html&gt;</code> declaration so that you trigger standards mode in all browsers.</p>
+
+					<h3>Sass</h3>
+					<p>Sass is a CSS pre-processor. There are a few other pre-processors available, but Sass seems to offer the most features and is very easy to use. If you haven’t heard of a CSS pre-processor, it allows you to write CSS with support for variables, mixins (similar to functions in a programming language), nested selectors, and more. Check out the files in the <strong>scss</strong> folder for examples.</p>
+					<p>Browsers are not capable of reading Sass markup, so you will need to convert it into valid CSS before it can be used. Here’s an article that can help: <a href="http://base.thomashigginbotham.com/using-sass-in-windows/">Using Sass in Windows</a>.</p>
+
+					<h3>RequireJS + jQuery</h3>
+					<p>Hopefully, you’re familiar with jQuery. If not, it may be time to consider learning. Of course, if you’ll only be using the HTML and CSS aspects of EWF, then this won’t apply to you.</p>
+					<p><a href="http://requirejs.org/">RequireJS</a> is a JavaScript file and module loader. This allows you to add a single <code>&lt;script/&gt;</code> to the <code>&lt;head/&gt;</code> section of your Web pages and keep the rest of your JavaScript files organized and separate. For more information on RequireJS with jQuery, <a href="http://requirejs.org/docs/jquery.html">see the how-to section of their website</a>.</p>
+
+					<h2>Using the Framework</h2>
+					<p>Now that you have a brief understanding of the technologies, here’s how to take advantage of the framework.</p>
+
+					<h3>Columnar Layouts</h3>
+					<p>EWF supports up to 12 columns per row, as most CSS frameworks do. You may also nest columns if needed, so there’s really no limit, but 12 should be sufficient. Columns require the use of an element with a <code>row</code> class (any block-level element will work) and direct descendant elements with classes of <code>size-<em>n</em></code>, where <em>n</em> is a number from 1 to 12. Additionally, all the <code>size-<em>n</em></code> classes must add up to 12. For example, you could have a <code>size-4</code> and a <code>size-8</code> class. If you are familiar with other frameworks, this should come as no surprise. Here’s an example:</p>
+
+<pre class="language-markup"><code>&lt;section class=&quot;row&quot;&gt;
+	&lt;div class=&quot;size-6&quot;&gt;50% width&lt;/div&gt;
+	&lt;div class=&quot;size-3&quot;&gt;25% width&lt;/div&gt;
+	&lt;div class=&quot;size-3&quot;&gt;25% width&lt;/div&gt;
+&lt;/section&gt;</code></pre>
+
+					<p>And here’s how the markup above would appear (with some additional styling):</p>
+
+					<section class="row">
+						<div class="size-6">50% width</div>
+						<div class="size-3">25% width</div>
+						<div class="size-3">25% width</div>
+					</section>
+
+					<p>As previously mentioned, you can nest columns, as shown below.</p>
+
+<pre class="language-markup"><code>&lt;section class=&quot;row&quot;&gt;
+	&lt;div class=&quot;size-6 row&quot;&gt;
+		&lt;div class=&quot;size-4&quot;&gt;33.3%&lt;/div&gt;
+		&lt;div class=&quot;size-4&quot;&gt;33.3%&lt;/div&gt;
+		&lt;div class=&quot;size-4&quot;&gt;33.3%&lt;/div&gt;
+	&lt;/div&gt;
+
+	&lt;div class=&quot;size-3&quot;&gt;25%&lt;/div&gt;
+	&lt;div class=&quot;size-3&quot;&gt;25%&lt;/div&gt;
+&lt;/section&gt;</code></pre>
+
+					<section class="row">
+						<div class="size-6 row">
+							<div class="size-4">33.3%</div>
+							<div class="size-4">33.3%</div>
+							<div class="size-4">33.3%</div>
+						</div>
+
+						<div class="size-3">25%</div>
+						<div class="size-3">25%</div>
+					</section>
+
+					<p>We’re using a lot of divs in our examples, but in real-world situations, try to use semantic alternatives.</p>
+
+					<h3>Grid Layouts</h3>
+					<p>A grid layout has multiple rows and columns, but each column must have the same width. This may appear to be a limitation at first, but it was designed that way to keep markup simple. By combining columnar and grid layouts, you should be able to achieve any design pattern you need.</p>
+					<p>Grid layouts use a similar structure to columnar layouts, except that you only need one class, which will be used on the wrapper/parent element. The class uses the format <code><em>n</em>-column</code> where <em>n</em> is a number written in standard form (e.g. one, two, three, etc.). Up to 12 columns are supported in the grid layout.</p>
+
+<pre class="language-markup"><code>&lt;section class=&quot;three-column&quot;&gt;
+	&lt;div&gt;Cell 1&lt;/div&gt;
+	&lt;div&gt;Cell 2&lt;/div&gt;
+	&lt;div&gt;Cell 3&lt;/div&gt;
+	&lt;div&gt;Cell 4&lt;/div&gt;
+	&lt;div&gt;Cell 5&lt;/div&gt;
+	&lt;div&gt;Cell 6&lt;/div&gt;
+&lt;/section&gt;</code></pre>
+
+					<section class="three-column">
+						<div>Cell 1</div>
+						<div>Cell 2</div>
+						<div>Cell 3</div>
+						<div>Cell 4</div>
+						<div>Cell 5</div>
+						<div>Cell 6</div>
+					</section>
+
+					<p>Here’s an example where we’ve mixed the columnar and grid layouts to create a more complex layout.</p>
+
+<pre class="language-markup"><code>&lt;section class=&quot;two-column&quot;&gt;
+	&lt;div class=&quot;row&quot;&gt;
+		&lt;div class=&quot;size-3&quot;&gt;25%&lt;/div&gt;
+		&lt;div class=&quot;size-6&quot;&gt;50%&lt;/div&gt;
+		&lt;div class=&quot;size-3&quot;&gt;25%&lt;/div&gt;
+	&lt;/div&gt;
+
+	&lt;div class=&quot;row&quot;&gt;
+		&lt;div class=&quot;size-6&quot;&gt;50%&lt;/div&gt;
+		&lt;div class=&quot;size-6&quot;&gt;50%&lt;/div&gt;
+	&lt;/div&gt;
+
+	&lt;div class=&quot;row&quot;&gt;
+		&lt;div class=&quot;size-3&quot;&gt;25%&lt;/div&gt;
+		&lt;div class=&quot;size-9&quot;&gt;75%&lt;/div&gt;
+	&lt;/div&gt;
+
+	&lt;div class=&quot;row&quot;&gt;
+		&lt;div class=&quot;size-6&quot;&gt;50%&lt;/div&gt;
+		&lt;div class=&quot;size-3&quot;&gt;25%&lt;/div&gt;
+		&lt;div class=&quot;size-3&quot;&gt;25%&lt;/div&gt;
+	&lt;/div&gt;
+&lt;/section&gt;</code></pre>
+
+					<section class="two-column wrapper-grid">
+						<div class="row">
+							<div class="size-3">25%</div>
+							<div class="size-6">50%</div>
+							<div class="size-3">25%</div>
+						</div>
+
+						<div class="row">
+							<div class="size-6">50%</div>
+							<div class="size-6">50%</div>
+						</div>
+
+						<div class="row">
+							<div class="size-3">25%</div>
+							<div class="size-9">75%</div>
+						</div>
+
+						<div class="row">
+							<div class="size-6">50%</div>
+							<div class="size-3">25%</div>
+							<div class="size-3">25%</div>
+						</div>
+					</section>
+
+					<h3>Offset Columns</h3>
+					<p>With columnar layouts, it may be sometimes necessary to offset a column by a certain amount. We can do this with the <code>push-<em>n</em></code> and <code>pull-<em>n</em></code> classes. In the example below, we add a <code>push-2</code> class to our middle <code>&lt;div/&gt;</code> to offset it to the right by two sizes.</p>
+
+					<div class="row">
+						<div class="size-3">.size-3</div>
+						<div class="size-4 push-2">.size-4.push-2</div>
+						<div class="size-3">.size-3</div>
+					</div>
+
+					<p class="note">Note: The <code>push-<em>n</em></code> and <code>pull-<em>n</em></code> classes do not apply to small-screen devices. In EWF, all columns stack on top of each other when the device screen width is 480 px or less.</p>
+
+					<h2>The Basics of RequireJS</h2>
+					<p>At this point, you should have enough information to create some nice layouts. In earlier versions of EWF, we included a JavaScript library with many common functions and polyfills. However, these are not easy to maintain and better alternatives are constantly being created. Instead, we are devoting our full attention to the framework itself and making RequireJS with jQuery a recommendation for writing organized code. Here’s a short tutorial for using RequireJS.</p>
+
+					<ol>
+						<li>Make sure you have a reference to RequireJS in the <code>&lt;head/&gt;</code> of your Web page: <code>&lt;script data-main=&quot;js/app&quot; src=&quot;js/lib/require-jquery.js&quot;&gt;&lt;/script&gt;</code></li>
+						<li>Update the <span class="file-path">/js/app.js</span> with your own scripts.</li>
+					</ol>
+
+					<p>One of the biggest features of RequireJS is the ability to dynamically load JS files as they’re needed. To do this, you use the <code>require()</code> function. Let’s say we want to add an image slider to our home page using a jQuery plugin we found. Typically, this requires that three JS files be added to the page: jQuery, the jQuery plugin, and your own code that initializes the plugin. That’s three scripts just for one aspect of the home page. Here’s how that would look with RequireJS:</p>
+
+					<h3>HTML File</h3>
+
+<pre class="language-markup"><code>&lt;!doctype html&gt;
+&lt;html&gt;
+&lt;head&gt;
+	&lt;title&gt;Image Slider Example&lt;/title&gt;
+	&lt;script data-main=&quot;/js/app&quot; src=&quot;/js/lib/require-jquery.js&quot;&gt;&lt;/script&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+	&lt;div id=&quot;slider&quot;/&gt;
+	…
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+
+					<p>The <code>&lt;script/&gt;</code> element in our HTML contains a <code>data-main</code> and a <code>src</code> attribute. The <code>data-main</code> attribute determines the location of your custom scripts, in this case, <span class="file-path">/js/app.js</span>. Notice that we left off the “.js” — that wasn’t a mistake. With RequireJS, the extension is optional. If you do include the extension, make sure to use an absolute path.</p>
+					<p>The <code>src</code> attribute lets the page know where RequireJS is located. In EWF, we’ve placed it in the <span class="file-path">/js/lib</span> directory.</p>
+					<p>Other than the <code>&lt;script/&gt;</code> tag, the only other tag of importance is our <code>div</code> with an @id of “slider”. This is the container for our image slider.</p>
+
+					<h3>JavaScript File (/js/app.js)</h3>
+
+<pre class="language-javascript"><code>require([&#39;lib/jquery.imageSlider&#39;], function(imageSlider) {
+	$(function() {
+		$(&#39;#slider&#39;).imageSlider();
+	});
+});</code></pre>
+
+					<p>Here we see the <code>require()</code> function in action. It accepts two parameters: an array of JS file paths and a callback function. In this case, we need to require our jQuery image slider plugin before we can use it, so we pass an array with the path to the plugin (notice the missing “js” extension again). If we needed additional JS files, we would simply add them to the array. Our callback function is just your standard jQuery code that initializes the slider.</p>
+					<p>Hopefully, you now have a feel for how RequireJS works and how useful it can be.</p>
+
+					<h2>That’s All!</h2>
+					<p>This is the end of our Quick Start guide. We’ve crammed a lot of information into a small space, but it should be enough to get you going. Check out the rest of our documentation when you’re ready to learn more.</p>
+				</article>
+			</section>
+
+			<footer>
+				<p><a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/deed.en_US"><img alt="Creative Commons License" src="http://i.creativecommons.org/l/by-sa/3.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/deed.en_US">Creative Commons Attribution-ShareAlike 3.0 Unported License</a>.</p>
+			</footer>
+		</div> <!-- /#wrap -->
+	</body>
+</html>

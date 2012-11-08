@@ -1,0 +1,17 @@
+/* =================================
+Table of Contents
+====================================
+:IE 7 Bug Fixes
+==================================== */
+
+/* =================================
+:IE 7 Bug Fixes
+==================================== */
+article {
+	.row,
+	*[class*='-column'] {
+		> * {
+			*padding: 0; // No border-box support in IE 7 (padding and borders add to the width)
+		}
+	}
+}
