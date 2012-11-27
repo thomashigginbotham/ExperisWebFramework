@@ -280,6 +280,7 @@ img {
 .eleven-column { @include grid-layout(11) }
 .twelve-column { @include grid-layout(12) }
 
+
 /* =================================
 :Classes
 ==================================== */
@@ -290,6 +291,21 @@ img {
 /* =================================
 :Media Queries
 ==================================== */
+@media (max-width: 720px) {
+	.break-50-at-75 {
+		&.two-column    { @include grid-layout(1) }
+		&.three-column  { @include grid-layout(1) }
+		&.four-column   { @include grid-layout(2) }
+		&.five-column   { @include grid-layout(2) }
+		&.six-column    { @include grid-layout(3) }
+		&.seven-column  { @include grid-layout(3) }
+		&.eight-column  { @include grid-layout(4) }
+		&.nine-column   { @include grid-layout(4) }
+		&.ten-column    { @include grid-layout(5) }
+		&.eleven-column { @include grid-layout(5) }
+		&.twelve-column { @include grid-layout(6) }
+	}
+}
 @media (max-width: 480px) {
 	.row,
 	.one-column,
