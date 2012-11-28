@@ -43,6 +43,7 @@ $gutter: 3%;
 		clear: both;
 	}
 	> * {
+		clear: none;
 		float: left;
 		@include border-box;
 		margin-right: $gutter/2;
@@ -87,6 +88,19 @@ $gutter: 3%;
 	}
 	
 	img { max-width: 100%; width: auto; height: auto; }
+}
+@mixin grid-break($percent) {
+	&.two-column    { @include grid-layout(floor(2 * $percent / 100)) }
+	&.three-column  { @include grid-layout(floor(3 * $percent / 100)) }
+	&.four-column   { @include grid-layout(floor(4 * $percent / 100)) }
+	&.five-column   { @include grid-layout(floor(5 * $percent / 100)) }
+	&.six-column    { @include grid-layout(floor(6 * $percent / 100)) }
+	&.seven-column  { @include grid-layout(floor(7 * $percent / 100)) }
+	&.eight-column  { @include grid-layout(floor(8 * $percent / 100)) }
+	&.nine-column   { @include grid-layout(floor(9 * $percent / 100)) }
+	&.ten-column    { @include grid-layout(floor(10 * $percent / 100)) }
+	&.eleven-column { @include grid-layout(floor(11 * $percent / 100)) }
+	&.twelve-column { @include grid-layout(floor(12 * $percent / 100)) }
 }
 @mixin column-width($size) {
 	width: (100 - $gutter * (12 / $size - 1)) / (12 / $size);
@@ -292,48 +306,44 @@ img {
 :Media Queries
 ==================================== */
 @media (max-width: 720px) {
+	.break-75-at-75 {
+		@include grid-break(75);
+	}
 	.break-50-at-75 {
-		&.two-column    { @include grid-layout(1) }
-		&.three-column  { @include grid-layout(1) }
-		&.four-column   { @include grid-layout(2) }
-		&.five-column   { @include grid-layout(2) }
-		&.six-column    { @include grid-layout(3) }
-		&.seven-column  { @include grid-layout(3) }
-		&.eight-column  { @include grid-layout(4) }
-		&.nine-column   { @include grid-layout(4) }
-		&.ten-column    { @include grid-layout(5) }
-		&.eleven-column { @include grid-layout(5) }
-		&.twelve-column { @include grid-layout(6) }
+		@include grid-break(50);
 	}
 }
 @media (max-width: 480px) {
-	.row,
-	.one-column,
-	.two-column,
-	.three-column,
-	.four-column,
-	.five-column,
-	.six-column,
-	.seven-column,
-	.eight-column,
-	.nine-column,
-	.ten-column,
-	.eleven-column,
-	.twelve-column {
-		> * {
-			float: none;
-			display: block;
-			margin: $gutter/2 0;
-			width: 100%;
-
-			&:last-child,
-			&:nth-last-of-type(-n + 12) {
+	// We use an ID selector here for stronger specificity without resorting to !important
+	#wrap {
+		.row,
+		.one-column,
+		.two-column,
+		.three-column,
+		.four-column,
+		.five-column,
+		.six-column,
+		.seven-column,
+		.eight-column,
+		.nine-column,
+		.ten-column,
+		.eleven-column,
+		.twelve-column {
+			> * {
 				float: none;
-			}
-			&[class*='push-'],
-			&[class*='pull-'] {
-				margin-left: 0;
-				margin-right: 0;
+				display: block;
+				margin: $gutter/2 0;
+				width: 100%;
+
+				&:last-child,
+				&:nth-last-of-type(-n + 12) {
+					float: none;
+				}
+				&[class*='push-'],
+				&[class*='pull-'] {
+					margin-left: 0;
+					margin-right: 0;
+				}
 			}
 		}
 	}
