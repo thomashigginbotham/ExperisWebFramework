@@ -214,7 +214,7 @@ img {
 		clear: both;
 		width: 100%;
 	}
-	> * {
+	&:not(.middle-column) > * {
 		float: left;
 		@include border-box;
 		margin-right: $gutter/2;
@@ -227,6 +227,9 @@ img {
 			float: right;
 			margin-right: 0;
 		}
+	}
+	&.middle-column > * {
+		margin: 0 auto;
 	}
 	img {
 		width: auto; // For IE 8
