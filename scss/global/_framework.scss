@@ -229,6 +229,7 @@ img {
 		}
 	}
 	&.middle-column > * {
+		@include border-box;
 		margin: 0 auto;
 	}
 	img {
