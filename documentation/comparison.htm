@@ -1,0 +1,223 @@
+<!doctype html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-us" xml:lang="en-us">
+	<head>
+		<meta charset="utf-8"/>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>How EWF Compares with Other Frameworks</title>
+		<link rel="stylesheet" href="assets/css/pages/documentation.css"/>
+
+		<!--[if lt IE 9]>
+		<link rel="stylesheet" href="assets/css/components/ie.css"/>
+		<script src="../js/ie/html5shiv.js"></script>
+		<script src="../js/ie/nwmatcher-1.2.3-min.js"></script>
+		<script src="../js/ie/selectivizr-min.js"></script>
+		<![endif]-->
+
+		<script data-main="assets/js/documentation" src="../js/lib/require-jquery.js"></script>
+	</head>
+
+	<body>
+		<div id="wrap">
+			<header>
+				<!--[if gte IE 9]><!-->
+				<svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="100%" height="150px" viewBox="0 0 500 220">
+					<line x1="30" y1="30" x2="90" y2="90" stroke="#c36d24" stroke-width="35" stroke-linecap="round" />
+					<line x1="30" y1="150" x2="90" y2="90" stroke="#c36d24" stroke-width="35" stroke-linecap="round" />
+					<line x1="120" y1="60" x2="150" y2="30" stroke="#6d8f81" stroke-width="35" stroke-linecap="round" />
+					<line x1="120" y1="120" x2="150" y2="150" stroke="#6290c4" stroke-width="35" stroke-linecap="round" />
+					<line x1="200" y1="30" x2="260" y2="150" stroke="#999" stroke-width="35" stroke-linecap="round" />
+					<line x1="290" y1="90" x2="320" y2="150" stroke="#ccc" stroke-width="35" stroke-linecap="round" />
+					<line x1="320" y1="30" x2="380" y2="150" stroke="#999" stroke-width="35" stroke-linecap="round" />
+					<line x1="375" y1="30" x2="460" y2="30" stroke="#999" stroke-width="35" stroke-linecap="round" />
+					<line x1="405" y1="85" x2="440" y2="85" stroke="#ccc" stroke-width="35" stroke-linecap="round" />
+				
+					<text x="15" y="210" fill="#999" font-family="Arial, Helvetica, sans-serif" font-size="41">Experis Web Framework</text>
+				</svg>
+				<!--<![endif]-->
+				<!--[if lt IE 9]>
+				<h1>Experis Web Framework</h1>
+				<![endif]-->
+			</header>
+
+			<section id="main" class="row">
+				<div class="size-3">
+					<nav class="sidebar-menu">
+						<ul>
+							<li><a href="introduction.htm">Introduction</a></li>
+							<li><a href="quick-start.htm">Quick Start Guide</a></li>
+							<li class="selected"><a href="comparison.htm">Feature Comparison</a></li>
+							<li><a href="layouts.htm">Sample Layouts</a></li>
+							<li><a href="style-guide.htm">Style Guide</a></li>
+						</ul>
+					</nav>
+
+					<div class="sidebar-callout">
+						<h1>Supported Browsers*</h1>
+
+						<ul>
+							<li>Chrome</li>
+							<li>Firefox</li>
+							<li>Safari</li>
+							<li>Opera</li>
+							<li>IE 7–10</li>
+						</ul>
+
+						<p><small>* Only the latest versions are supported unless otherwise noted.</small></p>
+					</div>
+				</div>
+
+				<article class="size-9">
+					<h1>Feature Comparison</h1>
+					<p>Here is how EWF stacks up when compared to other popular frameworks.</p>
+
+					<table class="comparison">
+						<thead>
+							<tr>
+								<th scope="col">&nbsp;</th>
+								<th scope="col" class="compare">EWF</th>
+								<th scope="col" class="compare">Bootstrap</th>
+								<th scope="col" class="compare">Foundation</th>
+							</tr>
+						</thead>
+
+						<tbody>
+							<tr>
+								<th scope="row">Container Syntax</th>
+								<td>No extra markup needed</td>
+								<td><pre><code>&lt;div class=&quot;container&quot;/&gt;</code></pre> <p>Bootstrap requires a “container-fluid” class for responsive layouts</p></td>
+								<td>No extra markup needed</td>
+							</tr>
+
+							<tr>
+								<th scope="row">Row Syntax</th>
+
+								<td>
+<pre><code>&lt;div class=&quot;row&quot;&gt;
+	&lt;div class=&quot;size-<em>n</em>&quot;/&gt;
+&lt;/div&gt;</code></pre>
+								</td>
+
+								<td>
+<pre><code>&lt;div class=&quot;row&quot;&gt;
+	&lt;div class=&quot;span<em>n</em>&quot;/&gt;
+&lt;/div&gt;</code></pre>
+								</td>
+
+								<td>
+<pre><code>&lt;div class=&quot;row&quot;&gt;
+	&lt;div class=&quot;<em>number</em> columns&quot;/&gt;
+&lt;/div&gt;</code></pre>
+								</td>
+							</tr>
+
+							<tr>
+								<th scope="row">Nested Rows Syntax</th>
+
+								<td>
+<pre><code>&lt;div class=&quot;row&quot;&gt;
+	&lt;div class=&quot;size-<em>n</em> row&quot;&gt;
+		&lt;div class=&quot;size-<em>n</em>&quot;/&gt;
+	&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+									<p>Fewer tags are required with EWF</p>
+								</td>
+
+								<td>
+<pre><code>&lt;div class=&quot;row&quot;&gt;
+	&lt;div class=&quot;span<em>n</em>&quot;&gt;
+		&lt;div class=&quot;row&quot;&gt;
+			&lt;div class=&quot;span<em>n</em>&quot;/&gt;
+		&lt;/div&gt;
+	&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+								</td>
+
+								<td>
+<pre><code>&lt;div class=&quot;row&quot;&gt;
+	&lt;div class=&quot;<em>number</em> columns&quot;&gt;
+		&lt;div class=&quot;row&quot;&gt;
+			&lt;div class=&quot;<em>number</em> columns&quot;/&gt;
+		&lt;/div&gt;
+	&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+								</td>
+							</tr>
+
+							<tr>
+								<th scope="row">Offset Column Syntax</th>
+
+								<td>
+<pre><code>&lt;div class=&quot;row&quot;&gt;
+	&lt;div class=&quot;size-<em>n</em> push-<em>n</em>&quot;/&gt;
+	&lt;div class=&quot;size-<em>n</em> pull-<em>n</em>&quot;/&gt;
+&lt;/div&gt;</code></pre>
+								</td>
+
+								<td>
+<pre><code>&lt;div class=&quot;row&quot;&gt;
+	&lt;div class=&quot;span<em>n</em> offset<em>n</em>&quot;/&gt;
+&lt;/div&gt;</code></pre>
+									<p>Bootstrap does not have a pull/negative offset feature.</p>
+								</td>
+
+								<td>
+<pre><code>&lt;div class=&quot;row&quot;&gt;
+	&lt;div class=&quot;<em>number</em> columns offset-by-<em>number</em>&quot;/&gt;
+	&lt;div class=&quot;<em>number</em> columns push-<em>number</em>&quot;/&gt;
+	&lt;div class=&quot;<em>number</em> columns pull-<em>number</em>&quot;/&gt;
+&lt;/div&gt;</code></pre>
+									<p>offset-by-<em>number</em> and push-<em>number</em> are redundant. Either can be used for similar results.</p>
+								</td>
+							</tr>
+
+							<tr>
+								<th scope="row">Centered Column Syntax</th>
+
+								<td>
+<pre><code>&lt;div class=&quot;row middle-column&quot;&gt;
+	&lt;div class=&quot;size-<em>n</em>&quot;/&gt;
+&lt;/div&gt;</code></pre>
+								</td>
+
+								<td>No support</td>
+
+								<td>
+<pre><code>&lt;div class=&quot;row&quot;&gt;
+	&lt;div class=&quot;<em>number</em> columns centered&quot;/&gt;
+&lt;/div&gt;</code></pre>
+								</td>
+							</tr>
+
+							<tr>
+								<th scope="row">Grid Syntax</th>
+
+								<td>
+<pre><code>&lt;div class=&quot;<em>number</em>-column&gt;
+	&lt;div/&gt;
+&lt;/div&gt;</code></pre>
+									<p>Any element can be used with EWF — not just divs. Foundation requires unordered lists and Bootstrap falls short entirely.</p>
+								</td>
+
+								<td>No support</td>
+
+								<td>
+<pre><code>&lt;ul class=&quot;block-grid <em>number</em>-up&gt;
+	&lt;li/&gt;
+&lt;/ul&gt;</code></pre>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+
+					<h2>So What’s Missing?</h2>
+					<p>You may have noticed that unlike many other CSS frameworks, EWF does not provide icon sets, form styling, jQuery widgets, and other graphical assets. We feel that a framework should be just that — a framework. It should be a structural support, a building block, something that holds your website together — not something that dictates a website’s design or takes away from its uniqueness. A designer should be free to determine how forms should appear and what icon sets best match the look that is needed. If you’re looking for a shortcut where this type of work is already done for you, then you can find plenty of resources online already. We don’t feel that graphic design is the domain of a CSS framework.</p>
+					<p>Some responsive frameworks also include classes that allow you to hide or show content depending on the device (e.g. .hidden-phone or .show-on-desktops). Not only is this bad practice, as you are forcing users to download content they won’t even see, but it’s not a future proof solution. The screen resolution of phones and tablets is constantly increasing and can no longer be reliably determined by browser width alone. Many tablet computers already have desktop resolutions, so using a “dont-show-on-tablet” class isn’t going to work anymore. If you really want to hide content for particular screen widths, feel free to write the media queries yourself, but there is a reason we don’t include them in the framework.</p>
+				</article>
+			</section>
+
+			<footer>
+				<p><a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/deed.en_US"><img alt="Creative Commons License" src="http://i.creativecommons.org/l/by-sa/3.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/deed.en_US">Creative Commons Attribution-ShareAlike 3.0 Unported License</a>.</p>
+			</footer>
+		</div> <!-- /#wrap -->
+	</body>
+</html>

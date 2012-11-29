@@ -1,0 +1,130 @@
+// Always import global files first
+@import '../../../../scss/global/framework';
+@import '../../../../scss/global/variables';
+
+/* =================================
+Table of Contents
+====================================
+:General Styling
+:Media Queries
+==================================== */
+
+/* =================================
+:General Styling
+==================================== */
+html, body {
+	height: 100%;
+}
+
+#wrap {
+	height: 100%;
+	font: 1.4em/1.5 Arial, Helvetica, sans-serif;
+
+	> header {
+		position: fixed;
+		top: 0;
+		left: 0;
+		padding: .5em 2.5%;
+		width: 95%;
+		z-index: 2;
+		border-bottom: 1px solid #555;
+		text-align: left;
+		color: #fff;
+		background-color: #333;
+		box-shadow: 0 0 50px #000;
+
+		h1 {
+			font-size: 1.6em;
+		}
+		a {
+			color: #fff;
+		}
+		ul {
+			margin: 0;
+			padding: 0;
+			line-height: 2.5;
+			list-style: none;
+			text-align: right;
+		}
+		li {
+			display: inline-block;
+			padding-left: .5em;
+		}
+	}
+}
+.box {
+	position: relative;
+	z-index: 1;
+	height: 100%;
+	vertical-align: middle;
+	text-align: center;
+	background: url(http://lorempixel.com/1024/576/abstract/) center fixed no-repeat;
+	background-size: cover;
+
+	&::before {
+		content: '';
+		display: inline-block;
+		height: 50%;
+	}
+	&::after {
+		content: '';
+		display: inline-block;
+		height: 50%;
+	}
+}
+.hero-panel {
+	display: inline-block;
+	padding: 3em 1em;
+	width: 50%;
+	border: 1px solid #fff;
+	border-right-color: #555;
+	border-bottom-color: #555;
+	border-radius: 10px;
+	vertical-align: middle;
+	background: rgba(255, 255, 255, .7);
+	box-shadow: 0 0 50px #333;
+}
+.main-content {
+	position: relative;
+	z-index: 1;
+	padding: 2.5%;
+	text-align: center;
+	background-color: #fff;
+	box-shadow: 0 0 50px #000;
+}
+#wrap > footer {
+	min-height: 220px;
+	text-align: center;
+	color: #fff;
+	background-color: #333;
+
+	> div {
+		position: fixed;
+		bottom: 0;
+		left: 0;
+		padding: 2em 2.5%;
+		width: 95%;
+		overflow: auto;
+	}
+}
+
+/* =================================
+:Media Queries
+==================================== */
+@media (max-width: 800px) {
+	#wrap > footer > div {
+		position: relative;
+	}
+}
+@media (max-width: 480px) {
+	#wrap > header {
+		text-align: center;
+
+		ul {
+			text-align: center;
+		}
+	}
+	.hero-panel {
+		width: 70%;
+	}
+}

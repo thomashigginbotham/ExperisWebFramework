@@ -2,6 +2,7 @@
 Table of Contents
 ====================================
 :Variables
+:Mixins
 :General
 :Header
 :Footer
@@ -14,25 +15,39 @@ $experis-blue: #6290c4;
 $experis-orange: #c36d24;
 
 /* =================================
+:Mixins
+==================================== */
+@mixin transition($value) {
+	-webkit-transition: $value;
+	-moz-transition: $value;
+	-ms-transition: $value;
+	-o-transition: $value;
+	transition: $value;
+}
+
+/* =================================
 :General
 ==================================== */
-h1 {
-	font-size: 2em;
-	font-weight: bold;
-	color: $experis-blue;
-}
-h2 {
-	font-size: 1.6em;
-	font-weight: bold;
-	color: $dark-gray;
-}
-h3 {
-	text-transform: uppercase;
-	font-size: 1.3em;
-	color: $med-gray;
-}
-a {
-	color: $experis-orange;
+#main > article {
+	h1 {
+		color: $experis-blue;
+	}
+	h2 {
+		padding-top: .5em;
+		border-top: 1px solid $light-gray;
+		color: $dark-gray;
+	}
+	h3 {
+		text-transform: uppercase;
+		color: $med-gray;
+	}
+	h4 {
+		margin-bottom: 1em;
+		border-bottom: 1px dotted $med-gray;
+	}
+	a {
+		color: $experis-orange;
+	}
 }
 
 /* =================================

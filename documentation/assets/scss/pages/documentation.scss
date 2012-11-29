@@ -64,6 +64,19 @@ article {
 		padding: .1em;
 		background: $light-gray;
 	}
+	.gallery > a {
+		text-decoration: none;
+		background: #fff;
+
+		&:hover,
+		&:focus {
+			box-shadow: 0 0 15px #000;
+			@include transition(#{box-shadow .25s ease-in});
+		}
+	}
+	.gallery img {
+		border: 1px solid $gray;
+	}
 }
 
 /* =================================

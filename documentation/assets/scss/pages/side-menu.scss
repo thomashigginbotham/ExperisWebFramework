@@ -1,0 +1,55 @@
+// Always import global files first
+@import '../../../../scss/global/framework';
+@import '../../../../scss/global/variables';
+
+/* =================================
+Table of Contents
+====================================
+:Mixins
+:General Styling
+:Media Queries
+==================================== */
+
+/* =================================
+:Mixins
+==================================== */
+@mixin linear-gradient($direction, $gradient) {
+	background: -webkit-linear-gradient($direction, $gradient);
+	background: -moz-linear-gradient($direction, $gradient);
+	background: linear-gradient($direction, $gradient);
+}
+
+/* =================================
+:General Styling
+==================================== */
+#wrap {
+	margin: 0 auto;
+	max-width: 960px;
+	font: 1.4em/1.5 Arial, Helvetica, sans-serif;
+	@include linear-gradient(left, $gray #{ 22.75%, #fff 22.75%});
+
+	.row > header {
+		position: fixed;
+	}
+}
+.banner {
+	margin-bottom: $gutter;
+}
+.main-content footer {
+	margin-top: $gutter;
+	padding: 1em;
+	background-color: $light-gray;
+}
+
+/* =================================
+:Media Queries
+==================================== */
+@media (max-width: 480px) {
+	#wrap {
+		background: none;
+
+		.row > header {
+			position: relative;
+		}
+	}
+}

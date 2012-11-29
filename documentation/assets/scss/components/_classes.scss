@@ -3,6 +3,7 @@ Table of Contents
 ====================================
 :Generic Classes
 :Sidebar Classes
+:Tables
 ==================================== */
 
 /* =================================
@@ -61,4 +62,40 @@ Table of Contents
 	> :last-child {
 		margin-bottom: 0;
 	}
+}
+
+/* =================================
+:Tables
+==================================== */
+.comparison {
+	border: 1px solid $light-gray;
+
+	th {
+		text-align: left;
+		color: #fff;
+		background: $dark-gray;
+	}
+	tbody th {
+		background: $med-gray;
+	}
+	th,
+	td {
+		padding: .5em;
+		border: 1px solid $gray;
+		vertical-align: top;
+
+		> :last-child {
+			margin-bottom: 0;
+		}
+	}
+	td {
+		font-size: .8em;
+	}
+	pre code {
+		width: 160px;
+		overflow: auto;
+	}
+}
+.compare {
+	width: 33%;
 }

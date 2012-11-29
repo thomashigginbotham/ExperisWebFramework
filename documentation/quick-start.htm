@@ -45,6 +45,8 @@
 						<ul>
 							<li><a href="introduction.htm">Introduction</a></li>
 							<li class="selected"><a href="quick-start.htm">Quick Start Guide</a></li>
+							<li><a href="comparison.htm">Feature Comparison</a></li>
+							<li><a href="layouts.htm">Sample Layouts</a></li>
 							<li><a href="style-guide.htm">Style Guide</a></li>
 						</ul>
 					</nav>
@@ -139,6 +141,30 @@
 
 					<p>We’re using a lot of divs in our examples, but in real-world situations, try to use semantic alternatives.</p>
 
+					<h4>Centered Columns</h4>
+					<p>A row containing only a single column can be centered with the <code>middle-column</code> class, as shown below.</p>
+
+<pre class="language-markup"><code>&lt;div class=&quot;row middle-column&quot;&gt;
+	&lt;div class=&quot;size-8&quot;&gt;I’m Centered!&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+
+					<div class="row middle-column">
+						<div class="size-8">I’m Centered!</div>
+					</div>
+
+					<p class="note">Note: If you’re wondering how you can center multiple columns, just nest them inside of a centered column.</p>
+
+					<h4>Offset Columns</h4>
+					<p>With columnar layouts, it may be sometimes necessary to offset a column by a certain amount. We can do this with the <code>push-<em>n</em></code> and <code>pull-<em>n</em></code> classes. In the example below, we add a <code>push-2</code> class to our middle <code>&lt;div/&gt;</code> to offset it to the right by two sizes.</p>
+
+					<div class="row">
+						<div class="size-3">.size-3</div>
+						<div class="size-4 push-2">.size-4.push-2</div>
+						<div class="size-3">.size-3</div>
+					</div>
+
+					<p class="note">Note: The <code>push-<em>n</em></code> and <code>pull-<em>n</em></code> classes do not apply to small-screen devices. In EWF, all columns stack on top of each other when the device screen width is 480 px or less.</p>
+
 					<h3>Grid Layouts</h3>
 					<p>A grid layout has multiple rows and columns, but each column must have the same width. This may appear to be a limitation at first, but it was designed that way to keep markup simple. By combining columnar and grid layouts, you should be able to achieve any design pattern you need.</p>
 					<p>Grid layouts use a similar structure to columnar layouts, except that you only need one class, which will be used on the wrapper/parent element. The class uses the format <code><em>n</em>-column</code> where <em>n</em> is a number written in standard form (e.g. one, two, three, etc.). Up to 12 columns are supported in the grid layout.</p>
@@ -210,17 +236,6 @@
 							<div class="size-3">25%</div>
 						</div>
 					</section>
-
-					<h3>Offset Columns</h3>
-					<p>With columnar layouts, it may be sometimes necessary to offset a column by a certain amount. We can do this with the <code>push-<em>n</em></code> and <code>pull-<em>n</em></code> classes. In the example below, we add a <code>push-2</code> class to our middle <code>&lt;div/&gt;</code> to offset it to the right by two sizes.</p>
-
-					<div class="row">
-						<div class="size-3">.size-3</div>
-						<div class="size-4 push-2">.size-4.push-2</div>
-						<div class="size-3">.size-3</div>
-					</div>
-
-					<p class="note">Note: The <code>push-<em>n</em></code> and <code>pull-<em>n</em></code> classes do not apply to small-screen devices. In EWF, all columns stack on top of each other when the device screen width is 480 px or less.</p>
 
 					<h2>The Basics of RequireJS</h2>
 					<p>At this point, you should have enough information to create some nice layouts. In earlier versions of EWF, we included a JavaScript library with many common functions and polyfills. However, these are not easy to maintain and better alternatives are constantly being created. Instead, we are devoting our full attention to the framework itself and making RequireJS with jQuery a recommendation for writing organized code. Here’s a short tutorial for using RequireJS.</p>
