@@ -16,3 +16,19 @@ require(['prism'], function(Prism) {
 
 	}
 });
+
+// Page-specific features
+$(function() {
+	var button = $('#dynamic-resize');
+	var wrap = $('#wrap');
+
+	button.click(function() {
+		wrap.toggleClass('container');
+
+		if (wrap.hasClass('container')) {
+			button.text('Revert to Dynamic Resizing');
+		} else {
+			button.text('Try it Now!');
+		}
+	})
+});

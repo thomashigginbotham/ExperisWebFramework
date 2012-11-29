@@ -302,6 +302,10 @@ img {
 /* =================================
 :Classes
 ==================================== */
+.container {
+	@include border-box;
+	width: 960px;
+}
 .border-box {
 	@include border-box;
 }
@@ -309,7 +313,15 @@ img {
 /* =================================
 :Media Queries
 ==================================== */
+@media (max-width: 960px) {
+	.container {
+		width: 720px;
+	}
+}
 @media (max-width: 720px) {
+	.container {
+		width: 480px;
+	}
 	.break-75-at-75 {
 		@include grid-break(75);
 	}
@@ -318,6 +330,9 @@ img {
 	}
 }
 @media (max-width: 480px) {
+	.container {
+		width: 100%;
+	}
 	// We use an ID selector here for stronger specificity without resorting to !important
 	#wrap {
 		.row,
