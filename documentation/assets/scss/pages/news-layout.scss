@@ -1,0 +1,94 @@
+// Always import global files first
+@import '../../../../scss/global/framework';
+@import '../../../../scss/global/variables';
+
+/* =================================
+Table of Contents
+====================================
+:General Styling
+:Classes
+:Media Queries
+==================================== */
+
+/* =================================
+:General Styling
+==================================== */
+#wrap {
+	margin: 0 auto;
+	padding: 0 $gutter;
+	max-width: 1200px;
+	font: 1.4em/1.5 Georgia, serif;
+
+	> header {
+		margin-top: $gutter;
+
+		h1 {
+			text-align: center;
+		}
+	}
+	> nav ul {
+		margin: $gutter 0;
+		padding: 1.5% 0;
+		border: 1px solid #333;
+		list-style: none;
+
+		text-align: center;
+	}
+	> nav li {
+		display: inline;
+		padding: 0 1em;
+	}
+	> footer {
+		margin-top: $gutter;
+		padding: $gutter 0;
+		border-top: 1px solid $dark-gray;
+	}
+}
+figure {
+	margin-bottom: $gutter;
+}
+figcaption {
+	text-align: right;
+	font-size: .8em;
+}
+
+/* =================================
+:Classes
+==================================== */
+.columns {
+	margin: $gutter 0;
+	padding: 0;
+	list-style: none;
+}
+
+/* =================================
+:Media Queries
+==================================== */
+@media (max-width: 800px) {
+	// Drop to two columns
+	#main-content {
+		> .size-5 {
+			width: 48.5%;
+		}
+		> .size-3 {
+			float: right;
+			margin-right: 0;
+			width: 48.5%;
+		}
+		> .size-4 {
+			float: left;
+			margin-left: 0;
+		}
+	}
+}
+
+@media (max-width: 480px) {
+	// Center header content and drop to one column
+	#wrap > header {
+		text-align: center;
+	}
+	#main-content > [class*='size-'] {
+		float: none;
+		width: 100%;
+	}
+}
