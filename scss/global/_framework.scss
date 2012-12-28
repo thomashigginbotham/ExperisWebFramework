@@ -70,22 +70,6 @@ $gutter: 3%;
 			*margin-bottom: $gutter; // Except in IE 7
 		}
 	}
-	.size-1,
-	.size-2,
-	.size-3,
-	.size-4,
-	.size-5,
-	.size-6,
-	.size-7,
-	.size-8,
-	.size-9,
-	.size-10,
-	.size-11,
-	.size-12, {
-		> :last-child {
-			margin-bottom: 0; // No bottom margin on last element in grid cells
-		}
-	}
 	
 	img { max-width: 100%; width: auto; height: auto; }
 }
