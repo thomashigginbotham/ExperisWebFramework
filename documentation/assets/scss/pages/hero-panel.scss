@@ -115,6 +115,9 @@ html, body {
 	#wrap > footer > div {
 		position: relative;
 	}
+	.columns-3.optimized {
+		@include grid-size-adjust(2);
+	}
 }
 @media (max-width: 480px) {
 	#wrap > header {

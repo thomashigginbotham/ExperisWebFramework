@@ -44,6 +44,12 @@ Table of Contents
 /* =================================
 :Media Queries
 ==================================== */
+@media (max-width: 720px) {
+	.columns-3.optimized {
+		@include grid-size-adjust(1);
+		text-align: center;
+	}
+}
 @media (max-width: 480px) {
 	#wrap {
 		background: none;

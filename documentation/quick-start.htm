@@ -167,9 +167,9 @@
 
 					<h3>Grid Layouts</h3>
 					<p>A grid layout has multiple rows and columns, but each column must have the same width. This may appear to be a limitation at first, but it was designed that way to keep markup simple. By combining columnar and grid layouts, you should be able to achieve any design pattern you need.</p>
-					<p>Grid layouts use a similar structure to columnar layouts, except that you only need one class, which will be used on the wrapper/parent element. The class uses the format <code><em>n</em>-column</code> where <em>n</em> is a number written in standard form (e.g. one, two, three, etc.). Up to 12 columns are supported in the grid layout.</p>
+					<p>Grid layouts use a similar structure to columnar layouts, except that you only need one class, which will be used on the wrapper/parent element. The class uses the format <code>columns-<em>n</em></code> where <em>n</em> is a number from 1 to 12, representing the number of columns in your grid.</p>
 
-<pre class="language-markup"><code>&lt;section class=&quot;three-column&quot;&gt;
+<pre class="language-markup"><code>&lt;section class=&quot;columns-3&quot;&gt;
 	&lt;div&gt;Cell 1&lt;/div&gt;
 	&lt;div&gt;Cell 2&lt;/div&gt;
 	&lt;div&gt;Cell 3&lt;/div&gt;
@@ -178,7 +178,7 @@
 	&lt;div&gt;Cell 6&lt;/div&gt;
 &lt;/section&gt;</code></pre>
 
-					<section class="three-column">
+					<section class="columns-3">
 						<div>Cell 1</div>
 						<div>Cell 2</div>
 						<div>Cell 3</div>
@@ -189,7 +189,7 @@
 
 					<p>Here’s an example where we’ve mixed the columnar and grid layouts to create a more complex layout.</p>
 
-<pre class="language-markup"><code>&lt;section class=&quot;two-column&quot;&gt;
+<pre class="language-markup"><code>&lt;section class=&quot;columns-2&quot;&gt;
 	&lt;div class=&quot;row&quot;&gt;
 		&lt;div class=&quot;size-3&quot;&gt;25%&lt;/div&gt;
 		&lt;div class=&quot;size-6&quot;&gt;50%&lt;/div&gt;
@@ -213,7 +213,7 @@
 	&lt;/div&gt;
 &lt;/section&gt;</code></pre>
 
-					<section class="two-column wrapper-grid">
+					<section class="columns-2 wrapper-grid">
 						<div class="row">
 							<div class="size-3">25%</div>
 							<div class="size-6">50%</div>

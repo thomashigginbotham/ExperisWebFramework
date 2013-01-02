@@ -32,20 +32,14 @@ $gutter: 3%;
 	-moz-box-sizing: border-box;
 	box-sizing: border-box;
 }
-@mixin grid-layout ($cols) {
+@mixin grid-size-adjust ($cols) {
 	$first-column-cell: #{$cols}n-#{$cols - 1};
 	$last-column-cell: #{$cols}n;
 	$last-row: -n + #{$cols};
 
-	&:after {
-		content: '';
-		display: block;
-		clear: both;
-	}
 	> * {
 		clear: none;
 		float: left;
-		@include border-box;
 		margin-right: $gutter/2;
 		margin-left: $gutter/2;
 		margin-bottom: $gutter;
@@ -70,21 +64,19 @@ $gutter: 3%;
 			*margin-bottom: $gutter; // Except in IE 7
 		}
 	}
+}
+@mixin grid-layout ($cols) {
+	&:after {
+		content: '';
+		display: block;
+		clear: both;
+	}
+	> * {
+		@include border-box;
+	}
+	@include grid-size-adjust($cols);
 	
 	img { max-width: 100%; width: auto; height: auto; }
-}
-@mixin grid-break($percent) {
-	&.two-column    { @include grid-layout(floor(2 * $percent / 100)) }
-	&.three-column  { @include grid-layout(floor(3 * $percent / 100)) }
-	&.four-column   { @include grid-layout(floor(4 * $percent / 100)) }
-	&.five-column   { @include grid-layout(floor(5 * $percent / 100)) }
-	&.six-column    { @include grid-layout(floor(6 * $percent / 100)) }
-	&.seven-column  { @include grid-layout(floor(7 * $percent / 100)) }
-	&.eight-column  { @include grid-layout(floor(8 * $percent / 100)) }
-	&.nine-column   { @include grid-layout(floor(9 * $percent / 100)) }
-	&.ten-column    { @include grid-layout(floor(10 * $percent / 100)) }
-	&.eleven-column { @include grid-layout(floor(11 * $percent / 100)) }
-	&.twelve-column { @include grid-layout(floor(12 * $percent / 100)) }
 }
 @mixin column-width($size) {
 	width: (100 - $gutter * (12 / $size - 1)) / (12 / $size);
@@ -122,7 +114,7 @@ time, mark, audio, video {
 	vertical-align: baseline;
 }
 
-/* Tab Width for Code (doesn't work in WebKit) */
+/* Set tab width to 4 spaces */
 pre {
 	-moz-tab-size: 4;
 	-o-tab-size: 4;
@@ -269,18 +261,18 @@ img {
 /* =================================
 :Grid Layout
 ==================================== */
-.one-column    { @include grid-layout(1) }
-.two-column    { @include grid-layout(2) }
-.three-column  { @include grid-layout(3) }
-.four-column   { @include grid-layout(4) }
-.five-column   { @include grid-layout(5) }
-.six-column    { @include grid-layout(6) }
-.seven-column  { @include grid-layout(7) }
-.eight-column  { @include grid-layout(8) }
-.nine-column   { @include grid-layout(9) }
-.ten-column    { @include grid-layout(10) }
-.eleven-column { @include grid-layout(11) }
-.twelve-column { @include grid-layout(12) }
+.columns-1  { @include grid-layout(1) }
+.columns-2  { @include grid-layout(2) }
+.columns-3  { @include grid-layout(3) }
+.columns-4  { @include grid-layout(4) }
+.columns-5  { @include grid-layout(5) }
+.columns-6  { @include grid-layout(6) }
+.columns-7  { @include grid-layout(7) }
+.columns-8  { @include grid-layout(8) }
+.columns-9  { @include grid-layout(9) }
+.columns-10 { @include grid-layout(10) }
+.columns-11 { @include grid-layout(11) }
+.columns-12 { @include grid-layout(12) }
 
 
 /* =================================
@@ -306,12 +298,6 @@ img {
 	.container {
 		width: 480px;
 	}
-	.break-75-at-75 {
-		@include grid-break(75);
-	}
-	.break-50-at-75 {
-		@include grid-break(50);
-	}
 }
 @media (max-width: 480px) {
 	.container {
@@ -320,18 +306,7 @@ img {
 	// We use an ID selector here for stronger specificity without resorting to !important
 	#wrap {
 		.row,
-		.one-column,
-		.two-column,
-		.three-column,
-		.four-column,
-		.five-column,
-		.six-column,
-		.seven-column,
-		.eight-column,
-		.nine-column,
-		.ten-column,
-		.eleven-column,
-		.twelve-column {
+		[class*=columns-] {
 			> * {
 				float: none;
 				display: block;

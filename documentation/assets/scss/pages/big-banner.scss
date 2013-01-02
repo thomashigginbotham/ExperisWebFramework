@@ -85,6 +85,11 @@ Table of Contents
 /* =================================
 :Media Queries
 ==================================== */
+@media (max-width: 720px) {
+	.columns-4.optimized {
+		@include grid-size-adjust(2);
+	}
+}
 @media (max-width: 600px) {
 	#wrap > h1 {
 		position: relative;

@@ -1,11 +1,13 @@
-// Always import global files first
-@import 'global/framework';
-@import 'global/variables';
+@import 'global/framework'; // Always import the framework
+@import 'global/variables'; // Customize this file with your own variables
+
+/* -- Replace everything below with your own CSS -- */
 
 /* =================================
 Table of Contents
 ====================================
 :General Styling
+:Media Queries
 ==================================== */
 
 /* =================================
@@ -13,8 +15,43 @@ Table of Contents
 ==================================== */
 #wrap {
 	margin: 0 auto;
+	padding: 0 $gutter;
 	max-width: 960px;
 	font: 1.4em/1.5 Arial, Helvetica, sans-serif;
 }
+article {
+	.row,
+	[class*='columns-'] {
+		margin-bottom: 3%;
+		text-align: center;
 
-// Add your own styles!
+		> * {
+			padding: 1em;
+			*padding: 1em 0; // IE 7 doesn't support border box
+			border-radius: 5px;
+			background-color: $gray;
+		}
+		.row > * {
+			background-color: $light-gray;
+		}
+		&.wrapper-grid > .row {
+			padding: 0;
+		}
+	}
+	.row .row {
+		margin-bottom: 0;
+	}
+	*[class*='pull-'] {
+		color: #fff;
+		background-color: $dark-gray;
+	}
+}
+
+/* =================================
+:Media Queries
+==================================== */
+@media (max-width: 720px) {
+	.columns-4.optimized {
+		@include grid-size-adjust(2); // Change 4-column grids to 2-column for smaller screens
+	}
+}
